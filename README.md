@@ -29,3 +29,16 @@ This is built using [extwee](https://github.com/videlais/extwee) and [Harlowe 3.
 4. Run `extwee-[OS] -r story -o build/index.html -f <path to Harlowe repo>/dist/format.js` to build the story
    1. `extwee` doesn't support `StoryIncludes` (they aren't actually part of the Twee3 spec anyway), but reading the directory should be just fine.
 5. Bonus: Update/add a task to `.vscode/tasks.json` if you want to run a file watcher as a VSCode build task (i.e. `Cmd/Ctrl-Shift-B` while developing).
+
+### Debugging
+
+Harlowe provides a debugger if you pass `options=debug` to the `tw-storydata` node in the built HTML. However `extwee` (and, it seems, the Twee3 spec) doesn't allow for passing options to the StoryData node. A manual way to activate the debugger is to edit the HTML directly. 
+
+1. Open `build/index.html`
+2. Search for `tw-storydata`
+3. Find the node opening tag (should be the second result)
+   1. This _may_ also be on line 12, if you want to just hop there to check. I don't know if that will be the case for every build.
+4. Change `options` (toward the end of the tag, just before `hidden`) to `options=debug`
+   1. I guess if you're having trouble finding it you can search for `options hidden`, since this should be the only result.
+
+Know that whenever you recompile (which might be on every save if you're using `extwee`'s file watcher), you will have to re-edit the HTML. This is a pain, but I don't know a better way right now.

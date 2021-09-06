@@ -12,13 +12,34 @@ Joyride
 (set: 
     $defaultName to "Default Defaulterson",
     $name to "",
-    $phone to (box: "=XX=") +
+)
+
+:: header [header] { position:"300,0", size:"80,80" }
+(append: ?sidebar)[(icon-restart:)]
+(set:
+    $phoneBox to (box: "=XX=") +
         (text-color: "white") +
         (background: "#197fe6") +
         (font: "monospace") +
         (border: "solid") +
         (border-color: "navy") +
-        (border-size: 2)
+        (border-size: 2),
+)
+(set:
+    $phone to (macro: str-type _content, [
+        (output:)[\
+            $phoneBox[\
+                (text-size:0.5)[\
+                    |==
+                    IM`_`NAVI 0.9.33
+                    ==|
+                    ==>
+                    Signal: (str:(((random:0,1000)-500)/10))db
+                ]
+                _content
+            ]
+        ]
+    ])
 )
 
 :: Start {"position":"0,100","size":"80,80"}
@@ -26,26 +47,38 @@ Welcome to Joyride
 
 //More info to come!//
 
-[[Next|Name Registration]]
+[[Start|Last Day]]
+
+:: Last Day
+Finally, you're ready to leave.
+
+You've spent your entire life on Nides, a small moon orbiting the planet Ruzade. While the planet was covered in a corrosive fog, save for the terraformed pocket that held its one and only city, Nides was a lush garden. The streets were lined with immaculately trimmed greenery and kept spotless thanks to a fleet of janitorial drones. Only the best for the Galactic Representatives and the rest of the upper class citizenry.
+
+(click:"upper class citizenry.")[Your parents scurried around the house, making sure you had everything packed for your first trip off-world. Your father was in the kitchen, fixing together a meal to tide you over on the several hour trip to Juno Station. Your mom was going over forms to fill out on her computer, making sure your new ship, a Class III Gridskipper you named //The Opal Star// was properly registered. There hasn't been this much action in the source since you were much younger.]
+
+(click:"you were much younger.")[You loaded up your bags, regretting all of the stuff that you'd have to leave behind. Your ship has all of the amenities you would expect from a too-small apartment, and not much more. Perhaps the kid down the street could get use out of your old, custom-made computers. Your handheld IM`_`NAVI was all you'd need from now on.]
+
+(click:"from now on.")[Your mom comes up to you and taps you on the shoulder. You both have irridescent, scaly skin, that was always quite brilliant in the white light of the local star. You turn around, and she has two devices in her hand. One device she thumbs rapidly, her corporate Navi. Despite her one and only child leaving the nest, she couldn't tear herself away from the fluctuating financial markets. She gave you a knowing look as she handed you the other device, a larger NaviTab, with a form drawn up, all filled out and [[ready for you to sign|Name Registration]]]
 
 :: Name Registration {"position":"100,100","size":"80,80"}
-|nameprompt)[
-    What is your name? (click:"What is your name?")[
-        (set: $name to (verbatim-print:
-                (prompt: "Your name, please:", $defaultName)
-            )
-        )
-        (hide: ?nameprompt)
-        (show: ?welcome)
+|form>[
+    (border:"solid")+(font:"monospace")+(css:"padding:1rem")[
+        <==>
+        **FORM 4097-B PLANETARY BEACON BOARD - NAVIGATOR APPLICATION**
+
+        By signing this I affirm that I am of sound mind and body to accept Planetary Beacon Bounties, and absolve the Planetary Beacon Bounty Board (PB3) of all responsibility in the event of injury, damages, or death. All risk in accepting Bounties is my own.
+
+        |signature>[Sign]
     ]
 ]
 |welcome)[Welcome to [[Juno Station|Chapter 1]], $name.]
 
-(if: $name is "")[
-    (show: ?nameprompt)
-    (hide: ?welcome)
-] (else:)[
+(click: ?signature)[
+    (set: $name to (verbatim-print:
+            (prompt: "Your Name", $defaultName)
+        )
+    )
+    (hide: ?form)
     (show: ?welcome)
-    (hide: ?nameprompt)
 ]
 

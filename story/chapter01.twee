@@ -3,7 +3,9 @@ Juno Station is the closest Hub to your home moon of Nides. After an awkward con
 
 As you ride the Docking Bay Tram to the station proper, you look down at your pad, a handheld glass screen that displays all sorts of information. You currently have a note open:
 
-$phone[Go get a Bounty.]
+($phone: "Go get a bounty.
+
+No really.")
 
 You are standing on the train platform, and have a few options on where to go next:
 
