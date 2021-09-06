@@ -2,16 +2,24 @@
 
 A [Twee3]() story about exploring a future galaxy.
 
+## Play
+
+The file `build/index.html` should be all you need. You can open it directly, though it's possible some JS in the story won't like that. For best results you should serve the file, either with a local server (I like using [`serve`](https://www.npmjs.com/package/serve)) or upload the file somewhere.
+
+In theory I could also upload the file to, like, my own website. But I'm lazy.
+
 ## Build
 
 This is built using [extwee](https://github.com/videlais/extwee) and [Harlowe 3.2.2](https://twine2.neocities.org/), though likely any Twee3 compatible compiler would work. Here's what I did:
 
 1. Download [extwee](https://github.com/videlais/extwee)
-   1. On MacOS I had to `chmod +x` the file, and also run it once (`extwee-macos --help`) in order to trigger it to be blocked my Mac security, then allowed it in the Security Prefpane in System Preferences.
+   1. Make sure it's on your `PATH`
+   2. On MacOS I had to `chmod +x` the file, and also run it once (`extwee-macos --help`) in order to trigger it to be blocked by Mac security, then allowed it in the Security Prefpane in System Preferences.
+   3. I used WSL on Windows, so used `extwee-linux`. I haven't tried running this using the actual windows executable yet.
 2. Download the [Harlowe](https://foss.heptapod.net/games/harlowe/-/tree/v3.2.2) Repository
    1. Click the download icon on the repo to download a zip, also select a branch/tag (the link above should take you to `v3.2.2` directly)
    2. Or you can get the repo with Mercurial I think? I don't know Mercurial so that's a non-starter for me.
-3. `cd` into the Harlowe repository:
+3. `cd` into the Harlowe repository, and create `format.js`:
    1. `npm install`
    2. `gem install sass`
       1. If you didn't already have `sass` installed. Yes, this version is deprecated but that's what Harlowe needs.
