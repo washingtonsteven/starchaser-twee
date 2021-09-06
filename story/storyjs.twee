@@ -1,4 +1,4 @@
-:: UserScript[script]
+:: UserScript [script] {"position":"300,0","size":"80,80"}
 (() => {
 
 })()

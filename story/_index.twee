@@ -1,14 +1,14 @@
-:: StoryTitle
+:: StoryTitle {"position":"0,0","size":"80,80"}
 Joyride
 
-:: StoryData
+:: StoryData {"position":"100,0","size":"80,80"}
 {
     "ifid": "C8910F65-EE86-4D0F-8F82-85A3DA24E098",
     "format": "Harlowe",
     "format-version": "3.2.2"
 }
 
-:: startup [startup]
+:: startup [startup] {"position":"200,0","size":"80,80"}
 (set: 
     $defaultName to "Default Defaulterson",
     $name to "",
@@ -21,14 +21,14 @@ Joyride
         (border-size: 2)
 )
 
-:: Start
+:: Start {"position":"0,100","size":"80,80"}
 Welcome to Joyride
 
 //More info to come!//
 
-[[Next|Part 2]]
+[[Next|Name Registration]]
 
-:: Part 2
+:: Name Registration {"position":"100,100","size":"80,80"}
 |nameprompt)[
     What is your name? (click:"What is your name?")[
         (set: $name to (verbatim-print:

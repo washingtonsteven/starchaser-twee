@@ -14,7 +14,7 @@
 <script role="script" id="twine-user-script" type="text/twine-javascript">(() => {
 
 })()</script>
-<tw-passagedata pid="2" name="startup" tags="startup" position="100,100" size="100,100" >(set: 
+<tw-passagedata pid="2" name="startup" tags="startup" position="200,0" size="80,80" >(set: 
     $defaultName to "Default Defaulterson",
     $name to "",
     $phone to (box: "=XX=") +
@@ -25,12 +25,12 @@
         (border-color: "navy") +
         (border-size: 2)
 )</tw-passagedata>
-<tw-passagedata pid="3" name="Start" tags position="100,100" size="100,100" >Welcome to Joyride
+<tw-passagedata pid="3" name="Start" tags position="0,100" size="80,80" >Welcome to Joyride
 
 //More info to come!//
 
-[[Next|Part 2]]</tw-passagedata>
-<tw-passagedata pid="4" name="Part 2" tags position="100,100" size="100,100" >|nameprompt)[
+[[Next|Name Registration]]</tw-passagedata>
+<tw-passagedata pid="4" name="Name Registration" tags position="100,100" size="80,80" >|nameprompt)[
     What is your name? (click:"What is your name?")[
         (set: $name to (verbatim-print:
                 (prompt: "Your name, please:", $defaultName)
@@ -49,7 +49,7 @@
     (show: ?welcome)
     (hide: ?nameprompt)
 ]</tw-passagedata>
-<tw-passagedata pid="5" name="Chapter 1" tags position="100,100" size="100,100" >Juno Station is the closest Hub to your home moon of Nides. After an awkward conversation with the Ingress Crew, you were able to dock your Class III Gridskipper in Docking Bay A-61.
+<tw-passagedata pid="5" name="Chapter 1" tags position="0,200" size="80,80" >Juno Station is the closest Hub to your home moon of Nides. After an awkward conversation with the Ingress Crew, you were able to dock your Class III Gridskipper in Docking Bay A-61.
 
 As you ride the Docking Bay Tram to the station proper, you look down at your pad, a handheld glass screen that displays all sorts of information. You currently have a note open:
 
