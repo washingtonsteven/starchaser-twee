@@ -4,15 +4,22 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build & Serve",
+            "label": "Build & Serve (WSL)",
             "type": "shell",
             "command": "extwee-linux -w ${workspaceFolder}/story -o ${workspaceFolder}/build/index.html -f ~/.twee/storyformats/harlowe-v3.2.2/dist/format.js & serve -n -p 3008 ${workspaceFolder}/build",
+            "problemMatcher": [],
+            "isBackground": true
+        },
+        {
+            "label": "Build & Serve (Mac)",
+            "type": "shell",
+            "command": "echo $PATH && extwee-macos -w ${workspaceFolder}/story -o ${workspaceFolder}/build/index.html -f ~/Documents/twee/storyformats/harlowe-v3.2.2/dist/format.js & serve -n -p 3008 ${workspaceFolder}/build",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
             "isBackground": true
-        }
+        },
     ]
 }
