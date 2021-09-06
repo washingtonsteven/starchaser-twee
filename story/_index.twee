@@ -1,0 +1,51 @@
+:: StoryTitle
+Joyride
+
+:: StoryData
+{
+    "ifid": "C8910F65-EE86-4D0F-8F82-85A3DA24E098",
+    "format": "Harlowe",
+    "format-version": "3.2.2"
+}
+
+:: startup [startup]
+(set: 
+    $defaultName to "Default Defaulterson",
+    $name to "",
+    $phone to (box: "=XX=") +
+        (text-color: "white") +
+        (background: "#197fe6") +
+        (font: "monospace") +
+        (border: "solid") +
+        (border-color: "navy") +
+        (border-size: 2)
+)
+
+:: Start
+Welcome to Joyride
+
+//More info to come!//
+
+[[Next|Part 2]]
+
+:: Part 2
+|nameprompt)[
+    What is your name? (click:"What is your name?")[
+        (set: $name to (verbatim-print:
+                (prompt: "Your name, please:", $defaultName)
+            )
+        )
+        (hide: ?nameprompt)
+        (show: ?welcome)
+    ]
+]
+|welcome)[Welcome to [[Juno Station|Chapter 1]], $name.]
+
+(if: $name is "")[
+    (show: ?nameprompt)
+    (hide: ?welcome)
+] (else:)[
+    (show: ?welcome)
+    (hide: ?nameprompt)
+]
+
