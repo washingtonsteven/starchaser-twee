@@ -1,0 +1,27 @@
+{
+  "name": "joyride-twee",
+  "version": "0.2.0",
+  "description": "A [Twee3]() story about exploring a future galaxy.",
+  "main": "index.js",
+  "dependencies": {
+    "extwee": "^1.6.2"
+  },
+  "devDependencies": {
+    "serve": "^12.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js",
+    "serve": "serve build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/washingtonsteven/joyride-twee.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/washingtonsteven/joyride-twee/issues"
+  },
+  "homepage": "https://github.com/washingtonsteven/joyride-twee#readme"
+}
