@@ -22,26 +22,28 @@ const getFormatPath = (formatName, formatVersion) => {
 };
 
 const directories = fs
-  .readdirSync(path.resolve(__dirname, "stories"))
-  .filter((d) => d.isDirectory());
+  .readdirSync(path.resolve(__dirname, "stories"), { withFileTypes: true })
+  .filter((dirent) => dirent.isDirectory());
 
 directories.forEach((directory) => {
   const dirPath = path.resolve(__dirname, "stories", directory.name);
   const files = fs
-    .readdirSync(dirPath)
+    .readdirSync(dirPath, { withFileTypes: true })
     .filter((f) => f.isFile())
-    .map((fileName) => path.resolve(dirPath, fileName));
+    .map((fileDirent) => path.resolve(dirPath, fileDirent.name));
   let contents = "";
   files.forEach((file) => {
     const fileContents = fs.readFileSync(file);
-    contents += `\n${fileContents}`;
+    contents += `\n\n${fileContents}`;
   });
 
   if (contents) {
     const tweeParser = new Extwee.TweeParser(contents);
     const formatName = tweeParser.story.metadata.format || DEFAULT_FORMAT;
     const formatVersion =
-      tweeParser.story.metadata.formatVersion || DEFAULT_FORMAT_VERSION;
+      tweeParser.story.metadata.formatVersion ||
+      tweeParser.story.metadata["format-version"] ||
+      DEFAULT_FORMAT_VERSION;
     const formatParser = new Extwee.StoryFormatParser(
       getFormatPath(formatName, formatVersion)
     );

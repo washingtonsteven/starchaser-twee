@@ -3,7 +3,15 @@ Joyride (but for Real)
 
 :: StoryData {"position":"100,0","size":"80,80"}
 {
-    "ifid": "C8910F65-EE86-4D0F-8F82-85A3DA24E098",
+    "ifid": "A0C1873D-F5ED-4105-9FA4-5D9F78678EA5",
     "format": "snowman",
     "format-version": "2.0.3"
 }
+
+:: Start
+This is the start of joyride ch-1, I'm just writing this for testing purposes.
+
+[[Next Page]]
+
+:: Next Page
+This is the next page, and there's no where else to go.
