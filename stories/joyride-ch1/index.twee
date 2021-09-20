@@ -1,0 +1,9 @@
+:: StoryTitle 
+Joyride (but for Real)
+
+:: StoryData {"position":"100,0","size":"80,80"}
+{
+    "ifid": "C8910F65-EE86-4D0F-8F82-85A3DA24E098",
+    "format": "snowman",
+    "format-version": "2.0.3"
+}
