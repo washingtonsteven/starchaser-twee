@@ -27,6 +27,7 @@ const directories = fs
 
 directories.forEach((directory) => {
   const dirPath = path.resolve(__dirname, "stories", directory.name);
+  console.log(`Building from ${dirPath}...`);
   const files = fs
     .readdirSync(dirPath, { withFileTypes: true })
     .filter((f) => f.isFile())
@@ -53,4 +54,5 @@ directories.forEach((directory) => {
       formatParser.storyformat
     );
   }
+  console.log(`...Done!\n---\n`);
 });

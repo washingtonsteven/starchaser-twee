@@ -1,0 +1,21 @@
+:: Script [script]
+(() => {
+    window.setup = window.setup || {};
+
+    Object.assign(window.setup, {
+        randomNavigatorId: (numDigits = 5) => {
+            const factor = Math.pow(10, numDigits-1)
+            let num = Math.floor(Math.random()*factor);
+            if (num < factor) {
+                num += factor * (Math.floor(Math.random()*10))
+            }
+            return num;
+        }
+    });
+
+    const initialState = {
+        playerNavigatorId: window.setup.randomNavigatorId()
+    };
+
+    window.story.state = Object.assign(window.story.state || {}, initialState);
+})()
