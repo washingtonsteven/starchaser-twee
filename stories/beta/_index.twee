@@ -14,7 +14,7 @@ Joyride
     $name to "",
 )
 
-:: header [header] { position:"300,0", size:"80,80" }
+:: header [header] { "position":"300,0", "size":"80,80" }
 (append: ?sidebar)[(icon-restart:)]
 (set:
     $phoneBox to (box: "=XX=") +

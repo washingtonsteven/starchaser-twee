@@ -1,7 +1,7 @@
 :: StoryTitle 
 Joyride (but for Real)
 
-:: StoryData {"position":"100,0","size":"80,80"}
+:: StoryData
 {
     "ifid": "A0C1873D-F5ED-4105-9FA4-5D9F78678EA5",
     "format": "snowman",
@@ -9,6 +9,7 @@ Joyride (but for Real)
 }
 
 :: Start
+<% s.currentLocation = "Juno Station Hangar"; window.setup.addAction("New Action!"); %>
 You pilot your Gridskipper into Hangar #1578, a pit in your stomach forming as the ship's chassis seems to come within inches of the bay.
 
 A message comes over the speakers into the cockpit, an automated broadcast from the Station.
@@ -16,6 +17,7 @@ A message comes over the speakers into the cockpit, an automated broadcast from 
 "[[Welcome to Juno Station]]"
 
 :: Welcome to Juno Station
+<% s.currentLocation = "Hangar #1578"; window.setup.addAction("Juno Station Action"); window.setup.addAction("And a second one"); %>
 You secure your ship, and climb out, slinging your pack over your shoulder. You walk up to the fare meter and swipe your BlancTab. The screen on the machine denotes the funds deducted (a bit higher than you'd like), as well as a special message:
 
 <span class="computer fare-message">

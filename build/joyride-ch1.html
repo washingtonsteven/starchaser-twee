@@ -10,12 +10,48 @@
 	</head>
 	<body>
 		<tw-story tags></tw-story>
-		<tw-storydata name="Joyride (but for Real)" startnode="2" creator="extwee" creator-version="1.6.2" ifid="A0C1873D-F5ED-4105-9FA4-5D9F78678EA5" zoom="undefined" format="snowman" format-version="2.0.3" options hidden>
-<style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style>
-<script role="script" id="twine-user-script" type="text/twine-javascript">(() => {
-    window.setup = window.setup || {};
+		<tw-storydata name="Joyride (but for Real)" startnode="3" creator="extwee" creator-version="1.6.2" ifid="A0C1873D-F5ED-4105-9FA4-5D9F78678EA5" zoom="undefined" format="snowman" format-version="2.0.3" options hidden>
+<style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
+    display:grid;
+    grid-template-areas:
+        "passage state"
+        "actions actions";
+    grid-template-rows: 3fr 1fr;
+    grid-template-columns: 3fr 1fr;
+}
 
+tw-story {
+    grid-area: passage;
+}
+
+div#state {
+    grid-area: state;
+    white-space: pre-wrap;
+}
+
+div#actions {
+    grid-area: actions;
+}</style>
+<script role="script" id="twine-user-script" type="text/twine-javascript">(() => {
+    const createElement = (id, content = "", tagName = "div", otherAttributes = {}) => {
+        const el = document.createElement(tagName);
+        el.innerHTML = content;
+        if (id) {
+            el.setAttribute("id", id);
+        }
+        Object.entries(otherAttributes).forEach(([key, value]) => el.setAttribute(key, value));
+        return el;
+    }
+
+    const stateElement = createElement("state", JSON.stringify(window.story.state, null, 1))
+    const actionElement = createElement("actions", "Actions");
+    const storydataElement = document.querySelector("tw-storydata");
+    document.body.insertBefore(stateElement, storydataElement);
+    document.body.insertBefore(actionElement, storydataElement);
+
+    window.setup = window.setup || {};
     Object.assign(window.setup, {
+        createElement,
         randomNavigatorId: (numDigits = 5) => {
             const factor = Math.pow(10, numDigits-1)
             let num = Math.floor(Math.random()*factor);
@@ -23,30 +59,46 @@
                 num += factor * (Math.floor(Math.random()*10))
             }
             return num;
+        },
+        addAction: (actionName) => {
+            const button = createElement(null, actionName, "button");
+            actionElement.appendChild(button);
         }
     });
 
     const initialState = {
         playerNavigatorId: window.setup.randomNavigatorId()
     };
-
     window.story.state = Object.assign(window.story.state || {}, initialState);
+
+    const updateStateDisplay = () => {
+        stateElement.innerHTML = JSON.stringify(window.story.state, null, 1);
+    }
+    window.setup.updateStateDisplay = updateStateDisplay;
+    updateStateDisplay();
+
+    $(window).on("sm.passage.showing", (event, eventObject) => {
+        actionElement.innerHTML = "";
+    })
+    $(window).on("sm.passage.shown", (event, eventObject) => {
+        updateStateDisplay();
+    })
 })()</script>
-<tw-passagedata pid="2" name="Start" tags position="100,100" size="100,100" >You pilot your Gridskipper into Hangar #1578, a pit in your stomach forming as the ship's chassis seems to come within inches of the bay.
+<tw-passagedata pid="3" name="Start" tags position="100,100" size="100,100" ><% s.currentLocation = "Juno Station Hangar"; window.setup.addAction("New Action!"); %>
+You pilot your Gridskipper into Hangar #1578, a pit in your stomach forming as the ship's chassis seems to come within inches of the bay.
 
 A message comes over the speakers into the cockpit, an automated broadcast from the Station.
 
 "[[Welcome to Juno Station]]"</tw-passagedata>
-<tw-passagedata pid="3" name="Welcome to Juno Station" tags position="100,100" size="100,100" >You secure your ship, and climb out, slinging your pack over your shoulder. You walk up to the fare meter and swipe your BlancTab. The screen on the machine denotes the funds deducted (a bit higher than you'd like), as well as a special message:
+<tw-passagedata pid="4" name="Welcome to Juno Station" tags position="100,100" size="100,100" ><% s.currentLocation = "Hangar #1578"; window.setup.addAction("Juno Station Action"); window.setup.addAction("And a second one"); %>
+You secure your ship, and climb out, slinging your pack over your shoulder. You walk up to the fare meter and swipe your BlancTab. The screen on the machine denotes the funds deducted (a bit higher than you'd like), as well as a special message:
 
 <span class="computer fare-message">
 Please report to the nearest Information booth for registration, Navigator #<%=s.playerNavigatorId%>
 </span>
 
-You follow.
-
 [[Down the corridor, and take the elevator down one level|Information Booth]]</tw-passagedata>
-<tw-passagedata pid="4" name="Information Booth" tags position="100,100" size="100,100" >You arrive at the information booth, where a young lizard-like creature similar to yourself is tapping away at their VizTab. They barely look up as they grab a different Tab, and spin it towards you.
+<tw-passagedata pid="5" name="Information Booth" tags position="100,100" size="100,100" >You arrive at the information booth, where a young lizard-like creature similar to yourself is tapping away at their VizTab. They barely look up as they grab a different Tab, and spin it towards you.
 
 "Fill this out please." they say in a monotone, eyes still glued to their own pad. They had pale, milky scales like yours, but theirs were punctuated with blotches of color which were shifting constantly. Embarassed, you avert your eyes. They seem to notice your reaction and release a single chuckle, continuing to swipe through their device.
 
