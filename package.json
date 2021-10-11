@@ -3,16 +3,18 @@
   "version": "0.2.0",
   "description": "A [Twee3]() story about exploring a future galaxy.",
   "main": "index.js",
-  "dependencies": {
-    "extwee": "^1.6.2"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "concurrently": "^6.3.0",
+    "extwee": "^1.6.2",
+    "nodemon": "^2.0.13",
     "serve": "^12.0.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node build.js",
-    "serve": "serve build"
+    "serve": "serve build",
+    "watch": "concurrently -n build,server \"nodemon -e twee build.js\" \"serve -l 1234 build\""
   },
   "repository": {
     "type": "git",
