@@ -27,9 +27,21 @@
             }
             return num;
         },
-        addAction: (actionName) => {
+        addAction: (actionName, passageTarget) => {
             const button = createElement(null, actionName, "button");
             actionElement.appendChild(button);
+            if (passageTarget) {
+                button.addEventListener("click", (e) => {
+                    if (typeof passageTarget === "function") {
+                        passageTarget(e);
+                    } else if (window.story.passage(passageTarget)) {
+                        window.story.show(passageTarget);
+                    }
+                })
+            }
+            if (window.story.passage(passageTarget)) {
+                button.addEventListener("click", (e) => window.story.show(passageTarget))
+            }
         }
     });
 

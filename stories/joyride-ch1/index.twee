@@ -17,7 +17,7 @@ A message comes over the speakers into the cockpit, an automated broadcast from 
 "[[Welcome to Juno Station]]"
 
 :: Welcome to Juno Station
-<% s.currentLocation = "Hangar #1578"; window.setup.addAction("Juno Station Action"); window.setup.addAction("And a second one"); %>
+<% s.currentLocation = "Hangar #1578"; window.setup.addAction("Juno Station Action", "Information Booth"); window.setup.addAction("And a second one", () => alert("haha fooled you")); %>
 You secure your ship, and climb out, slinging your pack over your shoulder. You walk up to the fare meter and swipe your BlancTab. The screen on the machine denotes the funds deducted (a bit higher than you'd like), as well as a special message:
 
 <span class="computer fare-message">

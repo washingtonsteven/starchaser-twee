@@ -60,9 +60,21 @@ div#actions {
             }
             return num;
         },
-        addAction: (actionName) => {
+        addAction: (actionName, passageTarget) => {
             const button = createElement(null, actionName, "button");
             actionElement.appendChild(button);
+            if (passageTarget) {
+                button.addEventListener("click", (e) => {
+                    if (typeof passageTarget === "function") {
+                        passageTarget(e);
+                    } else if (window.story.passage(passageTarget)) {
+                        window.story.show(passageTarget);
+                    }
+                })
+            }
+            if (window.story.passage(passageTarget)) {
+                button.addEventListener("click", (e) => window.story.show(passageTarget))
+            }
         }
     });
 
@@ -90,7 +102,7 @@ You pilot your Gridskipper into Hangar #1578, a pit in your stomach forming as t
 A message comes over the speakers into the cockpit, an automated broadcast from the Station.
 
 "[[Welcome to Juno Station]]"</tw-passagedata>
-<tw-passagedata pid="4" name="Welcome to Juno Station" tags position="100,100" size="100,100" ><% s.currentLocation = "Hangar #1578"; window.setup.addAction("Juno Station Action"); window.setup.addAction("And a second one"); %>
+<tw-passagedata pid="4" name="Welcome to Juno Station" tags position="100,100" size="100,100" ><% s.currentLocation = "Hangar #1578"; window.setup.addAction("Juno Station Action", "Information Booth"); window.setup.addAction("And a second one", () => alert("haha fooled you")); %>
 You secure your ship, and climb out, slinging your pack over your shoulder. You walk up to the fare meter and swipe your BlancTab. The screen on the machine denotes the funds deducted (a bit higher than you'd like), as well as a special message:
 
 <span class="computer fare-message">
