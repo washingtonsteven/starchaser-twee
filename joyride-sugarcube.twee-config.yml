@@ -4,4 +4,4 @@ sugarcube-2:
       name: tooltip
       description: "Show a tooltip when hovering over text\n\nUsage:\n\n```\n<<tooltip \"triggerText\" \"tooltipText\">>\n```\n\nCustom Macro."
       parameters:
-          - text &+ text
+          - "('top'|'right'|'left'|'bottom') &+ text &+ text"

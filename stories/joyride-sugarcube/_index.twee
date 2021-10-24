@@ -7,3 +7,9 @@ Joyride (SugarCube edition)
     "format": "sugarcube",
     "format-version": "2.35.0"
 }
+
+:: StoryCaption
+
+Name: <<print $playerName || "N/A">> <<print $navigatorNumber ? "($navigatorNumber)" : "">>
+Ship: <<print $shipName ? "$shipName ($shipType)" : "None">>
+Current Location: <<print _currentLocation || "Unknown">>

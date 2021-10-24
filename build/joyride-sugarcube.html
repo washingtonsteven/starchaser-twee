@@ -111,10 +111,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 
 .tooltip-trigger .tooltip-text {
     position:absolute;
-    top: 0;
-    left: 50%;
     min-width: 15rem;
-    transform: translate(-50%, -100%);
     background-color: #333;
     color: #eee;
     border: solid 1px #ccc;
@@ -123,6 +120,31 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
     padding: 0 0.5rem;
     visibility: hidden;
     text-align: center;
+    z-index: 1;
+}
+
+.tooltip-trigger.tooltip-top .tooltip-text {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -100%);
+}
+
+.tooltip-trigger.tooltip-right .tooltip-text {
+    top: 50%;
+    right: -0.5rem;
+    transform: translate(100%, -50%);
+}
+
+.tooltip-trigger.tooltip-bottom .tooltip-text {
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 100%);
+}
+
+.tooltip-trigger.tooltip-left .tooltip-text {
+    top: 50%;
+    left: -0.5rem;
+    transform: translate(-100%, -50%);
 }
 
 .tooltip-trigger:hover .tooltip-text {
@@ -131,14 +153,28 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 }</style>
 <script role="script" id="twine-user-script" type="text/twine-javascript">// Config.debug = true;
 
+$(document).on(":passageinit", function() {
+
+    // Setup Player first and last name
+    let playerName = State.getVar("$playerName") || "";
+
+    if (!State.getVar("$playerFirstName")) {
+        const parts = playerName.split(/\s+/);
+        State.setVar("$playerFirstName", parts[0]);
+        State.setVar("$playerLastName", parts[parts.length -1]);
+    }
+
+})
+
 Macro.add('tooltip', {
     handler: function() {
-        const text = this.args[0];
-        const tooltipText = this.args[1];
+        const direction = this.args[0]
+        const text = this.args[1];
+        const tooltipText = this.args[2];
         $(this.output)
             .append(
                 $("<span>")
-                    .addClass("tooltip-trigger")
+                    .addClass(`tooltip-trigger tooltip-${direction}`)
                     .html(text)
                     .append(
                         $("<span>")
@@ -150,37 +186,37 @@ Macro.add('tooltip', {
 });</script>
 <tw-passagedata pid="0" name="Start" tags position="100,100" size="100,100" >“Earn Cash! Expand Galactic Knowledge! Become a Navigator today!”
 
-The Planetary Beacon Bounty Board paid top dollar for prominent placements for their recruitment ads. Backed by various Science Guilds across the Dreyyar Union, the &lt;&lt;tooltip "PB3’s" "Planetary Beacon Bounty Board"&gt;&gt; main goal was to expand the Dreyyar territory. Just one hundred cycles ago, the Union only had contact with approximately ten percent of the estimated celestial bodies in the galaxy. Now, that number was up to twenty-three percent! 
+The Planetary Beacon Bounty Board paid top dollar for prominent placements for their recruitment ads. Backed by various Science Guilds across the Dreyyar Union, the &lt;&lt;tooltip top "PB3’s" "Planetary Beacon Bounty Board"&gt;&gt; main goal was to expand the Dreyyar territory. Just one hundred cycles ago, the Union only had contact with approximately ten percent of the estimated celestial bodies in the galaxy. Now, that number was up to twenty-three percent! 
 
 As the easily accessible planets, stars, and moons were seeded with beacons, fewer and fewer Navigators were willing to brave the deep to truly extend the reach of Dreyyar. Even with the going rate per Planetary Bounty skyrocketing, the supply of Navigators willing and skilled enough to make dangerous and lengthy treks began to dwindle.
 
 You’ve just finished your spaceflight course, and now it’s time to start your Navigator career. 
 
-[[Registration]]</tw-passagedata>
-<tw-passagedata pid="1" name="Registration" tags position="100,100" size="100,100" ><!-- TODO Form functionality -->
+&lt;&lt;button [[Registration]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="1" name="Registration" tags position="100,100" size="100,100" >&lt;&lt;set $navigatorNumber = random(10016, 99984)&gt;&gt;\
 First thing’s first. You must fill out your Navigator Registration.
 
-Name: (fill in, string)
-Age: (fill in, number)
-Navigator Number: (generated)
-Permanent Residence: (choice: Ruzade, Nides, N/A)
+First Name: &lt;&lt;textbox "$playerName" "Caleb Hertz"&gt;&gt;
+Navigator Number: &lt;&lt;tooltip right $navigatorNumber "A unique identifier for you"&gt;&gt;
+Permanent Residence: 
+    * &lt;&lt;radiobutton "$playerHome" "Ruzade" checked&gt;&gt; Ruzade
+    * &lt;&lt;radiobutton "$playerHome" "Nides"&gt;&gt; Nides
 
 Who do you want to put down for your Emergency Contact?
 (Spouse, Parent, N/A)
 
 Species:
-(hm, how would this work if we let them choose the race)
-(I can restrict this to one option, and fill more in later)
-Mirleon (hover: A gecko-like species with milky-white scales that showed blotches of color across the spectrum in response to their current emotional state. They wear endosuits in order to regular their internal body temperature,)
+    * &lt;&lt;radiobutton "$playerSpecies" "Mirleon" checked&gt;&gt; &lt;&lt;tooltip right "Mirleon" "A gecko-like species with milky-white scales that showed blotches of color across the spectrum in response to their current emotional state. They wear endosuits in order to regular their internal body temperature."&gt;&gt;
+<!-- hm, how would this work if we let them choose the race)
+(I can restrict this to one option, and fill more in later) -->
 
 Ship Registration:
-Type: Class III Gridskipper (hover: You were able to buy a beat up, single-occupancy ship. Whoever was the previous owner left a permanent Rillewiid smell in the cabin.)
-Name: (fill in)
+    Ship Type: &lt;&lt;tooltip right "Class III Gridskipper" "You were able to buy a beat up, single-occupancy ship. Whoever was the previous owner left a permanent Rillewiid smell in the cabin."&gt;&gt;
+    Ship Name: &lt;&lt;textbox "$shipName" "The Opal Star"&gt;&gt;
 
 [[Juno Station]]
 
-&lt;&lt;set $shipName = "The Opal Star"&gt;&gt;
-&lt;&lt;set $playerFirstName = "Caleb"&gt;&gt;</tw-passagedata>
+&lt;&lt;set $shipType to "Class III Gridskipper"&gt;&gt;</tw-passagedata>
 <tw-passagedata pid="2" name="Juno Station" tags position="100,100" size="100,100" >&lt;&lt;set _currentLocation = "Deck 5: Retail and Food Court"&gt;&gt;
 You make a shaky landing in Juno Station, the nearest PB3 <have this underlined like a glossary?> satellite location. $shipName has a few extra scratches now, which easily fit in with the rest of the scuffs on the chassis.
 
@@ -222,6 +258,9 @@ They chuckle. “Alright then.” Their right eye flashes white again as they us
 You shake your head, stepping away to your next destination.
 
 [[Food Court]] """//""" [[Information]] """//""" [[Elevators]] """//""" [[Shopping]]</tw-passagedata>
+<tw-passagedata pid="9" name="StoryCaption" tags position="100,100" size="100,100" >Name: &lt;&lt;print $playerName || "N/A"&gt;&gt; &lt;&lt;print $navigatorNumber ? "($navigatorNumber)" : ""&gt;&gt;
+Ship: &lt;&lt;print $shipName ? "$shipName ($shipType)" : "None"&gt;&gt;
+Current Location: &lt;&lt;print _currentLocation || "Unknown"&gt;&gt;</tw-passagedata>
 </tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */

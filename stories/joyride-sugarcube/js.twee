@@ -2,14 +2,28 @@
 
 // Config.debug = true;
 
+$(document).on(":passageinit", function() {
+
+    // Setup Player first and last name
+    let playerName = State.getVar("$playerName") || "";
+
+    if (!State.getVar("$playerFirstName")) {
+        const parts = playerName.split(/\s+/);
+        State.setVar("$playerFirstName", parts[0]);
+        State.setVar("$playerLastName", parts[parts.length -1]);
+    }
+
+})
+
 Macro.add('tooltip', {
     handler: function() {
-        const text = this.args[0];
-        const tooltipText = this.args[1];
+        const direction = this.args[0]
+        const text = this.args[1];
+        const tooltipText = this.args[2];
         $(this.output)
             .append(
                 $("<span>")
-                    .addClass("tooltip-trigger")
+                    .addClass(`tooltip-trigger tooltip-${direction}`)
                     .html(text)
                     .append(
                         $("<span>")

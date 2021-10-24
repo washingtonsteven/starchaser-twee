@@ -1,39 +1,39 @@
 :: Start
 “Earn Cash! Expand Galactic Knowledge! Become a Navigator today!”
 
-The Planetary Beacon Bounty Board paid top dollar for prominent placements for their recruitment ads. Backed by various Science Guilds across the Dreyyar Union, the <<tooltip "PB3’s" "Planetary Beacon Bounty Board">> main goal was to expand the Dreyyar territory. Just one hundred cycles ago, the Union only had contact with approximately ten percent of the estimated celestial bodies in the galaxy. Now, that number was up to twenty-three percent! 
+The Planetary Beacon Bounty Board paid top dollar for prominent placements for their recruitment ads. Backed by various Science Guilds across the Dreyyar Union, the <<tooltip top "PB3’s" "Planetary Beacon Bounty Board">> main goal was to expand the Dreyyar territory. Just one hundred cycles ago, the Union only had contact with approximately ten percent of the estimated celestial bodies in the galaxy. Now, that number was up to twenty-three percent! 
 
 As the easily accessible planets, stars, and moons were seeded with beacons, fewer and fewer Navigators were willing to brave the deep to truly extend the reach of Dreyyar. Even with the going rate per Planetary Bounty skyrocketing, the supply of Navigators willing and skilled enough to make dangerous and lengthy treks began to dwindle.
 
 You’ve just finished your spaceflight course, and now it’s time to start your Navigator career. 
 
-[[Registration]]
+<<button [[Registration]]>><</button>>
 
 :: Registration
-<!-- TODO Form functionality -->
+<<set $navigatorNumber = random(10016, 99984)>>\
 First thing’s first. You must fill out your Navigator Registration.
 
-Name: (fill in, string)
-Age: (fill in, number)
-Navigator Number: (generated)
-Permanent Residence: (choice: Ruzade, Nides, N/A)
+First Name: <<textbox "$playerName" "Caleb Hertz">>
+Navigator Number: <<tooltip right $navigatorNumber "A unique identifier for you">>
+Permanent Residence: 
+    * <<radiobutton "$playerHome" "Ruzade" checked>> Ruzade
+    * <<radiobutton "$playerHome" "Nides">> Nides
 
 Who do you want to put down for your Emergency Contact?
 (Spouse, Parent, N/A)
 
 Species:
-(hm, how would this work if we let them choose the race)
-(I can restrict this to one option, and fill more in later)
-Mirleon (hover: A gecko-like species with milky-white scales that showed blotches of color across the spectrum in response to their current emotional state. They wear endosuits in order to regular their internal body temperature,)
+    * <<radiobutton "$playerSpecies" "Mirleon" checked>> <<tooltip right "Mirleon" "A gecko-like species with milky-white scales that showed blotches of color across the spectrum in response to their current emotional state. They wear endosuits in order to regular their internal body temperature.">>
+<!-- hm, how would this work if we let them choose the race)
+(I can restrict this to one option, and fill more in later) -->
 
 Ship Registration:
-Type: Class III Gridskipper (hover: You were able to buy a beat up, single-occupancy ship. Whoever was the previous owner left a permanent Rillewiid smell in the cabin.)
-Name: (fill in)
+    Ship Type: <<tooltip right "Class III Gridskipper" "You were able to buy a beat up, single-occupancy ship. Whoever was the previous owner left a permanent Rillewiid smell in the cabin.">>
+    Ship Name: <<textbox "$shipName" "The Opal Star">>
 
 [[Juno Station]]
 
-<<set $shipName = "The Opal Star">>
-<<set $playerFirstName = "Caleb">>
+<<set $shipType to "Class III Gridskipper">>
 
 :: Juno Station 
 <<set _currentLocation = "Deck 5: Retail and Food Court">>
