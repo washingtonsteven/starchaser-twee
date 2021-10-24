@@ -1,9 +1,7 @@
 :: Start
-A passage
-<<set $thisIsAVariable to "variableValue">>
 “Earn Cash! Expand Galactic Knowledge! Become a Navigator today!”
 
-The Planetary Beacon Bounty Board paid top dollar for prominent placements for their recruitment ads. Backed by various Science Guilds across the Dreyyar Union, the PB3’s main goal was to expand the Dreyyar territory. Just one hundred cycles ago, the Union only had contact with approximately ten percent of the estimated celestial bodies in the galaxy. Now, that number was up to twenty-three percent! 
+The Planetary Beacon Bounty Board paid top dollar for prominent placements for their recruitment ads. Backed by various Science Guilds across the Dreyyar Union, the <<tooltip "PB3’s" "Planetary Beacon Bounty Board">> main goal was to expand the Dreyyar territory. Just one hundred cycles ago, the Union only had contact with approximately ten percent of the estimated celestial bodies in the galaxy. Now, that number was up to twenty-three percent! 
 
 As the easily accessible planets, stars, and moons were seeded with beacons, fewer and fewer Navigators were willing to brave the deep to truly extend the reach of Dreyyar. Even with the going rate per Planetary Bounty skyrocketing, the supply of Navigators willing and skilled enough to make dangerous and lengthy treks began to dwindle.
 
@@ -12,10 +10,7 @@ You’ve just finished your spaceflight course, and now it’s time to start you
 [[Registration]]
 
 :: Registration
-<<set $shipName = "The Opal Star">>
-<<set $playerFirstName = "Caleb">>
-
-<TODO Form functionality>
+<!-- TODO Form functionality -->
 First thing’s first. You must fill out your Navigator Registration.
 
 Name: (fill in, string)
@@ -36,6 +31,9 @@ Type: Class III Gridskipper (hover: You were able to buy a beat up, single-occup
 Name: (fill in)
 
 [[Juno Station]]
+
+<<set $shipName = "The Opal Star">>
+<<set $playerFirstName = "Caleb">>
 
 :: Juno Station 
 <<set _currentLocation = "Deck 5: Retail and Food Court">>
@@ -75,7 +73,7 @@ You ask what a caravan is, and the clerk hits a few extra buttons on their inter
 :: Okay, so now what?
 You return to the booth. The hallway nearby is incredibly quiet. The clerk returns from whatever they were doing in their augment and asks, “So. What’ll it be?”
 
-[[Where can I find a caravan?]] // [[Bounty Board, no caravan]]
+[[Where can I find a caravan?]] """//""" [[Bounty Board, no caravan]]
 
 :: Where can I find a caravan?
 You ask where you can find a caravan. They bring up the holoprojector again, this time with a three-dimensional map of the deck you are on.

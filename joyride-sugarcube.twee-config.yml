@@ -1,0 +1,7 @@
+sugarcube-2:
+  macros:
+    tooltip:
+      name: tooltip
+      description: "Show a tooltip when hovering over text\n\nUsage:\n\n```\n<<tooltip \"triggerText\" \"tooltipText\">>\n```\n\nCustom Macro."
+      parameters:
+          - text &+ text

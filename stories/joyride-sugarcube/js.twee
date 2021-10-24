@@ -1,3 +1,21 @@
 :: js [script]
 
-Config.debug = true;
+// Config.debug = true;
+
+Macro.add('tooltip', {
+    handler: function() {
+        const text = this.args[0];
+        const tooltipText = this.args[1];
+        $(this.output)
+            .append(
+                $("<span>")
+                    .addClass("tooltip-trigger")
+                    .html(text)
+                    .append(
+                        $("<span>")
+                            .addClass("tooltip-text")
+                            .html(tooltipText)
+                    )
+            )
+    }
+});

@@ -99,23 +99,65 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
 	<tw-storydata name="Joyride (SugarCube edition)" startnode="0" creator="extwee" creator-version="1.6.2" ifid="90634D21-E2C2-45C0-9DB1-849B7F1ACF51" zoom="undefined" format="SugarCube" format-version="2.35.0" options hidden>
-<style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style>
-<script role="script" id="twine-user-script" type="text/twine-javascript">Config.debug = true;</script>
-<tw-passagedata pid="0" name="Start" tags position="100,100" size="100,100" >A passage
-&lt;&lt;set $thisIsAVariable to "variableValue"&gt;&gt;
-“Earn Cash! Expand Galactic Knowledge! Become a Navigator today!”
+<style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">.tooltip-trigger {
+    color: #ddd;
+    position:relative;
+    display: inline-block;
+    border-bottom: 1px dotted #ddd;
+    padding-bottom: 0;
+    cursor: help;
+    height: 1.5rem;
+}
 
-The Planetary Beacon Bounty Board paid top dollar for prominent placements for their recruitment ads. Backed by various Science Guilds across the Dreyyar Union, the PB3’s main goal was to expand the Dreyyar territory. Just one hundred cycles ago, the Union only had contact with approximately ten percent of the estimated celestial bodies in the galaxy. Now, that number was up to twenty-three percent! 
+.tooltip-trigger .tooltip-text {
+    position:absolute;
+    top: 0;
+    left: 50%;
+    min-width: 15rem;
+    transform: translate(-50%, -100%);
+    background-color: #333;
+    color: #eee;
+    border: solid 1px #ccc;
+    opacity: 0;
+    transition: opacity 0.2s;
+    padding: 0 0.5rem;
+    visibility: hidden;
+    text-align: center;
+}
+
+.tooltip-trigger:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}</style>
+<script role="script" id="twine-user-script" type="text/twine-javascript">// Config.debug = true;
+
+Macro.add('tooltip', {
+    handler: function() {
+        const text = this.args[0];
+        const tooltipText = this.args[1];
+        $(this.output)
+            .append(
+                $("<span>")
+                    .addClass("tooltip-trigger")
+                    .html(text)
+                    .append(
+                        $("<span>")
+                            .addClass("tooltip-text")
+                            .html(tooltipText)
+                    )
+            )
+    }
+});</script>
+<tw-passagedata pid="0" name="Start" tags position="100,100" size="100,100" >“Earn Cash! Expand Galactic Knowledge! Become a Navigator today!”
+
+The Planetary Beacon Bounty Board paid top dollar for prominent placements for their recruitment ads. Backed by various Science Guilds across the Dreyyar Union, the &lt;&lt;tooltip "PB3’s" "Planetary Beacon Bounty Board"&gt;&gt; main goal was to expand the Dreyyar territory. Just one hundred cycles ago, the Union only had contact with approximately ten percent of the estimated celestial bodies in the galaxy. Now, that number was up to twenty-three percent! 
 
 As the easily accessible planets, stars, and moons were seeded with beacons, fewer and fewer Navigators were willing to brave the deep to truly extend the reach of Dreyyar. Even with the going rate per Planetary Bounty skyrocketing, the supply of Navigators willing and skilled enough to make dangerous and lengthy treks began to dwindle.
 
 You’ve just finished your spaceflight course, and now it’s time to start your Navigator career. 
 
 [[Registration]]</tw-passagedata>
-<tw-passagedata pid="1" name="Registration" tags position="100,100" size="100,100" >&lt;&lt;set $shipName = "The Opal Star"&gt;&gt;
-&lt;&lt;set $playerFirstName = "Caleb"&gt;&gt;
-
-<TODO Form functionality>
+<tw-passagedata pid="1" name="Registration" tags position="100,100" size="100,100" ><!-- TODO Form functionality -->
 First thing’s first. You must fill out your Navigator Registration.
 
 Name: (fill in, string)
@@ -135,7 +177,10 @@ Ship Registration:
 Type: Class III Gridskipper (hover: You were able to buy a beat up, single-occupancy ship. Whoever was the previous owner left a permanent Rillewiid smell in the cabin.)
 Name: (fill in)
 
-[[Juno Station]]</tw-passagedata>
+[[Juno Station]]
+
+&lt;&lt;set $shipName = "The Opal Star"&gt;&gt;
+&lt;&lt;set $playerFirstName = "Caleb"&gt;&gt;</tw-passagedata>
 <tw-passagedata pid="2" name="Juno Station" tags position="100,100" size="100,100" >&lt;&lt;set _currentLocation = "Deck 5: Retail and Food Court"&gt;&gt;
 You make a shaky landing in Juno Station, the nearest PB3 <have this underlined like a glossary?> satellite location. $shipName has a few extra scratches now, which easily fit in with the rest of the scuffs on the chassis.
 
@@ -167,7 +212,7 @@ They chuckle. “Alright then.” Their right eye flashes white again as they us
 [[Okay, so now what?]]</tw-passagedata>
 <tw-passagedata pid="5" name="Okay, so now what?" tags position="100,100" size="100,100" >You return to the booth. The hallway nearby is incredibly quiet. The clerk returns from whatever they were doing in their augment and asks, “So. What’ll it be?”
 
-[[Where can I find a caravan?]] // [[Bounty Board, no caravan]]</tw-passagedata>
+[[Where can I find a caravan?]] """//""" [[Bounty Board, no caravan]]</tw-passagedata>
 <tw-passagedata pid="6" name="Where can I find a caravan?" tags position="100,100" size="100,100" >You ask where you can find a caravan. They bring up the holoprojector again, this time with a three-dimensional map of the deck you are on.
 
 “You’re in luck, usually caravan reps post up around the food court to recruit folks. It’s a high traffic area so they’re able to get a good amount of throughput.” A red dot pops up on the map, followed by a yellow line outlining the path to get there. “Right there. Or just follow the signs. Across the way is the posting board as well, if you want to make a few calls around.”
