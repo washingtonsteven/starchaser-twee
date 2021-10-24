@@ -40,6 +40,7 @@ directories.forEach((directory) => {
 
   if (contents) {
     const tweeParser = new Extwee.TweeParser(contents);
+    console.log(`\tFound story: ${tweeParser.story.name}`);
     const formatName = tweeParser.story.metadata.format || DEFAULT_FORMAT;
     const formatVersion =
       tweeParser.story.metadata.formatVersion ||
@@ -48,6 +49,12 @@ directories.forEach((directory) => {
     const formatParser = new Extwee.StoryFormatParser(
       getFormatPath(formatName, formatVersion)
     );
+    // Replace macro brackets with html entities for sugarcube
+    if (formatName === "sugarcube") {
+      tweeParser.story.passages.forEach(passage => {
+        passage.text = passage.text.replace(/<</g, "&lt;&lt;").replace(/>>/g, "&gt;&gt;")
+      })
+    }
     new Extwee.HTMLWriter(
       path.resolve(__dirname, `build/${directory.name}.html`),
       tweeParser.story,

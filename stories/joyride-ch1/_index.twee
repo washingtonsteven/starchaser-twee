@@ -8,7 +8,11 @@ Joyride (but for Real)
     "format-version": "2.0.3"
 }
 
-:: Start
+:: Notes for Index
+
+NOTE: The passages here are for testing only. The story starts in 001.twee. Thanks.
+
+:: Start(Test)
 <% s.currentLocation = "Juno Station Hangar"; window.setup.addAction("New Action!"); %>
 You pilot your Gridskipper into Hangar #1578, a pit in your stomach forming as the ship's chassis seems to come within inches of the bay.
 
@@ -16,7 +20,7 @@ A message comes over the speakers into the cockpit, an automated broadcast from 
 
 "[[Welcome to Juno Station]]"
 
-:: Welcome to Juno Station
+:: Welcome to Juno Station(Test)
 <% s.currentLocation = "Hangar #1578"; window.setup.addAction("Juno Station Action", "Information Booth"); window.setup.addAction("And a second one", () => alert("haha fooled you")); %>
 You secure your ship, and climb out, slinging your pack over your shoulder. You walk up to the fare meter and swipe your BlancTab. The screen on the machine denotes the funds deducted (a bit higher than you'd like), as well as a special message:
 
@@ -26,7 +30,7 @@ Please report to the nearest Information booth for registration, Navigator #<%=s
 
 [[Down the corridor, and take the elevator down one level|Information Booth]]
 
-:: Information Booth
+:: Information Booth(Test)
 You arrive at the information booth, where a young lizard-like creature similar to yourself is tapping away at their VizTab. They barely look up as they grab a different Tab, and spin it towards you.
 
 "Fill this out please." they say in a monotone, eyes still glued to their own pad. They had pale, milky scales like yours, but theirs were punctuated with blotches of color which were shifting constantly. Embarassed, you avert your eyes. They seem to notice your reaction and release a single chuckle, continuing to swipe through their device.

@@ -29,6 +29,7 @@
         },
         addAction: (actionName, passageTarget) => {
             const button = createElement(null, actionName, "button");
+            button.classList.add("action-button");
             actionElement.appendChild(button);
             if (passageTarget) {
                 button.addEventListener("click", (e) => {
@@ -38,9 +39,13 @@
                         window.story.show(passageTarget);
                     }
                 })
-            }
-            if (window.story.passage(passageTarget)) {
-                button.addEventListener("click", (e) => window.story.show(passageTarget))
+
+                if (
+                    typeof passageTarget !== "function" && 
+                    !window.story.passage(passageTarget)
+                ) {
+                    button.classList.add("passage-not-found");
+                }
             }
         }
     });
@@ -52,12 +57,32 @@
 
     const updateStateDisplay = () => {
         stateElement.innerHTML = JSON.stringify(window.story.state, null, 1);
+        (window.story.state.actions || []).forEach(action => {
+            let actionLabel;
+            let actionTarget;
+            if (typeof action === "string") {
+                actionLabel = actionTarget = action;
+            } else if (typeof action === "object") {
+                if (Array.isArray(action) && action.length === 2) {
+                    actionLabel = action[0];
+                    actionTarget = action[1];
+                } else {
+                    actionLabel = action.label;
+                    actionTarget = action.target || action.label;
+                }
+            } else {
+                console.warn(`Tried to set an action of type "${typeof action}." Only "string" or "object" allowed`);
+                return;
+            }
+            window.setup.addAction(actionLabel, actionTarget);
+        })
     }
     window.setup.updateStateDisplay = updateStateDisplay;
     updateStateDisplay();
 
     $(window).on("sm.passage.showing", (event, eventObject) => {
         actionElement.innerHTML = "";
+        window.story.state.actions = [];
     })
     $(window).on("sm.passage.shown", (event, eventObject) => {
         updateStateDisplay();

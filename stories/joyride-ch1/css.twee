@@ -20,3 +20,7 @@ div#state {
 div#actions {
     grid-area: actions;
 }
+
+button.action-button.passage-not-found {
+    color: red;
+}

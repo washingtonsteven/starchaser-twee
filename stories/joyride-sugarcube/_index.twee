@@ -1,0 +1,9 @@
+:: StoryTitle
+Joyride (SugarCube edition)
+
+:: StoryData
+{
+    "ifid": "90634D21-E2C2-45C0-9DB1-849B7F1ACF51",
+    "format": "sugarcube",
+    "format-version": "2.35.0"
+}

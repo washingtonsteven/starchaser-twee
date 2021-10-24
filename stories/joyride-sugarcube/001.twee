@@ -1,0 +1,93 @@
+:: Start
+A passage
+<<set $thisIsAVariable to "variableValue">>
+“Earn Cash! Expand Galactic Knowledge! Become a Navigator today!”
+
+The Planetary Beacon Bounty Board paid top dollar for prominent placements for their recruitment ads. Backed by various Science Guilds across the Dreyyar Union, the PB3’s main goal was to expand the Dreyyar territory. Just one hundred cycles ago, the Union only had contact with approximately ten percent of the estimated celestial bodies in the galaxy. Now, that number was up to twenty-three percent! 
+
+As the easily accessible planets, stars, and moons were seeded with beacons, fewer and fewer Navigators were willing to brave the deep to truly extend the reach of Dreyyar. Even with the going rate per Planetary Bounty skyrocketing, the supply of Navigators willing and skilled enough to make dangerous and lengthy treks began to dwindle.
+
+You’ve just finished your spaceflight course, and now it’s time to start your Navigator career. 
+
+[[Registration]]
+
+:: Registration
+<<set $shipName = "The Opal Star">>
+<<set $playerFirstName = "Caleb">>
+
+<TODO Form functionality>
+First thing’s first. You must fill out your Navigator Registration.
+
+Name: (fill in, string)
+Age: (fill in, number)
+Navigator Number: (generated)
+Permanent Residence: (choice: Ruzade, Nides, N/A)
+
+Who do you want to put down for your Emergency Contact?
+(Spouse, Parent, N/A)
+
+Species:
+(hm, how would this work if we let them choose the race)
+(I can restrict this to one option, and fill more in later)
+Mirleon (hover: A gecko-like species with milky-white scales that showed blotches of color across the spectrum in response to their current emotional state. They wear endosuits in order to regular their internal body temperature,)
+
+Ship Registration:
+Type: Class III Gridskipper (hover: You were able to buy a beat up, single-occupancy ship. Whoever was the previous owner left a permanent Rillewiid smell in the cabin.)
+Name: (fill in)
+
+[[Juno Station]]
+
+:: Juno Station 
+<<set _currentLocation = "Deck 5: Retail and Food Court">>
+You make a shaky landing in Juno Station, the nearest PB3 <have this underlined like a glossary?> satellite location. $shipName has a few extra scratches now, which easily fit in with the rest of the scuffs on the chassis.
+
+You hop out, looking up to a sign with several arrows pointing in several different directions:
+
+(Information progresses story, others lead to fun places I guess?)
+(Run into Mora somewhere too, can catch her caravan before hitting up information)
+
+[[Food Court]] """//""" [[Information]] """//""" [[Elevators]] """//""" [[Shopping]]
+
+:: Information
+You closely follow signs taking you to the information booth at the center of the circular deck. The booth itself is  circular, divided up into several windows with the ability to service up to 10 customers around its circumference. For whatever reason, only one of the windows is open, the Mirleon representative inside, their eyes glowing as they are immersed in their Augmented Communicator. You walk up to the window, and their eyes fade back to standard dark slits as they blink. “How can I help you.” they respond, gruffly, resting their head in their palm.
+
+(reveal: "Hi, I’m $playerFirstName reporting in for a Navigator Bounty")
+They chuckle. “Alright then.” Their right eye flashes white again as they use their augment to scan you. The holoprojector between the two of you lights up, showing a projection of your registration.
+
+“Huh, another new one.” they shuffle their fingers on the blank desktop, operating a virtual interface only they could see. After a few moments of silence, the projection disappears. “You got a caravan?”
+
+<<if $foundCaravan === true>>
+[[Yep! The Thylacine Harpy Caravan!]] """//""" [[Nope, going it alone|[Lie] Nope, going it alone]]
+<<else>>
+[[Nope, going it alone]]
+<</if>>
+[[What's a caravan?|Caravan Intro]]
+
+:: Caravan Intro
+You ask what a caravan is, and the clerk hits a few extra buttons on their interface. Immediately your own augment dings quietly in your ear, indicating that you’ve received a new message. (effect, sidebar messages increases by 1)
+
+“Read that.” They reply shortly, before sitting back in their chair, their eyes glowing once again as they sink back into the Augment network.
+
+(stuck here until the user reads/opens the message, perhaps have tutorial/message)
+
+[[Okay, so now what?]]
+
+:: Okay, so now what?
+You return to the booth. The hallway nearby is incredibly quiet. The clerk returns from whatever they were doing in their augment and asks, “So. What’ll it be?”
+
+[[Where can I find a caravan?]] // [[Bounty Board, no caravan]]
+
+:: Where can I find a caravan?
+You ask where you can find a caravan. They bring up the holoprojector again, this time with a three-dimensional map of the deck you are on.
+
+“You’re in luck, usually caravan reps post up around the food court to recruit folks. It’s a high traffic area so they’re able to get a good amount of throughput.” A red dot pops up on the map, followed by a yellow line outlining the path to get there. “Right there. Or just follow the signs. Across the way is the posting board as well, if you want to make a few calls around.”
+
+“Anything else?”
+
+You shake your head, stepping away to your next destination.
+
+[[Food Court]] """//""" [[Information]] """//""" [[Elevators]] """//""" [[Shopping]]
+
+
+
+
