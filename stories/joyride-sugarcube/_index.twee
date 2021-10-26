@@ -13,3 +13,21 @@ Joyride (SugarCube edition)
 Name: <<print $playerName || "N/A">> <<print $navigatorNumber ? "($navigatorNumber)" : "">>
 Ship: <<print $shipName ? "$shipName ($shipType)" : "None">>
 Current Location: <<print _currentLocation || "Unknown">>
+
+:: PassageFooter
+@@#action-bar;
+ACTIONS:
+<<nobr>>
+    <<if _actions>>
+        <<for _i = 0; _i < _actions.length; _i++>>
+            <!-- TODO: handle actions being objects to provide callback/setter code -->
+            <<set _parts = _actions[_i].split("|")>>
+            <<if _parts.length === 1>>
+                <<button [[_parts[0]]]>><</button>>
+            <<elseif _parts.length === 2>>
+                <<button [[_parts[0]|_parts[1]]]>><</button>>
+            <</if>>
+        <</for>>
+    <</if>>
+<</nobr>>
+@@

@@ -13,6 +13,10 @@ $(document).on(":passageinit", function() {
         State.setVar("$playerLastName", parts[parts.length -1]);
     }
 
+});
+
+$(document).on(":passagerender", function(e) {
+    $(e.content).find("button.link-broken").prop("disabled", true);
 })
 
 Macro.add('tooltip', {

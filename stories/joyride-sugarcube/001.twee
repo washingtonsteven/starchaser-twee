@@ -7,7 +7,7 @@ As the easily accessible planets, stars, and moons were seeded with beacons, few
 
 You’ve just finished your spaceflight course, and now it’s time to start your Navigator career. 
 
-<<button [[Registration]]>><</button>>
+<<set _actions = ["Registration"]>>
 
 :: Registration
 <<set $navigatorNumber = random(10016, 99984)>>\
@@ -30,21 +30,21 @@ Species:
 Ship Registration:
     Ship Type: <<tooltip right "Class III Gridskipper" "You were able to buy a beat up, single-occupancy ship. Whoever was the previous owner left a permanent Rillewiid smell in the cabin.">>
     Ship Name: <<textbox "$shipName" "The Opal Star">>
-
-[[Juno Station]]
-
-<<set $shipType to "Class III Gridskipper">>
+<<silently>>
+    <<set $shipType to "Class III Gridskipper">>
+    <<set _actions = ["Juno Station"]>>
+<</silently>>
 
 :: Juno Station 
 <<set _currentLocation = "Deck 5: Retail and Food Court">>
-You make a shaky landing in Juno Station, the nearest PB3 <have this underlined like a glossary?> satellite location. $shipName has a few extra scratches now, which easily fit in with the rest of the scuffs on the chassis.
+You make a shaky landing in Juno Station, the nearest <<tooltip top "PB3" "Planetary Beacon Bounty Board">> satellite location. /$shipName/ has a few extra scratches now, which easily fit in with the rest of the scuffs on the chassis.
 
 You hop out, looking up to a sign with several arrows pointing in several different directions:
 
 (Information progresses story, others lead to fun places I guess?)
 (Run into Mora somewhere too, can catch her caravan before hitting up information)
 
-[[Food Court]] """//""" [[Information]] """//""" [[Elevators]] """//""" [[Shopping]]
+<<set _actions = ["Food Court", "Information", "Elevators", "Shopping"]>>
 
 :: Information
 You closely follow signs taking you to the information booth at the center of the circular deck. The booth itself is  circular, divided up into several windows with the ability to service up to 10 customers around its circumference. For whatever reason, only one of the windows is open, the Mirleon representative inside, their eyes glowing as they are immersed in their Augmented Communicator. You walk up to the window, and their eyes fade back to standard dark slits as they blink. “How can I help you.” they respond, gruffly, resting their head in their palm.
@@ -54,12 +54,14 @@ They chuckle. “Alright then.” Their right eye flashes white again as they us
 
 “Huh, another new one.” they shuffle their fingers on the blank desktop, operating a virtual interface only they could see. After a few moments of silence, the projection disappears. “You got a caravan?”
 
-<<if $foundCaravan === true>>
-[[Yep! The Thylacine Harpy Caravan!]] """//""" [[Nope, going it alone|[Lie] Nope, going it alone]]
-<<else>>
-[[Nope, going it alone]]
-<</if>>
-[[What's a caravan?|Caravan Intro]]
+<<nobr>>
+    <<if $foundCaravan === true>>
+    <<set _actions = ["Yep! The Thylacine Harpy Caravan!", "[Lie] Nope, going it alone|Nope, going it alone"]>>
+    <<else>>
+    <<set _actions = ["Nope, going it alone"]>>
+    <</if>>
+    <<run _actions.push("What's a caravan?|Caravan Intro")>>
+<</nobr>>
 
 :: Caravan Intro
 You ask what a caravan is, and the clerk hits a few extra buttons on their interface. Immediately your own augment dings quietly in your ear, indicating that you’ve received a new message. (effect, sidebar messages increases by 1)
@@ -68,12 +70,12 @@ You ask what a caravan is, and the clerk hits a few extra buttons on their inter
 
 (stuck here until the user reads/opens the message, perhaps have tutorial/message)
 
-[[Okay, so now what?]]
+<<set _actions = ["Okay, so now what?"]>>
 
 :: Okay, so now what?
 You return to the booth. The hallway nearby is incredibly quiet. The clerk returns from whatever they were doing in their augment and asks, “So. What’ll it be?”
 
-[[Where can I find a caravan?]] """//""" [[Bounty Board, no caravan]]
+<<set _actions = ["Where can I find a caravan?", "Bounty Board, no caravan"]>>
 
 :: Where can I find a caravan?
 You ask where you can find a caravan. They bring up the holoprojector again, this time with a three-dimensional map of the deck you are on.
@@ -84,7 +86,7 @@ You ask where you can find a caravan. They bring up the holoprojector again, thi
 
 You shake your head, stepping away to your next destination.
 
-[[Food Court]] """//""" [[Information]] """//""" [[Elevators]] """//""" [[Shopping]]
+<<set _actions = ["Food Court", "Information", "Elevators", "Shopping"]>>
 
 
 
