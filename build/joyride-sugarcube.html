@@ -191,6 +191,30 @@ window.setup.showActions = function() {
     $("#action-bar").attr("data-hide", "false");
 }
 
+window.setup.unreadMessagesCount = function() {
+    if (Array.isArray(State.variables.messages)) {
+        const found = State.variables.messages.filter(function(message) { return !message.read; });
+        return found.length;
+    }
+
+    return 0;
+}
+
+window.setup.addMessage = function(newMessage) {
+    if (Array.isArray(State.variables.messages)) {
+        const existing = State.variables.messages.find(function(message) {
+            return newMessage.subject === message.subject &&
+                newMessage.from === message.from &&
+                newMessage.body === message.body;
+        });
+
+        if (!existing) {
+            State.variables.messages.push(newMessage);
+            UIBar.update();
+        }
+    }
+}
+
 const addMacros = function() {
     // Tooltip Macro
     Macro.add("tooltip", {
@@ -379,9 +403,26 @@ They chuckle. “Alright then.” Their right eye flashes white again as they us
 
 “Read that.” They reply shortly, before sitting back in their chair, their eyes glowing once again as they sink back into the Augment network.
 
-(stuck here until the user reads/opens the message, perhaps have tutorial/message)
+(Use the sidebar to open your Messages!)
 
-&lt;&lt;set _actions = ["Okay, so now what?"]&gt;&gt;</tw-passagedata>
+&lt;&lt;silently&gt;&gt;
+&lt;&lt;run window.setup.addMessage({
+    subject: "Caravan Introduction",
+    from: "Juno Station Information #31",
+    body: "Caravans are wicked cool, man"
+})&gt;&gt;
+&lt;&lt;set _actions = ["Okay, so now what?"]&gt;&gt;
+&lt;&lt;done&gt;&gt;
+    &lt;&lt;run window.setup.hideActions()&gt;&gt;
+    &lt;&lt;script&gt;&gt;
+        function onMessagesOpened() {
+            $(document).off(":messagesopened", onMessagesOpened);
+            window.setup.showActions();
+        }
+        $(document).on(":messagesopened", onMessagesOpened)
+    &lt;&lt;/script&gt;&gt;
+&lt;&lt;/done&gt;&gt;
+&lt;&lt;/silently&gt;&gt;</tw-passagedata>
 <tw-passagedata pid="6" name="Okay, so now what?" tags position="100,100" size="100,100" >You return to the booth. The hallway nearby is incredibly quiet. The clerk returns from whatever they were doing in their augment and asks, “So. What’ll it be?”
 
 &lt;&lt;set _actions = ["Where can I find a caravan?", "Bounty Board, no caravan"]&gt;&gt;</tw-passagedata>
@@ -394,10 +435,59 @@ They chuckle. “Alright then.” Their right eye flashes white again as they us
 You shake your head, stepping away to your next destination.
 
 &lt;&lt;set _actions = ["Food Court", "Information", "Elevators", "Shopping"]&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="10" name="StoryCaption" tags position="100,100" size="100,100" >Name: &lt;&lt;print $playerName || "N/A"&gt;&gt; &lt;&lt;print $navigatorNumber ? "($navigatorNumber)" : ""&gt;&gt;
+<tw-passagedata pid="10" name="StoryInit" tags position="100,100" size="100,100" >&lt;&lt;set $messages = []&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="11" name="StoryCaption" tags position="100,100" size="100,100" >Name: &lt;&lt;print $playerName || "N/A"&gt;&gt; &lt;&lt;print $navigatorNumber ? "($navigatorNumber)" : ""&gt;&gt;
 Ship: &lt;&lt;print $shipName ? "$shipName ($shipType)" : "None"&gt;&gt;
-Current Location: &lt;&lt;print _currentLocation || "Unknown"&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="11" name="PassageFooter" tags position="100,100" size="100,100" >@@#action-bar;
+Current Location: &lt;&lt;print _currentLocation || "Unknown"&gt;&gt;
+
+&lt;&lt;silently&gt;&gt;
+    &lt;&lt;set _messageLink to "Messages"&gt;&gt;\
+    &lt;&lt;set _unreads to window.setup.unreadMessagesCount()&gt;&gt;
+    &lt;&lt;if _unreads > 0&gt;&gt;
+        &lt;&lt;set _messageLink to "Messages (" + _unreads+ ")"&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/silently&gt;&gt;\
+&lt;&lt;link _messageLink&gt;&gt;
+&lt;&lt;script&gt;&gt;
+    function renderMessages() {
+        let messagesPassage = Story.lookup("tags", "messages");
+
+        if (!messagesPassage) {
+            return;
+        }
+
+        messagesPassage = messagesPassage[0]; // Should only be one
+        const messagesSource = messagesPassage.text;
+        Dialog.wiki(messagesSource);
+        Dialog.open();
+        $(document).trigger(":messagesopened");
+        UIBar.update();
+    }
+    renderMessages();
+&lt;&lt;/script&gt;&gt;
+&lt;&lt;/link&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="12" name="Messages" tags="messages" position="100,100" size="100,100" >&lt;&lt;if $playerFirstName !== ""&gt;&gt;\
+!Messages for $playerFirstName
+&lt;&lt;else&gt;&gt;\
+!Messages
+&lt;&lt;/if&gt;&gt;\
+&lt;&lt;script&gt;&gt;
+    const messages = State.variables.messages || [];
+
+    if (!Array.isArray(messages) || messages.length === 0) {
+        $(output).wiki("!!No Messages")
+    } else {
+        messages.forEach(function(message) {
+            message.read = true;
+            $(output).wiki(`\
+                ''Subject: ${message.subject}''
+                ''From: ${message.from}''
+                ${message.body}
+            `)
+        });
+    }
+&lt;&lt;/script&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="13" name="PassageFooter" tags position="100,100" size="100,100" >@@#action-bar;
 ----
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;if _actions&gt;&gt;

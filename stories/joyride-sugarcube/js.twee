@@ -19,6 +19,30 @@ window.setup.showActions = function() {
     $("#action-bar").attr("data-hide", "false");
 }
 
+window.setup.unreadMessagesCount = function() {
+    if (Array.isArray(State.variables.messages)) {
+        const found = State.variables.messages.filter(function(message) { return !message.read; });
+        return found.length;
+    }
+
+    return 0;
+}
+
+window.setup.addMessage = function(newMessage) {
+    if (Array.isArray(State.variables.messages)) {
+        const existing = State.variables.messages.find(function(message) {
+            return newMessage.subject === message.subject &&
+                newMessage.from === message.from &&
+                newMessage.body === message.body;
+        });
+
+        if (!existing) {
+            State.variables.messages.push(newMessage);
+            UIBar.update();
+        }
+    }
+}
+
 const addMacros = function() {
     // Tooltip Macro
     Macro.add("tooltip", {

@@ -82,9 +82,26 @@ You ask what a caravan is, and the clerk hits a few extra buttons on their inter
 
 “Read that.” They reply shortly, before sitting back in their chair, their eyes glowing once again as they sink back into the Augment network.
 
-(stuck here until the user reads/opens the message, perhaps have tutorial/message)
+(Use the sidebar to open your Messages!)
 
+<<silently>>
+<<run window.setup.addMessage({
+    subject: "Caravan Introduction",
+    from: "Juno Station Information #31",
+    body: "Caravans are wicked cool, man"
+})>>
 <<set _actions = ["Okay, so now what?"]>>
+<<done>>
+    <<run window.setup.hideActions()>>
+    <<script>>
+        function onMessagesOpened() {
+            $(document).off(":messagesopened", onMessagesOpened);
+            window.setup.showActions();
+        }
+        $(document).on(":messagesopened", onMessagesOpened)
+    <</script>>
+<</done>>
+<</silently>>
 
 :: Okay, so now what?
 You return to the booth. The hallway nearby is incredibly quiet. The clerk returns from whatever they were doing in their augment and asks, “So. What’ll it be?”
