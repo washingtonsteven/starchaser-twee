@@ -100,104 +100,170 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 	</div>
 	<tw-storydata name="Joyride (SugarCube edition)" startnode="0" creator="extwee" creator-version="1.6.2" ifid="90634D21-E2C2-45C0-9DB1-849B7F1ACF51" zoom="undefined" format="SugarCube" format-version="2.35.0" options hidden>
 <style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">.tooltip-trigger {
-    color: #ddd;
+    color: #bbb;
     position:relative;
     display: inline-block;
     border-bottom: 1px dotted #ddd;
     padding-bottom: 0;
-    cursor: help;
+    cursor: pointer;
     height: 1.5rem;
 }
 
-.tooltip-trigger .tooltip-text {
-    position:absolute;
-    min-width: 15rem;
-    background-color: #333;
-    color: #eee;
-    border: solid 1px #ccc;
+.tooltip-text {
+    background: #ddd;
+    color: #222;
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    border-radius: 0.25rem;
     opacity: 0;
-    transition: opacity 0.2s;
-    padding: 0 0.5rem;
-    visibility: hidden;
-    text-align: center;
-    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.25s;
 }
 
-.tooltip-trigger.tooltip-top .tooltip-text {
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -100%);
-}
-
-.tooltip-trigger.tooltip-right .tooltip-text {
-    top: 50%;
-    right: -0.5rem;
-    transform: translate(100%, -50%);
-}
-
-.tooltip-trigger.tooltip-bottom .tooltip-text {
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 100%);
-}
-
-.tooltip-trigger.tooltip-left .tooltip-text {
-    top: 50%;
-    left: -0.5rem;
-    transform: translate(-100%, -50%);
-}
-
-.tooltip-trigger:hover .tooltip-text {
-    visibility: visible;
+.tooltip-text[data-show='true'] {
     opacity: 1;
+}
+
+.tooltip-text > .arrow, .tooltip-text > .arrow::before {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: inherit;
+}
+
+.tooltip-text > .arrow {
+    visibility: hidden;
+}
+
+.tooltip-text > .arrow::before {
+    visibility: visible;
+    content: '';
+    transform: rotate(45deg);
+}
+
+.tooltip-text[data-popper-placement^='top'] > .arrow {
+  bottom: -4px;
+}
+
+.tooltip-text[data-popper-placement^='bottom'] > .arrow {
+  top: -4px;
+}
+
+.tooltip-text[data-popper-placement^='left'] > .arrow {
+  right: -4px;
+}
+
+.tooltip-text[data-popper-placement^='right'] > .arrow {
+  left: -4px;
 }</style>
 <script role="script" id="twine-user-script" type="text/twine-javascript">// Config.debug = true;
 
-$(document).on(":passageinit", function() {
+window.setup = {};
+window.setup.$tooltips = [];
+window.setup.poppers = [];
 
-    // Setup Player first and last name
-    let playerName = State.getVar("$playerName") || "";
+const addMacros = function() {
+    // Tooltip Macro
+    Macro.add("tooltip", {
+        handler: function() {
+            const direction = this.args[0]
+            const text = this.args[1];
+            const tooltipText = this.args[2];
+            
+            const tooltipContent = $("<div>")
+                .addClass("tooltip-text")
+                .data("show", "false")
+                .append(
+                    tooltipText,
+                    $("<div>").addClass("arrow").attr("data-popper-arrow", "")
+                )
+            
+            const tooltipTrigger = $("<span>")
+                .addClass(`tooltip-trigger`)
+                .attr("aria-describedby", "tooltip")
+                .html(text)
+                .on("mouseenter", () => {
+                    tooltipContent.attr("data-show", "true");
+                })
+                .on("mouseleave", () => {
+                    tooltipContent.attr("data-show", "false");
+                });
+            
+            $(this.output).append(tooltipTrigger);
+            $(document.body).append(tooltipContent);
+            window.setup.$tooltips.push(tooltipContent);
+            
+            const popperInstance = Popper.createPopper(tooltipTrigger.get(0), tooltipContent.get(0), {
+                placement: direction || 'top',
+                modifiers: [
+                    {
+                        name: 'offset',
+                        options: {
+                            offset: [0, 0],
+                        }
+                    }
+                ]
+            });
+            window.setup.poppers.push(popperInstance);
+        }
+    });
+}
 
-    if (!State.getVar("$playerFirstName")) {
-        const parts = playerName.split(/\s+/);
-        State.setVar("$playerFirstName", parts[0]);
-        State.setVar("$playerLastName", parts[parts.length -1]);
-    }
 
-});
 
-$(document).on(":passagerender", function(e) {
-    $(e.content).find("button.link-broken").prop("disabled", true);
-})
+window.setup.init = function() {
+    $(document).on(":passageinit", function() {
+        // Setup Player first and last name
+        let playerName = State.getVar("$playerName") || "";
 
-Macro.add('tooltip', {
-    handler: function() {
-        const direction = this.args[0]
-        const text = this.args[1];
-        const tooltipText = this.args[2];
-        $(this.output)
-            .append(
-                $("<span>")
-                    .addClass(`tooltip-trigger tooltip-${direction}`)
-                    .html(text)
-                    .append(
-                        $("<span>")
-                            .addClass("tooltip-text")
-                            .html(tooltipText)
-                    )
-            )
-    }
-});</script>
-<tw-passagedata pid="0" name="Start" tags position="100,100" size="100,100" >“Earn Cash! Expand Galactic Knowledge! Become a Navigator today!”
+        if (!State.getVar("$playerFirstName")) {
+            const parts = playerName.split(/\s+/);
+            State.setVar("$playerFirstName", parts[0]);
+            State.setVar("$playerLastName", parts[parts.length -1]);
+        }
+
+        // Clear old popups
+        window.setup.$tooltips.forEach(function($tooltip) {
+            $tooltip.remove();
+        });
+        window.setup.$tooltips = [];
+    });
+
+    $(document).on(":passagerender", function(e) {
+        $(e.content).find("button.link-broken").prop("disabled", true);
+    });
+
+    addMacros();
+
+    const lock = LoadScreen.lock();
+    return importScripts("https://unpkg.com/@popperjs/core@2")
+        .then(() => {
+            window.setup.JSLoaded = true;
+            Engine.play(passage(), true);
+            LoadScreen.unlock(lock);
+        })
+        .catch(e => console.error(e))
+};
+
+window.setup.init();</script>
+<tw-passagedata pid="0" name="Start" tags position="100,100" size="100,100" >Welcome screen, et al.
+
+This is mostly here so we can properly load libraries for the main story without the first passage using them.
+
+As such, don't use custom macros or anything that gets loaded async on this page.
+
+&lt;&lt;set _actions = ["Begin|Want Ad"]&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="1" name="Want Ad" tags position="100,100" size="100,100" >“Earn Cash! Expand Galactic Knowledge! Become a Navigator today!”
 
 The Planetary Beacon Bounty Board paid top dollar for prominent placements for their recruitment ads. Backed by various Science Guilds across the Dreyyar Union, the &lt;&lt;tooltip top "PB3’s" "Planetary Beacon Bounty Board"&gt;&gt; main goal was to expand the Dreyyar territory. Just one hundred cycles ago, the Union only had contact with approximately ten percent of the estimated celestial bodies in the galaxy. Now, that number was up to twenty-three percent! 
 
-As the easily accessible planets, stars, and moons were seeded with beacons, fewer and fewer Navigators were willing to brave the deep to truly extend the reach of Dreyyar. Even with the going rate per Planetary Bounty skyrocketing, the supply of Navigators willing and skilled enough to make dangerous and lengthy treks began to dwindle.
+As the easily accessible planets, stars, and moons were seeded with beacons, fewer and fewer Navigators were willing to brave the deep to truly extend the reach of Dreyyar. Even with the going compensation rate per Planetary Bounty skyrocketing, the supply of Navigators willing and skilled enough to make dangerous and lengthy treks began to dwindle.
 
 You’ve just finished your spaceflight course, and now it’s time to start your Navigator career. 
 
 &lt;&lt;set _actions = ["Registration"]&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="1" name="Registration" tags position="100,100" size="100,100" >&lt;&lt;set $navigatorNumber = random(10016, 99984)&gt;&gt;\
+<tw-passagedata pid="2" name="Registration" tags position="100,100" size="100,100" >&lt;&lt;set $navigatorNumber = random(10016, 99984)&gt;&gt;\
 First thing’s first. You must fill out your Navigator Registration.
 
 First Name: &lt;&lt;textbox "$playerName" "Caleb Hertz"&gt;&gt;
@@ -221,7 +287,7 @@ Ship Registration:
     &lt;&lt;set $shipType to "Class III Gridskipper"&gt;&gt;
     &lt;&lt;set _actions = ["Juno Station"]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="2" name="Juno Station" tags position="100,100" size="100,100" >&lt;&lt;set _currentLocation = "Deck 5: Retail and Food Court"&gt;&gt;
+<tw-passagedata pid="3" name="Juno Station" tags position="100,100" size="100,100" >&lt;&lt;set _currentLocation = "Deck 5: Retail and Food Court"&gt;&gt;
 You make a shaky landing in Juno Station, the nearest &lt;&lt;tooltip top "PB3" "Planetary Beacon Bounty Board"&gt;&gt; satellite location. /$shipName/ has a few extra scratches now, which easily fit in with the rest of the scuffs on the chassis.
 
 You hop out, looking up to a sign with several arrows pointing in several different directions:
@@ -230,7 +296,7 @@ You hop out, looking up to a sign with several arrows pointing in several differ
 (Run into Mora somewhere too, can catch her caravan before hitting up information)
 
 &lt;&lt;set _actions = ["Food Court", "Information", "Elevators", "Shopping"]&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="3" name="Information" tags position="100,100" size="100,100" >You closely follow signs taking you to the information booth at the center of the circular deck. The booth itself is  circular, divided up into several windows with the ability to service up to 10 customers around its circumference. For whatever reason, only one of the windows is open, the Mirleon representative inside, their eyes glowing as they are immersed in their Augmented Communicator. You walk up to the window, and their eyes fade back to standard dark slits as they blink. “How can I help you.” they respond, gruffly, resting their head in their palm.
+<tw-passagedata pid="4" name="Information" tags position="100,100" size="100,100" >You closely follow signs taking you to the information booth at the center of the circular deck. The booth itself is  circular, divided up into several windows with the ability to service up to 10 customers around its circumference. For whatever reason, only one of the windows is open, the Mirleon representative inside, their eyes glowing as they are immersed in their Augmented Communicator. You walk up to the window, and their eyes fade back to standard dark slits as they blink. “How can I help you.” they respond, gruffly, resting their head in their palm.
 
 (reveal: "Hi, I’m $playerFirstName reporting in for a Navigator Bounty")
 They chuckle. “Alright then.” Their right eye flashes white again as they use their augment to scan you. The holoprojector between the two of you lights up, showing a projection of your registration.
@@ -239,23 +305,23 @@ They chuckle. “Alright then.” Their right eye flashes white again as they us
 
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;if $foundCaravan === true&gt;&gt;
-    &lt;&lt;set _actions = ["Yep! The Thylacine Harpy Caravan!", "[Lie] Nope, going it alone|Nope, going it alone"]&gt;&gt;
+        &lt;&lt;set _actions = ["Yep! The Thylacine Harpy Caravan!", "[Lie] Nope, going it alone|Nope, going it alone"]&gt;&gt;
     &lt;&lt;else&gt;&gt;
-    &lt;&lt;set _actions = ["Nope, going it alone"]&gt;&gt;
+        &lt;&lt;set _actions = ["Nope, going it alone"]&gt;&gt;
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;run _actions.push("What's a caravan?|Caravan Intro")&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="4" name="Caravan Intro" tags position="100,100" size="100,100" >You ask what a caravan is, and the clerk hits a few extra buttons on their interface. Immediately your own augment dings quietly in your ear, indicating that you’ve received a new message. (effect, sidebar messages increases by 1)
+<tw-passagedata pid="5" name="Caravan Intro" tags position="100,100" size="100,100" >You ask what a caravan is, and the clerk hits a few extra buttons on their interface. Immediately your own augment dings quietly in your ear, indicating that you’ve received a new message. (effect, sidebar messages increases by 1)
 
 “Read that.” They reply shortly, before sitting back in their chair, their eyes glowing once again as they sink back into the Augment network.
 
 (stuck here until the user reads/opens the message, perhaps have tutorial/message)
 
 &lt;&lt;set _actions = ["Okay, so now what?"]&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="5" name="Okay, so now what?" tags position="100,100" size="100,100" >You return to the booth. The hallway nearby is incredibly quiet. The clerk returns from whatever they were doing in their augment and asks, “So. What’ll it be?”
+<tw-passagedata pid="6" name="Okay, so now what?" tags position="100,100" size="100,100" >You return to the booth. The hallway nearby is incredibly quiet. The clerk returns from whatever they were doing in their augment and asks, “So. What’ll it be?”
 
 &lt;&lt;set _actions = ["Where can I find a caravan?", "Bounty Board, no caravan"]&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="6" name="Where can I find a caravan?" tags position="100,100" size="100,100" >You ask where you can find a caravan. They bring up the holoprojector again, this time with a three-dimensional map of the deck you are on.
+<tw-passagedata pid="7" name="Where can I find a caravan?" tags position="100,100" size="100,100" >You ask where you can find a caravan. They bring up the holoprojector again, this time with a three-dimensional map of the deck you are on.
 
 “You’re in luck, usually caravan reps post up around the food court to recruit folks. It’s a high traffic area so they’re able to get a good amount of throughput.” A red dot pops up on the map, followed by a yellow line outlining the path to get there. “Right there. Or just follow the signs. Across the way is the posting board as well, if you want to make a few calls around.”
 
@@ -264,22 +330,30 @@ They chuckle. “Alright then.” Their right eye flashes white again as they us
 You shake your head, stepping away to your next destination.
 
 &lt;&lt;set _actions = ["Food Court", "Information", "Elevators", "Shopping"]&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="9" name="StoryCaption" tags position="100,100" size="100,100" >Name: &lt;&lt;print $playerName || "N/A"&gt;&gt; &lt;&lt;print $navigatorNumber ? "($navigatorNumber)" : ""&gt;&gt;
+<tw-passagedata pid="10" name="StoryCaption" tags position="100,100" size="100,100" >Name: &lt;&lt;print $playerName || "N/A"&gt;&gt; &lt;&lt;print $navigatorNumber ? "($navigatorNumber)" : ""&gt;&gt;
 Ship: &lt;&lt;print $shipName ? "$shipName ($shipType)" : "None"&gt;&gt;
 Current Location: &lt;&lt;print _currentLocation || "Unknown"&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="10" name="PassageFooter" tags position="100,100" size="100,100" >@@#action-bar;
+<tw-passagedata pid="11" name="PassageFooter" tags position="100,100" size="100,100" >@@#action-bar;
 ACTIONS:
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;if _actions&gt;&gt;
-        &lt;&lt;for _i = 0; _i < _actions.length; _i++&gt;&gt;
-            <!-- TODO: handle actions being objects to provide callback/setter code -->
-            &lt;&lt;set _parts = _actions[_i].split("|")&gt;&gt;
-            &lt;&lt;if _parts.length === 1&gt;&gt;
-                &lt;&lt;button [[_parts[0]]]&gt;&gt;&lt;&lt;/button&gt;&gt;
-            &lt;&lt;elseif _parts.length === 2&gt;&gt;
-                &lt;&lt;button [[_parts[0]|_parts[1]]]&gt;&gt;&lt;&lt;/button&gt;&gt;
-            &lt;&lt;/if&gt;&gt;
-        &lt;&lt;/for&gt;&gt;
+        &lt;&lt;script&gt;&gt;
+            const actions = State.temporary.actions;
+
+            if (Array.isArray(actions)) {
+                actions.forEach((action) => {
+                    if (typeof action === "string") {
+                        let fullLink = action;
+                        if (!action.match(/\[\[.+\]\]/)) {
+                            fullLink = `[[${action}]]`;
+                        }
+                        $(output).wiki(`&lt;&lt;button ${fullLink}&gt;&gt;&lt;&lt;/button&gt;&gt;`);
+                    }
+
+                    $(output).wiki(" ");
+                });
+            }
+        &lt;&lt;/script&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 @@</tw-passagedata>

@@ -1,54 +1,60 @@
 :: css [stylesheet]
 
 .tooltip-trigger {
-    color: #ddd;
+    color: #bbb;
     position:relative;
     display: inline-block;
     border-bottom: 1px dotted #ddd;
     padding-bottom: 0;
-    cursor: help;
+    cursor: pointer;
     height: 1.5rem;
 }
 
-.tooltip-trigger .tooltip-text {
-    position:absolute;
-    min-width: 15rem;
-    background-color: #333;
-    color: #eee;
-    border: solid 1px #ccc;
+.tooltip-text {
+    background: #ddd;
+    color: #222;
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    border-radius: 0.25rem;
     opacity: 0;
-    transition: opacity 0.2s;
-    padding: 0 0.5rem;
-    visibility: hidden;
-    text-align: center;
-    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.25s;
 }
 
-.tooltip-trigger.tooltip-top .tooltip-text {
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -100%);
-}
-
-.tooltip-trigger.tooltip-right .tooltip-text {
-    top: 50%;
-    right: -0.5rem;
-    transform: translate(100%, -50%);
-}
-
-.tooltip-trigger.tooltip-bottom .tooltip-text {
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 100%);
-}
-
-.tooltip-trigger.tooltip-left .tooltip-text {
-    top: 50%;
-    left: -0.5rem;
-    transform: translate(-100%, -50%);
-}
-
-.tooltip-trigger:hover .tooltip-text {
-    visibility: visible;
+.tooltip-text[data-show='true'] {
     opacity: 1;
+}
+
+.tooltip-text > .arrow, .tooltip-text > .arrow::before {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: inherit;
+}
+
+.tooltip-text > .arrow {
+    visibility: hidden;
+}
+
+.tooltip-text > .arrow::before {
+    visibility: visible;
+    content: '';
+    transform: rotate(45deg);
+}
+
+.tooltip-text[data-popper-placement^='top'] > .arrow {
+  bottom: -4px;
+}
+
+.tooltip-text[data-popper-placement^='bottom'] > .arrow {
+  top: -4px;
+}
+
+.tooltip-text[data-popper-placement^='left'] > .arrow {
+  right: -4px;
+}
+
+.tooltip-text[data-popper-placement^='right'] > .arrow {
+  left: -4px;
 }

@@ -2,38 +2,91 @@
 
 // Config.debug = true;
 
-$(document).on(":passageinit", function() {
+window.setup = {};
+window.setup.$tooltips = [];
+window.setup.poppers = [];
 
-    // Setup Player first and last name
-    let playerName = State.getVar("$playerName") || "";
+const addMacros = function() {
+    // Tooltip Macro
+    Macro.add("tooltip", {
+        handler: function() {
+            const direction = this.args[0]
+            const text = this.args[1];
+            const tooltipText = this.args[2];
+            
+            const tooltipContent = $("<div>")
+                .addClass("tooltip-text")
+                .data("show", "false")
+                .append(
+                    tooltipText,
+                    $("<div>").addClass("arrow").attr("data-popper-arrow", "")
+                )
+            
+            const tooltipTrigger = $("<span>")
+                .addClass(`tooltip-trigger`)
+                .attr("aria-describedby", "tooltip")
+                .html(text)
+                .on("mouseenter", () => {
+                    tooltipContent.attr("data-show", "true");
+                })
+                .on("mouseleave", () => {
+                    tooltipContent.attr("data-show", "false");
+                });
+            
+            $(this.output).append(tooltipTrigger);
+            $(document.body).append(tooltipContent);
+            window.setup.$tooltips.push(tooltipContent);
+            
+            const popperInstance = Popper.createPopper(tooltipTrigger.get(0), tooltipContent.get(0), {
+                placement: direction || 'top',
+                modifiers: [
+                    {
+                        name: 'offset',
+                        options: {
+                            offset: [0, 0],
+                        }
+                    }
+                ]
+            });
+            window.setup.poppers.push(popperInstance);
+        }
+    });
+}
 
-    if (!State.getVar("$playerFirstName")) {
-        const parts = playerName.split(/\s+/);
-        State.setVar("$playerFirstName", parts[0]);
-        State.setVar("$playerLastName", parts[parts.length -1]);
-    }
 
-});
 
-$(document).on(":passagerender", function(e) {
-    $(e.content).find("button.link-broken").prop("disabled", true);
-})
+window.setup.init = function() {
+    $(document).on(":passageinit", function() {
+        // Setup Player first and last name
+        let playerName = State.getVar("$playerName") || "";
 
-Macro.add('tooltip', {
-    handler: function() {
-        const direction = this.args[0]
-        const text = this.args[1];
-        const tooltipText = this.args[2];
-        $(this.output)
-            .append(
-                $("<span>")
-                    .addClass(`tooltip-trigger tooltip-${direction}`)
-                    .html(text)
-                    .append(
-                        $("<span>")
-                            .addClass("tooltip-text")
-                            .html(tooltipText)
-                    )
-            )
-    }
-});
+        if (!State.getVar("$playerFirstName")) {
+            const parts = playerName.split(/\s+/);
+            State.setVar("$playerFirstName", parts[0]);
+            State.setVar("$playerLastName", parts[parts.length -1]);
+        }
+
+        // Clear old popups
+        window.setup.$tooltips.forEach(function($tooltip) {
+            $tooltip.remove();
+        });
+        window.setup.$tooltips = [];
+    });
+
+    $(document).on(":passagerender", function(e) {
+        $(e.content).find("button.link-broken").prop("disabled", true);
+    });
+
+    addMacros();
+
+    const lock = LoadScreen.lock();
+    return importScripts("https://unpkg.com/@popperjs/core@2")
+        .then(() => {
+            window.setup.JSLoaded = true;
+            Engine.play(passage(), true);
+            LoadScreen.unlock(lock);
+        })
+        .catch(e => console.error(e))
+};
+
+window.setup.init();

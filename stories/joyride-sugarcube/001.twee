@@ -1,9 +1,18 @@
 :: Start
+Welcome screen, et al.
+
+This is mostly here so we can properly load libraries for the main story without the first passage using them.
+
+As such, don't use custom macros or anything that gets loaded async on this page.
+
+<<set _actions = ["Begin|Want Ad"]>>
+
+:: Want Ad
 “Earn Cash! Expand Galactic Knowledge! Become a Navigator today!”
 
 The Planetary Beacon Bounty Board paid top dollar for prominent placements for their recruitment ads. Backed by various Science Guilds across the Dreyyar Union, the <<tooltip top "PB3’s" "Planetary Beacon Bounty Board">> main goal was to expand the Dreyyar territory. Just one hundred cycles ago, the Union only had contact with approximately ten percent of the estimated celestial bodies in the galaxy. Now, that number was up to twenty-three percent! 
 
-As the easily accessible planets, stars, and moons were seeded with beacons, fewer and fewer Navigators were willing to brave the deep to truly extend the reach of Dreyyar. Even with the going rate per Planetary Bounty skyrocketing, the supply of Navigators willing and skilled enough to make dangerous and lengthy treks began to dwindle.
+As the easily accessible planets, stars, and moons were seeded with beacons, fewer and fewer Navigators were willing to brave the deep to truly extend the reach of Dreyyar. Even with the going compensation rate per Planetary Bounty skyrocketing, the supply of Navigators willing and skilled enough to make dangerous and lengthy treks began to dwindle.
 
 You’ve just finished your spaceflight course, and now it’s time to start your Navigator career. 
 
@@ -56,9 +65,9 @@ They chuckle. “Alright then.” Their right eye flashes white again as they us
 
 <<nobr>>
     <<if $foundCaravan === true>>
-    <<set _actions = ["Yep! The Thylacine Harpy Caravan!", "[Lie] Nope, going it alone|Nope, going it alone"]>>
+        <<set _actions = ["Yep! The Thylacine Harpy Caravan!", "[Lie] Nope, going it alone|Nope, going it alone"]>>
     <<else>>
-    <<set _actions = ["Nope, going it alone"]>>
+        <<set _actions = ["Nope, going it alone"]>>
     <</if>>
     <<run _actions.push("What's a caravan?|Caravan Intro")>>
 <</nobr>>

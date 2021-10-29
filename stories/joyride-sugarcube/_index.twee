@@ -19,15 +19,23 @@ Current Location: <<print _currentLocation || "Unknown">>
 ACTIONS:
 <<nobr>>
     <<if _actions>>
-        <<for _i = 0; _i < _actions.length; _i++>>
-            <!-- TODO: handle actions being objects to provide callback/setter code -->
-            <<set _parts = _actions[_i].split("|")>>
-            <<if _parts.length === 1>>
-                <<button [[_parts[0]]]>><</button>>
-            <<elseif _parts.length === 2>>
-                <<button [[_parts[0]|_parts[1]]]>><</button>>
-            <</if>>
-        <</for>>
+        <<script>>
+            const actions = State.temporary.actions;
+
+            if (Array.isArray(actions)) {
+                actions.forEach((action) => {
+                    if (typeof action === "string") {
+                        let fullLink = action;
+                        if (!action.match(/\[\[.+\]\]/)) {
+                            fullLink = `[[${action}]]`;
+                        }
+                        $(output).wiki(`<<button ${fullLink}>><</button>>`);
+                    }
+
+                    $(output).wiki(" ");
+                });
+            }
+        <</script>>
     <</if>>
 <</nobr>>
 @@
