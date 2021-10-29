@@ -1,5 +1,19 @@
 :: css [stylesheet]
 
+#action-bar {
+    visibility: visible;
+    opacity: 1;
+}
+
+#action-bar[data-hide=true] {
+    opacity: 0;
+    visibility: hidden;
+}
+
+#action-bar[data-hide=false] {
+    transition: opacity 1s;
+}
+
 .tooltip-trigger {
     color: #bbb;
     position:relative;
@@ -20,6 +34,7 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.25s;
+    max-width: 45vw;
 }
 
 .tooltip-text[data-show='true'] {

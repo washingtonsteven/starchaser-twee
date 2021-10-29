@@ -1,10 +1,5 @@
 sugarcube-2:
   macros:
-    b:
-      name: linkbutton
-      description: "Render a link as a button"
-      parameters:
-          - "link"
     tooltip:
       name: tooltip
       description: "Show a tooltip when hovering over text\n\nUsage:\n\n```\n<<tooltip \"triggerText\" \"tooltipText\">>\n```\n\nCustom Macro."

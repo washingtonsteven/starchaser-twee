@@ -25,14 +25,14 @@ First thing’s first. You must fill out your Navigator Registration.
 First Name: <<textbox "$playerName" "Caleb Hertz">>
 Navigator Number: <<tooltip right $navigatorNumber "A unique identifier for you">>
 Permanent Residence: 
-    * <<radiobutton "$playerHome" "Ruzade" checked>> Ruzade
-    * <<radiobutton "$playerHome" "Nides">> Nides
+* <label><<radiobutton "$playerHome" "Ruzade" checked>> Ruzade</label>
+* <label><<radiobutton "$playerHome" "Nides">> Nides</label>
 
 Who do you want to put down for your Emergency Contact?
 (Spouse, Parent, N/A)
 
 Species:
-    * <<radiobutton "$playerSpecies" "Mirleon" checked>> <<tooltip right "Mirleon" "A gecko-like species with milky-white scales that showed blotches of color across the spectrum in response to their current emotional state. They wear endosuits in order to regular their internal body temperature.">>
+* <label><<radiobutton "$playerSpecies" "Mirleon" checked>> <<tooltip right "Mirleon" "A gecko-like species with milky-white scales that showed blotches of color across the spectrum in response to their current emotional state. They wear endosuits in order to regular their internal body temperature.">></label>
 <!-- hm, how would this work if we let them choose the race)
 (I can restrict this to one option, and fill more in later) -->
 
@@ -41,7 +41,7 @@ Ship Registration:
     Ship Name: <<textbox "$shipName" "The Opal Star">>
 <<silently>>
     <<set $shipType to "Class III Gridskipper">>
-    <<set _actions = ["Juno Station"]>>
+    <<set _actions = ["Submit Registration|Juno Station"]>>
 <</silently>>
 
 :: Juno Station 
@@ -58,10 +58,12 @@ You hop out, looking up to a sign with several arrows pointing in several differ
 :: Information
 You closely follow signs taking you to the information booth at the center of the circular deck. The booth itself is  circular, divided up into several windows with the ability to service up to 10 customers around its circumference. For whatever reason, only one of the windows is open, the Mirleon representative inside, their eyes glowing as they are immersed in their Augmented Communicator. You walk up to the window, and their eyes fade back to standard dark slits as they blink. “How can I help you.” they respond, gruffly, resting their head in their palm.
 
-(reveal: "Hi, I’m $playerFirstName reporting in for a Navigator Bounty")
+<<linkreplace "Hi, I'm $playerFirstName reporting in for a Navigator Bounty" t8n>>\
 They chuckle. “Alright then.” Their right eye flashes white again as they use their augment to scan you. The holoprojector between the two of you lights up, showing a projection of your registration.
 
-“Huh, another new one.” they shuffle their fingers on the blank desktop, operating a virtual interface only they could see. After a few moments of silence, the projection disappears. “You got a caravan?”
+“Huh, another new one.” they shuffle their fingers on the blank desktop, operating a virtual interface only they could see. After a few moments of silence, the projection disappears. “You got a caravan?”\
+<<run window.setup.showActions()>>\
+<</linkreplace>>
 
 <<nobr>>
     <<if $foundCaravan === true>>
@@ -70,6 +72,9 @@ They chuckle. “Alright then.” Their right eye flashes white again as they us
         <<set _actions = ["Nope, going it alone"]>>
     <</if>>
     <<run _actions.push("What's a caravan?|Caravan Intro")>>
+    <<done>>
+        <<run window.setup.hideActions()>>\
+    <</done>>
 <</nobr>>
 
 :: Caravan Intro

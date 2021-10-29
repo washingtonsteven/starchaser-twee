@@ -16,7 +16,7 @@ Current Location: <<print _currentLocation || "Unknown">>
 
 :: PassageFooter
 @@#action-bar;
-ACTIONS:
+----
 <<nobr>>
     <<if _actions>>
         <<script>>

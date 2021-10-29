@@ -6,10 +6,28 @@ window.setup = {};
 window.setup.$tooltips = [];
 window.setup.poppers = [];
 
+// Ex. When the UI Bar changes from stowed
+window.setup.updatePoppers = function() {
+    window.setup.poppers.forEach(function(p) { p.update(); });
+}
+
+window.setup.hideActions = function() {
+    $("#action-bar").attr("data-hide", "true");
+}
+
+window.setup.showActions = function() {
+    $("#action-bar").attr("data-hide", "false");
+}
+
 const addMacros = function() {
     // Tooltip Macro
     Macro.add("tooltip", {
         handler: function() {
+            if (!window.Popper) {
+                // Popper is not initialized, don't do anything.
+                // The passage will be re-rendered once it's here.
+                return;
+            }
             const direction = this.args[0]
             const text = this.args[1];
             const tooltipText = this.args[2];
@@ -26,10 +44,10 @@ const addMacros = function() {
                 .addClass(`tooltip-trigger`)
                 .attr("aria-describedby", "tooltip")
                 .html(text)
-                .on("mouseenter", () => {
+                .on("mouseenter", function() {
                     tooltipContent.attr("data-show", "true");
                 })
-                .on("mouseleave", () => {
+                .on("mouseleave", function() {
                     tooltipContent.attr("data-show", "false");
                 });
             
@@ -38,12 +56,19 @@ const addMacros = function() {
             window.setup.$tooltips.push(tooltipContent);
             
             const popperInstance = Popper.createPopper(tooltipTrigger.get(0), tooltipContent.get(0), {
-                placement: direction || 'top',
+                placement: direction || 'auto',
                 modifiers: [
                     {
                         name: 'offset',
                         options: {
-                            offset: [0, 0],
+                            offset: function({placement, reference, popper}) {
+                                // Top and Bottom don't need adjustment, but left and right do.
+                                if (placement.indexOf("top") === 0 || placement.indexOf("bottom") === 0) {
+                                    return [];
+                                } else {
+                                    return [0, 8];
+                                }
+                            },
                         }
                     }
                 ]
@@ -53,7 +78,25 @@ const addMacros = function() {
     });
 }
 
+function setupUIBarObserver() {
+    if (!window.MutationObserver) {
+        return;
+    }
 
+    const observer = new MutationObserver(function(mutationsList) {
+        mutationsList.forEach(function(mutation) {
+            if (mutation.type === "attributes" && mutation.attributeName === "class") {
+                // class changed, we aren't worried about what happened
+                // Wait for the animation to finish though.
+                setTimeout(function() {
+                    window.setup.updatePoppers && window.setup.updatePoppers();
+                }, 250);
+            }
+        })
+    });
+
+    observer.observe(document.querySelector("#ui-bar"), { attributes: true });
+}
 
 window.setup.init = function() {
     $(document).on(":passageinit", function() {
@@ -78,15 +121,16 @@ window.setup.init = function() {
     });
 
     addMacros();
+    setupUIBarObserver();
 
     const lock = LoadScreen.lock();
     return importScripts("https://unpkg.com/@popperjs/core@2")
-        .then(() => {
+        .then(function () {
             window.setup.JSLoaded = true;
             Engine.play(passage(), true);
             LoadScreen.unlock(lock);
         })
-        .catch(e => console.error(e))
+        .catch(function(e){ console.error(e); })
 };
 
 window.setup.init();

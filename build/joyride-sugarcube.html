@@ -99,7 +99,21 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
 	<tw-storydata name="Joyride (SugarCube edition)" startnode="0" creator="extwee" creator-version="1.6.2" ifid="90634D21-E2C2-45C0-9DB1-849B7F1ACF51" zoom="undefined" format="SugarCube" format-version="2.35.0" options hidden>
-<style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">.tooltip-trigger {
+<style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">#action-bar {
+    visibility: visible;
+    opacity: 1;
+}
+
+#action-bar[data-hide=true] {
+    opacity: 0;
+    visibility: hidden;
+}
+
+#action-bar[data-hide=false] {
+    transition: opacity 1s;
+}
+
+.tooltip-trigger {
     color: #bbb;
     position:relative;
     display: inline-block;
@@ -119,6 +133,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.25s;
+    max-width: 45vw;
 }
 
 .tooltip-text[data-show='true'] {
@@ -163,10 +178,28 @@ window.setup = {};
 window.setup.$tooltips = [];
 window.setup.poppers = [];
 
+// Ex. When the UI Bar changes from stowed
+window.setup.updatePoppers = function() {
+    window.setup.poppers.forEach(function(p) { p.update(); });
+}
+
+window.setup.hideActions = function() {
+    $("#action-bar").attr("data-hide", "true");
+}
+
+window.setup.showActions = function() {
+    $("#action-bar").attr("data-hide", "false");
+}
+
 const addMacros = function() {
     // Tooltip Macro
     Macro.add("tooltip", {
         handler: function() {
+            if (!window.Popper) {
+                // Popper is not initialized, don't do anything.
+                // The passage will be re-rendered once it's here.
+                return;
+            }
             const direction = this.args[0]
             const text = this.args[1];
             const tooltipText = this.args[2];
@@ -183,10 +216,10 @@ const addMacros = function() {
                 .addClass(`tooltip-trigger`)
                 .attr("aria-describedby", "tooltip")
                 .html(text)
-                .on("mouseenter", () => {
+                .on("mouseenter", function() {
                     tooltipContent.attr("data-show", "true");
                 })
-                .on("mouseleave", () => {
+                .on("mouseleave", function() {
                     tooltipContent.attr("data-show", "false");
                 });
             
@@ -195,12 +228,19 @@ const addMacros = function() {
             window.setup.$tooltips.push(tooltipContent);
             
             const popperInstance = Popper.createPopper(tooltipTrigger.get(0), tooltipContent.get(0), {
-                placement: direction || 'top',
+                placement: direction || 'auto',
                 modifiers: [
                     {
                         name: 'offset',
                         options: {
-                            offset: [0, 0],
+                            offset: function({placement, reference, popper}) {
+                                // Top and Bottom don't need adjustment, but left and right do.
+                                if (placement.indexOf("top") === 0 || placement.indexOf("bottom") === 0) {
+                                    return [];
+                                } else {
+                                    return [0, 8];
+                                }
+                            },
                         }
                     }
                 ]
@@ -210,7 +250,25 @@ const addMacros = function() {
     });
 }
 
+function setupUIBarObserver() {
+    if (!window.MutationObserver) {
+        return;
+    }
 
+    const observer = new MutationObserver(function(mutationsList) {
+        mutationsList.forEach(function(mutation) {
+            if (mutation.type === "attributes" && mutation.attributeName === "class") {
+                // class changed, we aren't worried about what happened
+                // Wait for the animation to finish though.
+                setTimeout(function() {
+                    window.setup.updatePoppers && window.setup.updatePoppers();
+                }, 250);
+            }
+        })
+    });
+
+    observer.observe(document.querySelector("#ui-bar"), { attributes: true });
+}
 
 window.setup.init = function() {
     $(document).on(":passageinit", function() {
@@ -235,15 +293,16 @@ window.setup.init = function() {
     });
 
     addMacros();
+    setupUIBarObserver();
 
     const lock = LoadScreen.lock();
     return importScripts("https://unpkg.com/@popperjs/core@2")
-        .then(() => {
+        .then(function () {
             window.setup.JSLoaded = true;
             Engine.play(passage(), true);
             LoadScreen.unlock(lock);
         })
-        .catch(e => console.error(e))
+        .catch(function(e){ console.error(e); })
 };
 
 window.setup.init();</script>
@@ -269,14 +328,14 @@ First thing’s first. You must fill out your Navigator Registration.
 First Name: &lt;&lt;textbox "$playerName" "Caleb Hertz"&gt;&gt;
 Navigator Number: &lt;&lt;tooltip right $navigatorNumber "A unique identifier for you"&gt;&gt;
 Permanent Residence: 
-    * &lt;&lt;radiobutton "$playerHome" "Ruzade" checked&gt;&gt; Ruzade
-    * &lt;&lt;radiobutton "$playerHome" "Nides"&gt;&gt; Nides
+* <label>&lt;&lt;radiobutton "$playerHome" "Ruzade" checked&gt;&gt; Ruzade</label>
+* <label>&lt;&lt;radiobutton "$playerHome" "Nides"&gt;&gt; Nides</label>
 
 Who do you want to put down for your Emergency Contact?
 (Spouse, Parent, N/A)
 
 Species:
-    * &lt;&lt;radiobutton "$playerSpecies" "Mirleon" checked&gt;&gt; &lt;&lt;tooltip right "Mirleon" "A gecko-like species with milky-white scales that showed blotches of color across the spectrum in response to their current emotional state. They wear endosuits in order to regular their internal body temperature."&gt;&gt;
+* <label>&lt;&lt;radiobutton "$playerSpecies" "Mirleon" checked&gt;&gt; &lt;&lt;tooltip right "Mirleon" "A gecko-like species with milky-white scales that showed blotches of color across the spectrum in response to their current emotional state. They wear endosuits in order to regular their internal body temperature."&gt;&gt;</label>
 <!-- hm, how would this work if we let them choose the race)
 (I can restrict this to one option, and fill more in later) -->
 
@@ -285,7 +344,7 @@ Ship Registration:
     Ship Name: &lt;&lt;textbox "$shipName" "The Opal Star"&gt;&gt;
 &lt;&lt;silently&gt;&gt;
     &lt;&lt;set $shipType to "Class III Gridskipper"&gt;&gt;
-    &lt;&lt;set _actions = ["Juno Station"]&gt;&gt;
+    &lt;&lt;set _actions = ["Submit Registration|Juno Station"]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;</tw-passagedata>
 <tw-passagedata pid="3" name="Juno Station" tags position="100,100" size="100,100" >&lt;&lt;set _currentLocation = "Deck 5: Retail and Food Court"&gt;&gt;
 You make a shaky landing in Juno Station, the nearest &lt;&lt;tooltip top "PB3" "Planetary Beacon Bounty Board"&gt;&gt; satellite location. /$shipName/ has a few extra scratches now, which easily fit in with the rest of the scuffs on the chassis.
@@ -298,10 +357,12 @@ You hop out, looking up to a sign with several arrows pointing in several differ
 &lt;&lt;set _actions = ["Food Court", "Information", "Elevators", "Shopping"]&gt;&gt;</tw-passagedata>
 <tw-passagedata pid="4" name="Information" tags position="100,100" size="100,100" >You closely follow signs taking you to the information booth at the center of the circular deck. The booth itself is  circular, divided up into several windows with the ability to service up to 10 customers around its circumference. For whatever reason, only one of the windows is open, the Mirleon representative inside, their eyes glowing as they are immersed in their Augmented Communicator. You walk up to the window, and their eyes fade back to standard dark slits as they blink. “How can I help you.” they respond, gruffly, resting their head in their palm.
 
-(reveal: "Hi, I’m $playerFirstName reporting in for a Navigator Bounty")
+&lt;&lt;linkreplace "Hi, I'm $playerFirstName reporting in for a Navigator Bounty" t8n&gt;&gt;\
 They chuckle. “Alright then.” Their right eye flashes white again as they use their augment to scan you. The holoprojector between the two of you lights up, showing a projection of your registration.
 
-“Huh, another new one.” they shuffle their fingers on the blank desktop, operating a virtual interface only they could see. After a few moments of silence, the projection disappears. “You got a caravan?”
+“Huh, another new one.” they shuffle their fingers on the blank desktop, operating a virtual interface only they could see. After a few moments of silence, the projection disappears. “You got a caravan?”\
+&lt;&lt;run window.setup.showActions()&gt;&gt;\
+&lt;&lt;/linkreplace&gt;&gt;
 
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;if $foundCaravan === true&gt;&gt;
@@ -310,6 +371,9 @@ They chuckle. “Alright then.” Their right eye flashes white again as they us
         &lt;&lt;set _actions = ["Nope, going it alone"]&gt;&gt;
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;run _actions.push("What's a caravan?|Caravan Intro")&gt;&gt;
+    &lt;&lt;done&gt;&gt;
+        &lt;&lt;run window.setup.hideActions()&gt;&gt;\
+    &lt;&lt;/done&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata>
 <tw-passagedata pid="5" name="Caravan Intro" tags position="100,100" size="100,100" >You ask what a caravan is, and the clerk hits a few extra buttons on their interface. Immediately your own augment dings quietly in your ear, indicating that you’ve received a new message. (effect, sidebar messages increases by 1)
 
@@ -334,7 +398,7 @@ You shake your head, stepping away to your next destination.
 Ship: &lt;&lt;print $shipName ? "$shipName ($shipType)" : "None"&gt;&gt;
 Current Location: &lt;&lt;print _currentLocation || "Unknown"&gt;&gt;</tw-passagedata>
 <tw-passagedata pid="11" name="PassageFooter" tags position="100,100" size="100,100" >@@#action-bar;
-ACTIONS:
+----
 &lt;&lt;nobr&gt;&gt;
     &lt;&lt;if _actions&gt;&gt;
         &lt;&lt;script&gt;&gt;
