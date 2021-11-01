@@ -91,3 +91,16 @@ Current Location: <<print _currentLocation || "Unknown">>
     <</if>>
 <</nobr>>
 @@
+
+:: Widgets [widget]
+<<widget npc>>\
+@@.npc;"<<print $args[0]>>"@@\
+<</widget>>
+
+<<widget pc>>\
+@@.pc;"<<print $args.join(" ")>>"@@\
+<</widget>>
+
+<<widget aug>>\
+@@.aug;<<print $args[0]>>@@\
+<</widget>>

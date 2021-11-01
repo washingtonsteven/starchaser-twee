@@ -99,7 +99,20 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
 	<tw-storydata name="Joyride (SugarCube edition)" startnode="0" creator="extwee" creator-version="1.6.2" ifid="90634D21-E2C2-45C0-9DB1-849B7F1ACF51" zoom="undefined" format="SugarCube" format-version="2.35.0" options hidden>
-<style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">#action-bar {
+<style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">.npc {
+    color: paleturquoise;
+}
+
+.pc {
+    color: plum;
+}
+
+.aug {
+    color: goldenrod;
+    font-family: monospace;
+}
+
+#action-bar {
     visibility: visible;
     opacity: 1;
 }
@@ -355,11 +368,11 @@ The ride is slightly bumpy, but you arrive at the cylindrical station without mu
 
 You disembark your &lt;&lt;tooltip "A model of ship made by the Tassa Company. Known for their reliability and function-over-form"&gt;&gt;Gridskipper&lt;&lt;/tooltip&gt;&gt; your stomach doing a partial flip in the reduced gravity of the hangar. With a thought, a digital readout appears over your vision:
 
-"Planetary Beacon Bounty Board (PB3) Office is on deck 3: Administration."
+&lt;&lt;aug "Planetary Beacon Bounty Board (PB3) Office is on deck 3: Administration."&gt;&gt;
 
 In addition, a yellow path is drawn on the ground in front of you, through the airlock and into the station. Just a moment later, the path flickers blue, before disappearing altogether.
 
-"Signal lost."
+&lt;&lt;aug "Signal lost."&gt;&gt;
 
 Your &lt;&lt;tooltip "Augmented Communicator, a neural implant communications device"&gt;&gt;AugComm&lt;&lt;/tooltip&gt;&gt; is on the fritz again. Maybe someone here can help you out with that.
 
@@ -386,25 +399,25 @@ A deep belly laugh erupts from a table to your left, where a large, furred creat
 [[Forward - Elevators|Juno Station, Deck 5, Elevators]]</tw-passagedata>
 <tw-passagedata pid="7" name="Juno Station, Deck 5, Information - Conversation" tags position="100,100" size="100,100" >You walk up to the booth. Behind the glass the attendant takes notice of you, with apparent disdain. They tug out their headphones and regard you in a monotone.
 
-"Yeah, can I help you?"
+&lt;&lt;npc "Yeah, can I help you?"&gt;&gt;
 
-&lt;&lt;linkappend "I’m looking for the Planetary Beacon Bounty Board" t8n&gt;&gt;
-They sink back in their chair. "Of course you are." they mutter.
+&lt;&lt;linkappend "&lt;&lt;pc I’m looking for the Planetary Beacon Bounty Board&gt;&gt;" t8n&gt;&gt;
+They sink back in their chair. &lt;&lt;npc "Of course you are."&gt;&gt; they mutter.
 
 They bring up a hologram of the station, showing a cross-section of each of the seven decks. Each one lit up as they gave their spiel about each.
 
-"Okay, if you’re just here to grab a bounty, head up to Deck 7. The Kiosk is fully automated now. You can also get the Board installed on a Slate or Augment so you can pick them up away from a station.
+&lt;&lt;npc "Okay, if you’re just here to grab a bounty, head up to Deck 7. The Kiosk is fully automated now. You can also get the Board installed on a Slate or Augment so you can pick them up away from a station."&gt;&gt;
 
-"If you need a caravan, there’s a posting board on Deck 6. If you wait til quiet hours are over usually it refreshes with a new crop of people looking to fill out their groups. You can also check this floor, since sometimes groups will ‘recruit’ in the Mess.
+&lt;&lt;npc "If you need a caravan, there’s a posting board on Deck 6. If you wait til quiet hours are over usually it refreshes with a new crop of people looking to fill out their groups. You can also check this floor, since sometimes groups will ‘recruit’ in the Mess."&gt;&gt;
 
-"If you’ve got actual business with the PB3, then you’ll want their office on Deck 3. Check the info booth there to get an appointment."
+&lt;&lt;npc "If you’ve got actual business with the PB3, then you’ll want their office on Deck 3. Check the info booth there to get an appointment."&gt;&gt;
 
-Your Augment flickers back on again, causing you to recoil a bit. Your Starchaser acceptance message flashes up, with a particular line of text highlighted: "Please report to a PB3 office for initial training and registration." You wave away the email, but attempt to keep the AugComm up. It only lasts a few seconds before flickering away again. 
+Your Augment flickers back on again, causing you to recoil a bit. Your Starchaser acceptance message flashes up, with a particular line of text highlighted: &lt;&lt;aug "Please report to a PB3 office for initial training and registration."&gt;&gt; You wave away the email, but attempt to keep the AugComm up. It only lasts a few seconds before flickering away again. 
 
-"That all?" the attendant asks, fidgeting with their headphones.
+&lt;&lt;npc "That all?"&gt;&gt; the attendant asks, fidgeting with their headphones.
 &lt;&lt;/linkappend&gt;&gt;
 
-&lt;&lt;linkappend "What’s up with this place? It’s quiet." t8n&gt;&gt;
+&lt;&lt;linkappend "&lt;&lt;pc What’s up with this place? It’s quiet.&gt;&gt;" t8n&gt;&gt;
 "Quiet hours. Most folks are getting some sleep right now."
 
 "Oh." you reply.
@@ -412,7 +425,7 @@ Your Augment flickers back on again, causing you to recoil a bit. Your Starchase
 "Yup." they bring up a display on their Slate, then dismiss it as quickly. "It’s about 5 hours until things start back up again. Might want to sync your—" they eye you up and down "—whatever, with the local time if you’re gonna be here a bit."
 &lt;&lt;/linkappend&gt;&gt;
 
-&lt;&lt;linkappend "What is there to do?" t8n&gt;&gt;
+&lt;&lt;linkappend "&lt;&lt;pc What is there to do?&gt;&gt;" t8n&gt;&gt;
 "I dunno, buddy." they shrug. "It’s quiet hours now, so not much is open on this Deck. Deck 6 has more stuff if you have //saucier// tastes. And Deck 7 has some parks."
 
 They bring up a hologram view of the station for you to see, each Deck highlighting as they talk about it. 
@@ -503,6 +516,17 @@ Current Location: &lt;&lt;print _currentLocation || "Unknown"&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 @@</tw-passagedata>
+<tw-passagedata pid="16" name="Widgets" tags="widget" position="100,100" size="100,100" >&lt;&lt;widget npc&gt;&gt;\
+@@.npc;"&lt;&lt;print $args[0]&gt;&gt;"@@\
+&lt;&lt;/widget&gt;&gt;
+
+&lt;&lt;widget pc&gt;&gt;\
+@@.pc;"&lt;&lt;print $args.join(" ")&gt;&gt;"@@\
+&lt;&lt;/widget&gt;&gt;
+
+&lt;&lt;widget aug&gt;&gt;\
+@@.aug;&lt;&lt;print $args[0]&gt;&gt;@@\
+&lt;&lt;/widget&gt;&gt;</tw-passagedata>
 </tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */

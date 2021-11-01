@@ -1,5 +1,18 @@
 :: css [stylesheet]
 
+.npc {
+    color: paleturquoise;
+}
+
+.pc {
+    color: plum;
+}
+
+.aug {
+    color: goldenrod;
+    font-family: monospace;
+}
+
 #action-bar {
     visibility: visible;
     opacity: 1;

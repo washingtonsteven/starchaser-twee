@@ -32,11 +32,11 @@ You make a shaky landing at Juno Station. Your ship, //$shipName//, apparently r
 
 You disembark your <<tooltip "A model of ship made by the Tassa Company. Known for their reliability and function-over-form">>Gridskipper<</tooltip>> your stomach doing a partial flip in the reduced gravity of the hangar. With a thought, a digital readout appears over your vision:
 
-"Planetary Beacon Bounty Board (PB3) Office is on deck 3: Administration."
+<<aug "Planetary Beacon Bounty Board (PB3) Office is on deck 3: Administration.">>
 
 In addition, a yellow path is drawn on the ground in front of you, through the airlock and into the station. Just a moment later, the path flickers blue, before disappearing altogether.
 
-"Signal lost."
+<<aug "Signal lost.">>
 
 Your <<tooltip "Augmented Communicator, a neural implant communications device">>AugComm<</tooltip>> is on the fritz again. Maybe someone here can help you out with that.
 
@@ -75,25 +75,25 @@ You approach the center of the Deck, and are met with a bored, young <<tooltip "
 
 You walk up to the booth. Behind the glass the attendant takes notice of you, with apparent disdain. They tug out their headphones and regard you in a monotone.
 
-"Yeah, can I help you?"
+<<npc "Yeah, can I help you?">>
 
-<<linkappend "I’m looking for the Planetary Beacon Bounty Board" t8n>>
-They sink back in their chair. "Of course you are." they mutter.
+<<linkappend "<<pc I’m looking for the Planetary Beacon Bounty Board>>" t8n>>
+They sink back in their chair. <<npc "Of course you are.">> they mutter.
 
 They bring up a hologram of the station, showing a cross-section of each of the seven decks. Each one lit up as they gave their spiel about each.
 
-"Okay, if you’re just here to grab a bounty, head up to Deck 7. The Kiosk is fully automated now. You can also get the Board installed on a Slate or Augment so you can pick them up away from a station.
+<<npc "Okay, if you’re just here to grab a bounty, head up to Deck 7. The Kiosk is fully automated now. You can also get the Board installed on a Slate or Augment so you can pick them up away from a station.">>
 
-"If you need a caravan, there’s a posting board on Deck 6. If you wait til quiet hours are over usually it refreshes with a new crop of people looking to fill out their groups. You can also check this floor, since sometimes groups will ‘recruit’ in the Mess.
+<<npc "If you need a caravan, there’s a posting board on Deck 6. If you wait til quiet hours are over usually it refreshes with a new crop of people looking to fill out their groups. You can also check this floor, since sometimes groups will ‘recruit’ in the Mess.">>
 
-"If you’ve got actual business with the PB3, then you’ll want their office on Deck 3. Check the info booth there to get an appointment."
+<<npc "If you’ve got actual business with the PB3, then you’ll want their office on Deck 3. Check the info booth there to get an appointment.">>
 
-Your Augment flickers back on again, causing you to recoil a bit. Your Starchaser acceptance message flashes up, with a particular line of text highlighted: "Please report to a PB3 office for initial training and registration." You wave away the email, but attempt to keep the AugComm up. It only lasts a few seconds before flickering away again. 
+Your Augment flickers back on again, causing you to recoil a bit. Your Starchaser acceptance message flashes up, with a particular line of text highlighted: <<aug "Please report to a PB3 office for initial training and registration.">> You wave away the email, but attempt to keep the AugComm up. It only lasts a few seconds before flickering away again. 
 
-"That all?" the attendant asks, fidgeting with their headphones.
+<<npc "That all?">> the attendant asks, fidgeting with their headphones.
 <</linkappend>>
 
-<<linkappend "What’s up with this place? It’s quiet." t8n>>
+<<linkappend "<<pc What’s up with this place? It’s quiet.>>" t8n>>
 "Quiet hours. Most folks are getting some sleep right now."
 
 "Oh." you reply.
@@ -101,7 +101,7 @@ Your Augment flickers back on again, causing you to recoil a bit. Your Starchase
 "Yup." they bring up a display on their Slate, then dismiss it as quickly. "It’s about 5 hours until things start back up again. Might want to sync your—" they eye you up and down "—whatever, with the local time if you’re gonna be here a bit."
 <</linkappend>>
 
-<<linkappend "What is there to do?" t8n>>
+<<linkappend "<<pc What is there to do?>>" t8n>>
 "I dunno, buddy." they shrug. "It’s quiet hours now, so not much is open on this Deck. Deck 6 has more stuff if you have //saucier// tastes. And Deck 7 has some parks."
 
 They bring up a hologram view of the station for you to see, each Deck highlighting as they talk about it. 
