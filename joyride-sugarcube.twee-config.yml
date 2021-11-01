@@ -2,6 +2,7 @@ sugarcube-2:
   macros:
     tooltip:
       name: tooltip
-      description: "Show a tooltip when hovering over text\n\nUsage:\n\n```\n<<tooltip \"triggerText\" \"tooltipText\">>\n```\n\nCustom Macro."
+      description: "Show a tooltip when hovering over text\n\nUsage:\n\n```\n<<tooltip \"tooltipText\" [direction]>>triggerText<</tooltip>>\n```\n\nCustom Macro."
+      container: true
       parameters:
-          - "('top'|'right'|'left'|'bottom') &+ text &+ text"
+          - "text |+ (top | bottom | left | right | auto)"

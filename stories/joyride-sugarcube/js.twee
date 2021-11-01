@@ -46,15 +46,17 @@ window.setup.addMessage = function(newMessage) {
 const addMacros = function() {
     // Tooltip Macro
     Macro.add("tooltip", {
+        tags: null,
         handler: function() {
             if (!window.Popper) {
                 // Popper is not initialized, don't do anything.
                 // The passage will be re-rendered once it's here.
                 return;
             }
-            const direction = this.args[0]
-            const text = this.args[1];
-            const tooltipText = this.args[2];
+            const tooltipText = this.args[0]
+            const direction = this.args[1] ||  "auto";
+            const payload = (this.payload || []).find(p => p.name === "tooltip");
+            const text = (payload || {}).contents || "trigger";
             
             const tooltipContent = $("<div>")
                 .addClass("tooltip-text")

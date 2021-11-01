@@ -1,124 +1,125 @@
 :: Start
-Welcome screen, et al.
 
-This is mostly here so we can properly load libraries for the main story without the first passage using them.
+! Ascendancy: Starchaser
 
-As such, don't use custom macros or anything that gets loaded async on this page.
-
-<<set _actions = ["Begin|Want Ad"]>>
-
-:: Want Ad
-“Earn Cash! Expand Galactic Knowledge! Become a Navigator today!”
-
-The Planetary Beacon Bounty Board paid top dollar for prominent placements for their recruitment ads. Backed by various Science Guilds across the Dreyyar Union, the <<tooltip top "PB3’s" "Planetary Beacon Bounty Board">> main goal was to expand the Dreyyar territory. Just one hundred cycles ago, the Union only had contact with approximately ten percent of the estimated celestial bodies in the galaxy. Now, that number was up to twenty-three percent! 
-
-As the easily accessible planets, stars, and moons were seeded with beacons, fewer and fewer Navigators were willing to brave the deep to truly extend the reach of Dreyyar. Even with the going compensation rate per Planetary Bounty skyrocketing, the supply of Navigators willing and skilled enough to make dangerous and lengthy treks began to dwindle.
-
-You’ve just finished your spaceflight course, and now it’s time to start your Navigator career. 
-
-<<set _actions = ["Registration"]>>
+[[Begin|Registration]]
 
 :: Registration
-<<set $navigatorNumber = random(10016, 99984)>>\
-First thing’s first. You must fill out your Navigator Registration.
 
-First Name: <<textbox "$playerName" "Caleb Hertz">>
-Navigator Number: <<tooltip right $navigatorNumber "A unique identifier for you">>
-Permanent Residence: 
-* <label><<radiobutton "$playerHome" "Ruzade" checked>> Ruzade</label>
-* <label><<radiobutton "$playerHome" "Nides">> Nides</label>
+Please enter your name: 
+First: <<textbox "$playerFirstName" "Caleb">> 
+Last: <<textbox "$playerLastName" "Hertz">>
 
-Who do you want to put down for your Emergency Contact?
-(Spouse, Parent, N/A)
+What is your Ship’s name: <<textbox "$shipName" "The Opal Star">>
 
-Species:
-* <label><<radiobutton "$playerSpecies" "Mirleon" checked>> <<tooltip right "Mirleon" "A gecko-like species with milky-white scales that showed blotches of color across the spectrum in response to their current emotional state. They wear endosuits in order to regular their internal body temperature.">></label>
-<!-- hm, how would this work if we let them choose the race)
-(I can restrict this to one option, and fill more in later) -->
+[[Continue|Introduction]]
 
-Ship Registration:
-    Ship Type: <<tooltip right "Class III Gridskipper" "You were able to buy a beat up, single-occupancy ship. Whoever was the previous owner left a permanent Rillewiid smell in the cabin.">>
-    Ship Name: <<textbox "$shipName" "The Opal Star">>
-<<silently>>
-    <<set $shipType to "Class III Gridskipper">>
-    <<set _actions = ["Submit Registration|Juno Station"]>>
-<</silently>>
+:: Introduction
 
-:: Juno Station 
-<<set _currentLocation = "Deck 5: Retail and Food Court">>
-You make a shaky landing in Juno Station, the nearest <<tooltip top "PB3" "Planetary Beacon Bounty Board">> satellite location. /$shipName/ has a few extra scratches now, which easily fit in with the rest of the scuffs on the chassis.
+The Dreyyar region covers one of the massive, spiraling arms of the galaxy, the territory controlled by the Dreyyar Union growing every cycle, thanks to the efforts of Starchasers. 
 
-You hop out, looking up to a sign with several arrows pointing in several different directions:
+Sponsored by various Scientific Guilds, Starchasers are contractors, hired to extend the reach of planetary discovery of the Union.
 
-(Information progresses story, others lead to fun places I guess?)
-(Run into Mora somewhere too, can catch her caravan before hitting up information)
+You have left your home moon of <<tooltip "The largest moon of the factory planet Ruzade">>Nides<</tooltip>>, eager to  find and start your first assignment from the <<tooltip "PB3">>Planetary Beacon Bounty Board<</tooltip>>. The nearest PB3 output is at the nearby Juno Station.
 
-<<set _actions = ["Food Court", "Information", "Elevators", "Shopping"]>>
+The ride is slightly bumpy, but you arrive at the cylindrical station without much hassle.
 
-:: Information
-You closely follow signs taking you to the information booth at the center of the circular deck. The booth itself is  circular, divided up into several windows with the ability to service up to 10 customers around its circumference. For whatever reason, only one of the windows is open, the Mirleon representative inside, their eyes glowing as they are immersed in their Augmented Communicator. You walk up to the window, and their eyes fade back to standard dark slits as they blink. “How can I help you.” they respond, gruffly, resting their head in their palm.
+[[Dock|Juno Station, Deck 5, Hangar]]
 
-<<linkreplace "Hi, I'm $playerFirstName reporting in for a Navigator Bounty" t8n>>\
-They chuckle. “Alright then.” Their right eye flashes white again as they use their augment to scan you. The holoprojector between the two of you lights up, showing a projection of your registration.
+:: Juno Station, Deck 5, Hangar
 
-“Huh, another new one.” they shuffle their fingers on the blank desktop, operating a virtual interface only they could see. After a few moments of silence, the projection disappears. “You got a caravan?”\
-<<run window.setup.showActions()>>\
-<</linkreplace>>
+You make a shaky landing at Juno Station. Your ship, //$shipName//, apparently received worse injuries from the previous owner, but the sound of metal scraping on metal is never a pleasant one.
 
-<<nobr>>
-    <<if $foundCaravan === true>>
-        <<set _actions = ["Yep! The Thylacine Harpy Caravan!", "[Lie] Nope, going it alone|Nope, going it alone"]>>
-    <<else>>
-        <<set _actions = ["Nope, going it alone"]>>
-    <</if>>
-    <<run _actions.push("What's a caravan?|Caravan Intro")>>
-    <<done>>
-        <<run window.setup.hideActions()>>\
-    <</done>>
-<</nobr>>
+You disembark your <<tooltip "A model of ship made by the Tassa Company. Known for their reliability and function-over-form">>Gridskipper<</tooltip>> your stomach doing a partial flip in the reduced gravity of the hangar. With a thought, a digital readout appears over your vision:
 
-:: Caravan Intro
-You ask what a caravan is, and the clerk hits a few extra buttons on their interface. Immediately your own augment dings quietly in your ear, indicating that you’ve received a new message. (effect, sidebar messages increases by 1)
+"Planetary Beacon Bounty Board (PB3) Office is on deck 3: Administration."
 
-“Read that.” They reply shortly, before sitting back in their chair, their eyes glowing once again as they sink back into the Augment network.
+In addition, a yellow path is drawn on the ground in front of you, through the airlock and into the station. Just a moment later, the path flickers blue, before disappearing altogether.
 
-(Use the sidebar to open your Messages!)
+"Signal lost."
 
-<<silently>>
-<<run window.setup.addMessage({
-    subject: "Caravan Introduction",
-    from: "Juno Station Information #31",
-    body: "Caravans are wicked cool, man"
-})>>
-<<set _actions = ["Okay, so now what?"]>>
-<<done>>
-    <<run window.setup.hideActions()>>
-    <<script>>
-        function onMessagesOpened() {
-            $(document).off(":messagesopened", onMessagesOpened);
-            window.setup.showActions();
-        }
-        $(document).on(":messagesopened", onMessagesOpened)
-    <</script>>
-<</done>>
-<</silently>>
+Your <<tooltip "Augmented Communicator, a neural implant communications device">>AugComm<</tooltip>> is on the fritz again. Maybe someone here can help you out with that.
 
-:: Okay, so now what?
-You return to the booth. The hallway nearby is incredibly quiet. The clerk returns from whatever they were doing in their augment and asks, “So. What’ll it be?”
+[[Head In|Juno Station, Deck 5, Hangar Entrance]]
 
-<<set _actions = ["Where can I find a caravan?", "Bounty Board, no caravan"]>>
+:: Juno Station, Deck 5, Hangar Entrance
 
-:: Where can I find a caravan?
-You ask where you can find a caravan. They bring up the holoprojector again, this time with a three-dimensional map of the deck you are on.
+You enter the station proper, and gravity is back to normal. The hallway is fairly quiet as it curves away from you.
 
-“You’re in luck, usually caravan reps post up around the food court to recruit folks. It’s a high traffic area so they’re able to get a good amount of throughput.” A red dot pops up on the map, followed by a yellow line outlining the path to get there. “Right there. Or just follow the signs. Across the way is the posting board as well, if you want to make a few calls around.”
+The sign in front of you points in three directions:
 
-“Anything else?”
+[[Left - Mess Hall|Juno Station, Deck 5, Mess Hall]]
+[[Straight - Information, Elevators|Juno Station, Deck 5, Information]]
+[[Right - Retail|Juno Station, Deck 5, Retail]]
 
-You shake your head, stepping away to your next destination.
+:: Juno Station, Deck 5, Mess Hall
 
-<<set _actions = ["Food Court", "Information", "Elevators", "Shopping"]>>
+Your footsteps echo in the hallway as you head toward the food court. Motion-sensing lights along the wall click on as you approach.
 
+You arrive, and see a large expanse of tables and chairs, mostly empty. There are a few small groups of people chattering, and all but one of the restaurants are closed. 
 
+A deep belly laugh erupts from a table to your left, where a large, furred creature smacks their rotund belly with two arms, their other two fists pounding on the table.
 
+[[Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance]]
+
+:: Juno Station, Deck 5, Information
+
+You approach the center of the Deck, and are met with a bored, young <<tooltip "a reptilian species, sporting rough, milky white scales that can blush through several colors of the rainbow">>Mirleon<</tooltip>> is tapping through their Slate, head in hand, their ears plugged up with headphones.
+
+[[Approach|Juno Station, Deck 5, Information - Conversation]]
+
+[[Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance]]
+[[Forward - Elevators|Juno Station, Deck 5, Elevators]]
+
+:: Juno Station, Deck 5, Information - Conversation
+
+You walk up to the booth. Behind the glass the attendant takes notice of you, with apparent disdain. They tug out their headphones and regard you in a monotone.
+
+"Yeah, can I help you?"
+
+<<linkappend "I’m looking for the Planetary Beacon Bounty Board" t8n>>
+They sink back in their chair. "Of course you are." they mutter.
+
+They bring up a hologram of the station, showing a cross-section of each of the seven decks. Each one lit up as they gave their spiel about each.
+
+"Okay, if you’re just here to grab a bounty, head up to Deck 7. The Kiosk is fully automated now. You can also get the Board installed on a Slate or Augment so you can pick them up away from a station.
+
+"If you need a caravan, there’s a posting board on Deck 6. If you wait til quiet hours are over usually it refreshes with a new crop of people looking to fill out their groups. You can also check this floor, since sometimes groups will ‘recruit’ in the Mess.
+
+"If you’ve got actual business with the PB3, then you’ll want their office on Deck 3. Check the info booth there to get an appointment."
+
+Your Augment flickers back on again, causing you to recoil a bit. Your Starchaser acceptance message flashes up, with a particular line of text highlighted: "Please report to a PB3 office for initial training and registration." You wave away the email, but attempt to keep the AugComm up. It only lasts a few seconds before flickering away again. 
+
+"That all?" the attendant asks, fidgeting with their headphones.
+<</linkappend>>
+
+<<linkappend "What’s up with this place? It’s quiet." t8n>>
+"Quiet hours. Most folks are getting some sleep right now."
+
+"Oh." you reply.
+
+"Yup." they bring up a display on their Slate, then dismiss it as quickly. "It’s about 5 hours until things start back up again. Might want to sync your—" they eye you up and down "—whatever, with the local time if you’re gonna be here a bit."
+<</linkappend>>
+
+<<linkappend "What is there to do?" t8n>>
+"I dunno, buddy." they shrug. "It’s quiet hours now, so not much is open on this Deck. Deck 6 has more stuff if you have //saucier// tastes. And Deck 7 has some parks."
+
+They bring up a hologram view of the station for you to see, each Deck highlighting as they talk about it. 
+
+"Deck 4," they continue with a sigh. "It’s mainly sleeping quarters, so you can spend some Sols and wake up when more things are open. 3 and below is Administration, Residential, and Engineering. Unless you live here, you probably don’t want those."
+<</linkappend>>
+
+:: Juno Station, Deck 5, Retail
+
+You wander over to the retail section. The hallways are dark here, and light up as you pass their sensors. 
+
+A row of storefronts meets you after a short trek. Every one of them is dark, and stays that way. A few have automated storefronts for vending small items, or storing orders for later pickup.
+
+In the center is a bench, where a <<tooltip "A furred, four-legged species, known for their brutality, though this has calmed some since joining the Dreyyar Union">>Lemnae<</tooltip>>
+
+[[Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance]]
+
+:: Juno Station, Deck 5, Elevators
+
+TBD
 
