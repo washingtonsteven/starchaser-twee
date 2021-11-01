@@ -1,8 +1,8 @@
 :: Start
 
-! Ascendancy: Starchaser
-
-[[Begin|Registration]]
+! Ascendancy: Starchaser\
+\
+<<acts "Begin|Registration">>\
 
 :: Registration
 
@@ -12,7 +12,7 @@ Last: <<textbox "$playerLastName" "Hertz">>
 
 What is your Ship’s name: <<textbox "$shipName" "The Opal Star">>
 
-[[Continue|Introduction]]
+<<acts "Continue|Introduction">>
 
 :: Introduction
 
@@ -24,7 +24,7 @@ You have left your home moon of <<tooltip "The largest moon of the factory plane
 
 The ride is slightly bumpy, but you arrive at the cylindrical station without much hassle.
 
-[[Dock|Juno Station, Deck 5, Hangar]]
+<<acts "Dock|Juno Station, Deck 5, Hangar">>
 
 :: Juno Station, Deck 5, Hangar
 
@@ -40,17 +40,18 @@ In addition, a yellow path is drawn on the ground in front of you, through the a
 
 Your <<tooltip "Augmented Communicator, a neural implant communications device">>AugComm<</tooltip>> is on the fritz again. Maybe someone here can help you out with that.
 
-[[Head In|Juno Station, Deck 5, Hangar Entrance]]
+<<acts "Head In|Juno Station, Deck 5, Hangar Entrance">>
 
 :: Juno Station, Deck 5, Hangar Entrance
 
 You enter the station proper, and gravity is back to normal. The hallway is fairly quiet as it curves away from you.
 
 The sign in front of you points in three directions:
-
-[[Left - Mess Hall|Juno Station, Deck 5, Mess Hall]]
-[[Straight - Information, Elevators|Juno Station, Deck 5, Information]]
-[[Right - Retail|Juno Station, Deck 5, Retail]]
+<<silently>>
+<<acts "Left - Mess Hall|Juno Station, Deck 5, Mess Hall">>
+<<acts "Straight - Information, Elevators|Juno Station, Deck 5, Information">>
+<<acts "Right - Retail|Juno Station, Deck 5, Retail">>
+<</silently>>
 
 :: Juno Station, Deck 5, Mess Hall
 
@@ -60,16 +61,16 @@ You arrive, and see a large expanse of tables and chairs, mostly empty. There ar
 
 A deep belly laugh erupts from a table to your left, where a large, furred creature smacks their rotund belly with two arms, their other two fists pounding on the table.
 
-[[Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance]]
+<<acts "Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance">>
 
 :: Juno Station, Deck 5, Information
 
 You approach the center of the Deck, and are met with a bored, young <<tooltip "a reptilian species, sporting rough, milky white scales that can blush through several colors of the rainbow">>Mirleon<</tooltip>> is tapping through their Slate, head in hand, their ears plugged up with headphones.
-
-[[Approach|Juno Station, Deck 5, Information - Conversation]]
-
-[[Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance]]
-[[Forward - Elevators|Juno Station, Deck 5, Elevators]]
+<<silently>>
+<<acts "Approach|Juno Station, Deck 5, Information - Conversation">>
+<<acts "Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance">>
+<<acts "Forward - Elevators|Juno Station, Deck 5, Elevators">>
+<</silently>>
 
 :: Juno Station, Deck 5, Information - Conversation
 
@@ -117,7 +118,7 @@ A row of storefronts meets you after a short trek. Every one of them is dark, an
 
 In the center is a bench, where a <<tooltip "A furred, four-legged species, known for their brutality, though this has calmed some since joining the Dreyyar Union">>Lemnae<</tooltip>>
 
-[[Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance]]
+<<acts "Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance">>
 
 :: Juno Station, Deck 5, Elevators
 

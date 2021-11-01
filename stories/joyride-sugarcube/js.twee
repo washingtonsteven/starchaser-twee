@@ -126,15 +126,6 @@ function setupUIBarObserver() {
 
 window.setup.init = function() {
     $(document).on(":passageinit", function() {
-        // Setup Player first and last name
-        let playerName = State.getVar("$playerName") || "";
-
-        if (!State.getVar("$playerFirstName")) {
-            const parts = playerName.split(/\s+/);
-            State.setVar("$playerFirstName", parts[0]);
-            State.setVar("$playerLastName", parts[parts.length -1]);
-        }
-
         // Clear old popups
         window.setup.$tooltips.forEach(function($tooltip) {
             $tooltip.remove();

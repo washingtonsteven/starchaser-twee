@@ -66,6 +66,9 @@ Current Location: <<print _currentLocation || "Unknown">>
     }
 <</script>>
 
+:: PassageHeader
+<<set _actions = []>>
+
 :: PassageFooter
 @@#action-bar;
 ----
@@ -93,6 +96,12 @@ Current Location: <<print _currentLocation || "Unknown">>
 @@
 
 :: Widgets [widget]
+<<widget acts>>
+    <<for _i=0; _i < $args.length; _i++>>
+        <<run _actions.push($args[_i])>>
+    <</for>>
+<</widget>>
+
 <<widget npc>>\
 @@.npc;"<<print $args[0]>>"@@\
 <</widget>>
