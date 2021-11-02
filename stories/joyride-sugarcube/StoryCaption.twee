@@ -1,0 +1,31 @@
+:: StoryCaption
+Name: <<print $playerName || "N/A">> <<print $navigatorNumber ? "($navigatorNumber)" : "">>
+Ship: <<print $shipName ? "$shipName ($shipType)" : "None">>
+Current Location: <<print _currentLocation || "Unknown">>
+
+<<silently>>
+    <<set _messageLink to "Messages">>\
+    <<set _unreads to window.setup.unreadMessagesCount()>>
+    <<if _unreads > 0>>
+        <<set _messageLink to "Messages (" + _unreads+ ")">>
+    <</if>>
+<</silently>>\
+<<link _messageLink>>
+<<script>>
+    function renderMessages() {
+        let messagesPassage = Story.lookup("tags", "messages");
+
+        if (!messagesPassage) {
+            return;
+        }
+
+        messagesPassage = messagesPassage[0]; // Should only be one
+        const messagesSource = messagesPassage.text;
+        Dialog.wiki(messagesSource);
+        Dialog.open();
+        $(document).trigger(":messagesopened");
+        UIBar.update();
+    }
+    renderMessages();
+<</script>>
+<</link>>

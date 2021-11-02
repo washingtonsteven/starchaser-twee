@@ -8,6 +8,10 @@
     color: plum;
 }
 
+a > .pc, .macro-linkappend > .pc {
+    font-weight: bold;
+}
+
 .aug {
     color: goldenrod;
     font-family: monospace;

@@ -1,0 +1,22 @@
+:: Messages [messages]
+<<if $playerFirstName !== "">>\
+!Messages for $playerFirstName
+<<else>>\
+!Messages
+<</if>>\
+<<script>>
+    const messages = State.variables.messages || [];
+
+    if (!Array.isArray(messages) || messages.length === 0) {
+        $(output).wiki("!!No Messages")
+    } else {
+        messages.forEach(function(message) {
+            message.read = true;
+            $(output).wiki(`\
+                ''Subject: ${message.subject}''
+                ''From: ${message.from}''
+                ${message.body}
+            `)
+        });
+    }
+<</script>>

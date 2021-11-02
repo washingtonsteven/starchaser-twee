@@ -107,6 +107,10 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
     color: plum;
 }
 
+a > .pc, .macro-linkappend > .pc {
+    font-weight: bold;
+}
+
 .aug {
     color: goldenrod;
     font-family: monospace;
@@ -414,9 +418,11 @@ Current Location: &lt;&lt;print _currentLocation || "Unknown"&gt;&gt;
 &lt;&lt;/link&gt;&gt;</tw-passagedata>
 <tw-passagedata pid="4" name="StoryInit" tags position="100,100" size="100,100" >&lt;&lt;set $messages = []&gt;&gt;</tw-passagedata>
 <tw-passagedata pid="5" name="Widgets" tags="widget" position="100,100" size="100,100" >&lt;&lt;widget acts&gt;&gt;
+    \&lt;&lt;silently&gt;&gt;
     &lt;&lt;for _i=0; _i < $args.length; _i++&gt;&gt;
         &lt;&lt;run _actions.push($args[_i])&gt;&gt;
     &lt;&lt;/for&gt;&gt;
+    &lt;&lt;/silently&gt;&gt;\
 &lt;&lt;/widget&gt;&gt;</tw-passagedata>
 <tw-passagedata pid="10" name="Start" tags position="100,100" size="100,100" >! Ascendancy: Starchaser
 \&lt;&lt;silently&gt;&gt;
@@ -451,38 +457,44 @@ In addition, a yellow path is drawn on the ground in front of you, through the a
 @@.aug;"Signal lost."@@
 
 Your &lt;&lt;tooltip "Augmented Communicator, a neural implant communications device"&gt;&gt;AugComm&lt;&lt;/tooltip&gt;&gt; is on the fritz again. Maybe someone here can help you out with that.
-\&lt;&lt;silently&gt;&gt;
-&lt;&lt;acts "Head In|Juno Station, Deck 5, Hangar Entrance"&gt;&gt;
-&lt;&lt;/silently&gt;&gt;\</tw-passagedata>
+\
+\&lt;&lt;acts "Head In|Juno Station, Deck 5, Hangar Entrance"&gt;&gt;</tw-passagedata>
 <tw-passagedata pid="14" name="Juno Station, Deck 5, Hangar Entrance" tags position="100,100" size="100,100" >You enter the station proper, and gravity is back to normal. The hallway is fairly quiet as it curves away from you.
 
 The sign in front of you points in three directions:
-\&lt;&lt;silently&gt;&gt;
-&lt;&lt;acts "Left - Mess Hall|Juno Station, Deck 5, Mess Hall"&gt;&gt;
-&lt;&lt;acts "Straight - Information, Elevators|Juno Station, Deck 5, Information"&gt;&gt;
-&lt;&lt;acts "Right - Retail|Juno Station, Deck 5, Retail"&gt;&gt;
-&lt;&lt;/silently&gt;&gt;\</tw-passagedata>
+\
+\&lt;&lt;acts "Left - Mess Hall|Juno Station, Deck 5, Mess Hall"&gt;&gt;
+\&lt;&lt;acts "Straight - Information, Elevators|Juno Station, Deck 5, Information"&gt;&gt;
+\&lt;&lt;acts "Right - Retail|Juno Station, Deck 5, Retail"&gt;&gt;</tw-passagedata>
 <tw-passagedata pid="15" name="Juno Station, Deck 5, Mess Hall" tags position="100,100" size="100,100" >Your footsteps echo in the hallway as you head toward the food court. Motion-sensing lights along the wall click on as you approach.
 
 You arrive, and see a large expanse of tables and chairs, mostly empty. There are a few small groups of people chattering, and all but one of the restaurants are closed. 
 
 A deep belly laugh erupts from a table to your left, where a large, furred creature smacks their rotund belly with two arms, their other two fists pounding on the table.
-\&lt;&lt;silently&gt;&gt;
-&lt;&lt;acts "Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance"&gt;&gt;
-&lt;&lt;/silently&gt;&gt;\</tw-passagedata>
-<tw-passagedata pid="16" name="Juno Station, Deck 5, Information" tags position="100,100" size="100,100" >You approach the center of the Deck, and are met with a bored, young &lt;&lt;tooltip "a reptilian species, sporting rough, milky white scales that can blush through several colors of the rainbow"&gt;&gt;Mirleon&lt;&lt;/tooltip&gt;&gt; is tapping through their Slate, head in hand, their ears plugged up with headphones.
-\&lt;&lt;silently&gt;&gt;
-&lt;&lt;acts "Approach|Juno Station, Deck 5, Information - Conversation"&gt;&gt;
-&lt;&lt;acts "Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance"&gt;&gt;
-&lt;&lt;acts "Forward - Elevators|Juno Station, Deck 5, Elevators"&gt;&gt;
-&lt;&lt;/silently&gt;&gt;/</tw-passagedata>
-<tw-passagedata pid="17" name="Juno Station, Deck 5, Information - Conversation" tags position="100,100" size="100,100" >You walk up to the booth. Behind the glass the attendant takes notice of you, with apparent disdain. They tug out their headphones and regard you in a monotone.
+\
+\&lt;&lt;acts "Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance"&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="16" name="Juno Station, Deck 5, Information" tags position="100,100" size="100,100" >You approach the center of the Deck, and are met with a bored, young &lt;&lt;tooltip "a reptilian species, sporting rough, milky white scales that can blush through several colors of the rainbow"&gt;&gt;Mirleon&lt;&lt;/tooltip&gt;&gt; who is tapping through their Slate, head in hand, their ears plugged up with headphones.
+\&lt;&lt;acts "Approach|Juno Station, Deck 5, Information - Conversation"&gt;&gt;
+\&lt;&lt;acts "Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance"&gt;&gt;
+\&lt;&lt;acts "Forward - Elevators|Juno Station, Deck 5, Elevators"&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="17" name="Juno Station, Deck 5, Retail" tags position="100,100" size="100,100" >You wander over to the retail section. The hallways are dark here, and light up as you pass their sensors. 
+
+A row of storefronts meets you after a short trek. Every one of them is dark, and stays that way. A few have automated storefronts for vending small items, or storing orders for later pickup.
+
+In the center is a bench, where a &lt;&lt;tooltip "A furred, four-legged species, known for their brutality, though this has calmed some since joining the Dreyyar Union"&gt;&gt;Lemnae&lt;&lt;/tooltip&gt;&gt; is sprawled out. They are moaning to themselves, clutching their stomach.
+\
+\&lt;&lt;acts "Check on them|Juno Station, Deck 5, Retail - Conversation"&gt;&gt;
+\&lt;&lt;acts "Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance"&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="18" name="Juno Station, Deck 5, Elevators" tags position="100,100" size="100,100" >TBD</tw-passagedata>
+<tw-passagedata pid="19" name="Juno Station, Deck 5, Information - Conversation" tags position="100,100" size="100,100" >You walk up to the booth. Behind the glass the attendant takes notice of you, with apparent disdain. They tug out their headphones and regard you in a monotone.
 
 @@.npc;"Yeah, can I help you?"@@
 
-&lt;&lt;linkappend "@@.pc;I’m looking for the Planetary Beacon Bounty Board@@" t8n&gt;&gt;
-
-They sink back in their chair. @@.npc;"Of course you are."@@ they mutter.
+&lt;&lt;link "@@.pc;\"I’m looking for the Planetary Beacon Bounty Board\"@@" "Juno Station, Deck 5, Information - Conversation(PB3 directions)"&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link "@@.pc;\"What's up with this place? It's quiet.\"@@" "Juno Station, Deck 5, Information - Conversation(Quiet Hours)"&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link "@@.pc;\"What is there to do?\"@@" "Juno Station, Deck 5, Information - Conversation(What to do)"&gt;&gt;&lt;&lt;/link&gt;&gt;
+\&lt;&lt;acts "Leave|Juno Station, Deck 5, Information"&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="20" name="Juno Station, Deck 5, Information - Conversation(PB3 directions)" tags position="100,100" size="100,100" >They sink back in their chair. @@.npc;"Of course you are."@@ they mutter.
 
 They bring up a hologram of the station, showing a cross-section of each of the seven decks. Each one lit up as they gave their spiel about each.
 
@@ -492,38 +504,54 @@ They bring up a hologram of the station, showing a cross-section of each of the 
 "If you need a caravan, there’s a posting board on ''Deck 6''. If you wait til quiet hours are over usually it refreshes with a new crop of people looking to fill out their groups. You can also check this floor, since sometimes groups will ‘recruit’ in the Mess.
 
 "If you’ve got actual business with the PB3, then you’ll want their office on ''Deck 3''. Check the info booth there to get an appointment."
-@@
+@@\
 
 Your Augment flickers back on again, causing you to recoil a bit. Your Starchaser acceptance message flashes up, with a particular line of text highlighted: @@.aug;"Please report to a PB3 office for initial training and registration."@@ You wave away the email, but attempt to keep the AugComm up. It only lasts a few seconds before flickering away again. 
 
 @@.npc;"That all?"@@ the attendant asks, fidgeting with their headphones.
-&lt;&lt;/linkappend&gt;&gt;
 
-&lt;&lt;linkappend "@@.pc;\"What’s up with this place? It’s quiet.\"@@" t8n&gt;&gt;
-
-@@.npc;"Quiet hours. Most folks are getting some sleep right now."@@
+&lt;&lt;link "@@.pc;\"What's up with this place? It's quiet.\"@@" "Juno Station, Deck 5, Information - Conversation(Quiet Hours)"&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link "@@.pc;\"What is there to do?\"@@" "Juno Station, Deck 5, Information - Conversation(What to do)"&gt;&gt;&lt;&lt;/link&gt;&gt;
+\&lt;&lt;acts "Leave|Juno Station, Deck 5, Information"&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="21" name="Juno Station, Deck 5, Information - Conversation(Quiet Hours)" tags position="100,100" size="100,100" >@@.npc;"Quiet hours. Most folks are getting some sleep right now."@@
 
 @@.pc;"Oh."@@ you reply.
 
 @@.npc;"Yup."@@ they bring up a display on their Slate, then dismiss it as quickly. @@.npc;"It’s about 5 hours until things start back up again. Might want to sync your—"@@ they eye you up and down @@.npc;"—whatever, with the local time if you’re gonna be here a bit."@@
-&lt;&lt;/linkappend&gt;&gt;
 
-&lt;&lt;linkappend "@@.pc;\"What is there to do?\"@@" t8n&gt;&gt;
-
-@@.npc;"I dunno, buddy."@@ they shrug. @@.npc;"It’s quiet hours now, so not much is open on this Deck. Deck 6 has more stuff if you have //saucier// tastes. And Deck 7 has some parks."@@
+&lt;&lt;link "@@.pc;\"I’m looking for the Planetary Beacon Bounty Board\"@@" "Juno Station, Deck 5, Information - Conversation(PB3 directions)"&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link "@@.pc;\"What is there to do?\"@@" "Juno Station, Deck 5, Information - Conversation(What to do)"&gt;&gt;&lt;&lt;/link&gt;&gt;
+\&lt;&lt;acts "Leave|Juno Station, Deck 5, Information"&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="22" name="Juno Station, Deck 5, Information - Conversation(What to do)" tags position="100,100" size="100,100" >@@.npc;"I dunno, buddy."@@ they shrug. @@.npc;"It’s quiet hours now, so not much is open on this Deck. Deck 6 has more stuff if you have //saucier// tastes. And Deck 7 has some parks."@@
 
 They bring up a hologram view of the station for you to see, each Deck highlighting as they talk about it. 
 
 @@.npc;"Deck 4,"@@ they continue with a sigh. @@.npc;"It’s mainly sleeping quarters, so you can spend some Sols and wake up when more things are open. 3 and below is Administration, Residential, and Engineering. Unless you live here, you probably don’t want those."@@
+
+&lt;&lt;link "@@.pc;\"I’m looking for the Planetary Beacon Bounty Board\"@@" "Juno Station, Deck 5, Information - Conversation(PB3 directions)"&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link "@@.pc;\"What's up with this place? It's quiet.\"@@" "Juno Station, Deck 5, Information - Conversation(Quiet Hours)"&gt;&gt;&lt;&lt;/link&gt;&gt;
+\&lt;&lt;acts "Leave|Juno Station, Deck 5, Information"&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="23" name="Juno Station, Deck 5, Retail - Conversation" tags position="100,100" size="100,100" >You step closer, getting a strong whiff of booze as they belch. They relax into the bench a bit, their brow still furrowed in frustration.
+
+&lt;&lt;link "@@.pc;\"You okay?\"@@" "Juno Station, Deck 5, Retail - Conversation(Check In)"&gt;&gt;&lt;&lt;/link&gt;&gt;
+\&lt;&lt;acts "Leave|Juno Station, Deck 5, Retail"&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="24" name="Juno Station, Deck 5, Retail - Conversation(Check In)" tags position="100,100" size="100,100" >You take another step closer, but they put up a paw, stopping you in your tracks.
+
+@@.npc;"I'm //fine//."@@ they practically snarl. @@.npc;"Ugh, this…is not how I expected tonight to play out."@@
+
+Rolling off the bench, they land on the ground on all fours. They are wearing a black flight jacket covered in various patches and pins. 
+
+@@.npc;"And what are you doing here?"@@ They look up at you with a stone-faced look, which is immediately interrupted by a violent hiccup. They bring a paw to their mouth, waiting for a followup event that never came.
+
+&lt;&lt;link "@@.pc;\"Nothing, just looking around.\"@@" "Juno Station, Deck 5, Retail - Conversation(Idle Chatter)"&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link "@@.pc;\"I'm looking for the PB3 office\"@@" "Juno Station, Deck 5, Retail - Conversation(Get PB3 Directions)"&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata>
+<tw-passagedata pid="25" name="Juno Station, Deck 5, Retail - Conversation(Idle Chatter)" tags position="100,100" size="100,100" >They nod at you, and start to trot past. @@.npc;"Sure you were."@@ they chuckle.  @@.npc;"There ain't nothing worth stealing around here. Your best bet is jacking a ship directly from one of the hangars."@@
+
+&lt;&lt;linkappend "@@.pc;\"But I wasn't gonna steal--\"@@" t8n&gt;&gt;
+
+Their gait is wobbly, and they end up bumping against an automated display. @@.npc;"Ugh. Whatever. Look, you mind helping out an old lady find her way back to her ship? I've been having quite a night."@@
 &lt;&lt;/linkappend&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="18" name="Juno Station, Deck 5, Retail" tags position="100,100" size="100,100" >You wander over to the retail section. The hallways are dark here, and light up as you pass their sensors. 
-
-A row of storefronts meets you after a short trek. Every one of them is dark, and stays that way. A few have automated storefronts for vending small items, or storing orders for later pickup.
-
-In the center is a bench, where a &lt;&lt;tooltip "A furred, four-legged species, known for their brutality, though this has calmed some since joining the Dreyyar Union"&gt;&gt;Lemnae&lt;&lt;/tooltip&gt;&gt;
-
-&lt;&lt;acts "Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance"&gt;&gt;</tw-passagedata>
-<tw-passagedata pid="19" name="Juno Station, Deck 5, Elevators" tags position="100,100" size="100,100" >TBD</tw-passagedata>
+<tw-passagedata pid="26" name="Juno Station, Deck 5, Retail - Conversation(Get PB3 Directions)" tags position="100,100" size="100,100" >TBD</tw-passagedata>
 </tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */

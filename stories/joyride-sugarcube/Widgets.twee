@@ -1,0 +1,8 @@
+:: Widgets [widget]
+<<widget acts>>
+    \<<silently>>
+    <<for _i=0; _i < $args.length; _i++>>
+        <<run _actions.push($args[_i])>>
+    <</for>>
+    <</silently>>\
+<</widget>>

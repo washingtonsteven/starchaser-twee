@@ -1,0 +1,25 @@
+:: PassageFooter
+@@#action-bar;
+----
+<<nobr>>
+    <<if _actions>>
+        <<script>>
+            const actions = State.temporary.actions;
+
+            if (Array.isArray(actions)) {
+                actions.forEach((action) => {
+                    if (typeof action === "string") {
+                        let fullLink = action;
+                        if (!action.match(/\[\[.+\]\]/)) {
+                            fullLink = `[[${action}]]`;
+                        }
+                        $(output).wiki(`<<button ${fullLink}>><</button>>`);
+                    }
+
+                    $(output).wiki(" ");
+                });
+            }
+        <</script>>
+    <</if>>
+<</nobr>>
+@@

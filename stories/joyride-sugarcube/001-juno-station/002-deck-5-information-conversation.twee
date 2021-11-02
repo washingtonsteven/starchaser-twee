@@ -1,0 +1,52 @@
+:: Juno Station, Deck 5, Information - Conversation
+You walk up to the booth. Behind the glass the attendant takes notice of you, with apparent disdain. They tug out their headphones and regard you in a monotone.
+
+@@.npc;"Yeah, can I help you?"@@
+
+<<link "@@.pc;\"I’m looking for the Planetary Beacon Bounty Board\"@@" "Juno Station, Deck 5, Information - Conversation(PB3 directions)">><</link>>
+<<link "@@.pc;\"What's up with this place? It's quiet.\"@@" "Juno Station, Deck 5, Information - Conversation(Quiet Hours)">><</link>>
+<<link "@@.pc;\"What is there to do?\"@@" "Juno Station, Deck 5, Information - Conversation(What to do)">><</link>>
+\<<acts "Leave|Juno Station, Deck 5, Information">>
+
+:: Juno Station, Deck 5, Information - Conversation(PB3 directions)
+They sink back in their chair. @@.npc;"Of course you are."@@ they mutter.
+
+They bring up a hologram of the station, showing a cross-section of each of the seven decks. Each one lit up as they gave their spiel about each.
+
+@@.npc;
+"Okay, if you’re just here to grab a bounty, head up to ''Deck 7''. The Kiosk is fully automated now. You can also get the Board installed on a Slate or Augment so you can pick them up away from a station.
+
+"If you need a caravan, there’s a posting board on ''Deck 6''. If you wait til quiet hours are over usually it refreshes with a new crop of people looking to fill out their groups. You can also check this floor, since sometimes groups will ‘recruit’ in the Mess.
+
+"If you’ve got actual business with the PB3, then you’ll want their office on ''Deck 3''. Check the info booth there to get an appointment."
+@@\
+
+Your Augment flickers back on again, causing you to recoil a bit. Your Starchaser acceptance message flashes up, with a particular line of text highlighted: @@.aug;"Please report to a PB3 office for initial training and registration."@@ You wave away the email, but attempt to keep the AugComm up. It only lasts a few seconds before flickering away again. 
+
+@@.npc;"That all?"@@ the attendant asks, fidgeting with their headphones.
+
+<<link "@@.pc;\"What's up with this place? It's quiet.\"@@" "Juno Station, Deck 5, Information - Conversation(Quiet Hours)">><</link>>
+<<link "@@.pc;\"What is there to do?\"@@" "Juno Station, Deck 5, Information - Conversation(What to do)">><</link>>
+\<<acts "Leave|Juno Station, Deck 5, Information">>
+
+:: Juno Station, Deck 5, Information - Conversation(Quiet Hours)
+@@.npc;"Quiet hours. Most folks are getting some sleep right now."@@
+
+@@.pc;"Oh."@@ you reply.
+
+@@.npc;"Yup."@@ they bring up a display on their Slate, then dismiss it as quickly. @@.npc;"It’s about 5 hours until things start back up again. Might want to sync your—"@@ they eye you up and down @@.npc;"—whatever, with the local time if you’re gonna be here a bit."@@
+
+<<link "@@.pc;\"I’m looking for the Planetary Beacon Bounty Board\"@@" "Juno Station, Deck 5, Information - Conversation(PB3 directions)">><</link>>
+<<link "@@.pc;\"What is there to do?\"@@" "Juno Station, Deck 5, Information - Conversation(What to do)">><</link>>
+\<<acts "Leave|Juno Station, Deck 5, Information">>
+
+:: Juno Station, Deck 5, Information - Conversation(What to do)
+@@.npc;"I dunno, buddy."@@ they shrug. @@.npc;"It’s quiet hours now, so not much is open on this Deck. Deck 6 has more stuff if you have //saucier// tastes. And Deck 7 has some parks."@@
+
+They bring up a hologram view of the station for you to see, each Deck highlighting as they talk about it. 
+
+@@.npc;"Deck 4,"@@ they continue with a sigh. @@.npc;"It’s mainly sleeping quarters, so you can spend some Sols and wake up when more things are open. 3 and below is Administration, Residential, and Engineering. Unless you live here, you probably don’t want those."@@
+
+<<link "@@.pc;\"I’m looking for the Planetary Beacon Bounty Board\"@@" "Juno Station, Deck 5, Information - Conversation(PB3 directions)">><</link>>
+<<link "@@.pc;\"What's up with this place? It's quiet.\"@@" "Juno Station, Deck 5, Information - Conversation(Quiet Hours)">><</link>>
+\<<acts "Leave|Juno Station, Deck 5, Information">>
