@@ -25,9 +25,7 @@ const directories = fs
   .readdirSync(path.resolve(__dirname, "stories"), { withFileTypes: true })
   .filter((dirent) => dirent.isDirectory());
 
-directories.forEach((directory) => {
-  const dirPath = path.resolve(__dirname, "stories", directory.name);
-  console.log(`Building from ${dirPath}...`);
+const readFilesInDir = (dirPath) => {
   const files = fs
     .readdirSync(dirPath, { withFileTypes: true })
     .filter((f) => f.isFile())
@@ -37,6 +35,22 @@ directories.forEach((directory) => {
     const fileContents = fs.readFileSync(file);
     contents += `\n\n${fileContents}`;
   });
+
+  return contents;
+};
+
+directories.forEach((directory) => {
+  const dirPath = path.resolve(__dirname, "stories", directory.name);
+  console.log(`Building from ${dirPath}...`);
+
+  const dirs = fs
+    .readdirSync(dirPath, { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((dirDirent) => path.resolve(dirPath, dirDirent.name));
+  let contents = "";
+
+  contents += readFilesInDir(dirPath);
+  dirs.forEach((subdirPath) => (contents += readFilesInDir(subdirPath)));
 
   if (contents) {
     const tweeParser = new Extwee.TweeParser(contents);
@@ -51,9 +65,11 @@ directories.forEach((directory) => {
     );
     // Replace macro brackets with html entities for sugarcube
     if (formatName === "sugarcube") {
-      tweeParser.story.passages.forEach(passage => {
-        passage.text = passage.text.replace(/<</g, "&lt;&lt;").replace(/>>/g, "&gt;&gt;")
-      })
+      tweeParser.story.passages.forEach((passage) => {
+        passage.text = passage.text
+          .replace(/<</g, "&lt;&lt;")
+          .replace(/>>/g, "&gt;&gt;");
+      });
     }
     new Extwee.HTMLWriter(
       path.resolve(__dirname, `build/${directory.name}.html`),
