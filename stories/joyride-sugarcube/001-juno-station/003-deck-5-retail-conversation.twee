@@ -20,10 +20,15 @@ Rolling off the bench, they land on the ground on all fours. They are wearing a 
 :: Juno Station, Deck 5, Retail - Conversation(Idle Chatter)
 They nod at you, and start to trot past. @@.npc;"Sure you were."@@ they chuckle.  @@.npc;"There ain't nothing worth stealing around here. Your best bet is jacking a ship directly from one of the hangars."@@
 
-<<linkappend "@@.pc;\"But I wasn't gonna steal--\"@@" t8n>>
+<<link "@@.pc;\"But I wasn't gonna steal--\"@@" "Juno Station, Deck 5, Retail - Conversation(Idle Chatter 2)">><</link>>
 
+:: Juno Station, Deck 5, Retail - Conversation(Idle Chatter 2)
 Their gait is wobbly, and they end up bumping against an automated display. @@.npc;"Ugh. Whatever. Look, you mind helping out an old lady find her way back to her ship? I've been having quite a night."@@
-<</linkappend>>
+\
+<<acts "Follow Her|Juno Station, Deck 5, Retail - Conversation(Escort 1)">>
+
+:: Juno Station, Deck 5, Retail - Conversation(Escort 1)
+TBD
 
 :: Juno Station, Deck 5, Retail - Conversation(Get PB3 Directions)
 TBD

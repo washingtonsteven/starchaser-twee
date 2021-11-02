@@ -49,5 +49,31 @@ In the center is a bench, where a <<tooltip "A furred, four-legged species, know
 
 :: Juno Station, Deck 5, Elevators
 
-TBD
+You arrive at the Elevator bank for Deck 5. There are several doors that encircle you, occasionally sounding off calming chimes as they arrive at other levels of the station.
+\
+\<<acts "Summon an elevator|Juno Station, Deck 5, Inside Elevator">>
+\<<acts "Back - Information|Juno Station, Deck 5, Information">>
 
+:: Juno Station, Deck 5, Inside Elevator
+
+The elevator arrives, and you step in. There is a shiny panel to your left with a button for each deck of the station. On the right is a screen playing an advertisement.
+
+\@@.ad;
+\<<set _adIndex = random(1,3)>>
+\<<switch _adIndex>>
+    \<<case 1>>
+    A tinny fanfare plays, and a gruff beast shows up on screen, his raspy voice practically yelling at you: @@.repair;"We've gotcha covered! From scrapes and dings, to FTL repairs. The best dat Juno Station has to offer! Dial up Orion's Ship Repair directly from yer Hangar and we'll have ya shipshape by lunch! Tell 'em that Tandy sent ya and get 10% off! Orion's Ship Repair: We'll getcha moving again!"@@
+    \<<case 2>>
+    Sultry music plays as a breathy female voice echoes over the ad's speakers. Images of a slender silhouette dancing in front of a fire flicker across the screen. @@.club;"The most //personal// experiences. Enjoy yourself."@@ The background saxophone blares. @@.club;"Come have a satisfying evening. //The Lily Petal Spa//. Deck 6."@@
+    \<<case 3>>
+    Some nondescript music plays over the speaker, while images of various fried foods appear on the screen. There is no voiceover, but the screen displays stylized text: @@.food;"The Total Package."@@ A hamburger spins into frame, joined by some friends and a cup of unknown, green liquid. @@.food;"only 699 Sols!"@@ The animation plays repeatedly on a loop.
+\<</switch>>
+@@
+\
+\<<acts "Deck 7 - Skyview|Juno Station, Deck 7, Elevators">>
+\<<acts "Deck 6 - Entertainment|Juno Station, Deck 6, Elevators">>
+\<<acts "Deck 4 - Lodging|Juno Station, Deck 4, Elevators">>
+\<<acts "Deck 3 - Administration and Security|Juno Station, Deck 3, Elevators">>
+\<<acts "Deck 2 - Residential|Juno Station, Deck 2, Elevators">>
+\<<acts "Deck 1 - Engineering|Juno Station, Deck 1, Elevators">>
+\<<acts "Exit|Juno Station, Deck 5, Elevators">>

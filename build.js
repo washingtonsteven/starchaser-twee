@@ -53,6 +53,9 @@ directories.forEach((directory) => {
   dirs.forEach((subdirPath) => (contents += readFilesInDir(subdirPath)));
 
   if (contents) {
+    const naiveWordCount = contents.split(/\s+/).length;
+    console.log(`\tNaive Word Count: ${naiveWordCount}`);
+
     const tweeParser = new Extwee.TweeParser(contents);
     console.log(`\tFound story: ${tweeParser.story.name}`);
     const formatName = tweeParser.story.metadata.format || DEFAULT_FORMAT;
@@ -76,6 +79,35 @@ directories.forEach((directory) => {
       tweeParser.story,
       formatParser.storyformat
     );
+
+    const passages = tweeParser.story.passages.filter((p) => {
+      if (
+        [
+          "StoryTitle",
+          "StoryData",
+          "PassageFooter",
+          "PassageHeader",
+          "StoryCaption",
+          "StoryInit",
+        ].includes(p.name)
+      ) {
+        return false;
+      }
+
+      if (
+        p.tags.includes("stylesheet") ||
+        p.tags.includes("script") ||
+        p.tags.includes("widget")
+      ) {
+        return false;
+      }
+      return true;
+    });
+    const corePassageContent = passages.reduce((acc, curr) => {
+      return (acc += curr.text);
+    }, "");
+    const coreWordCount = corePassageContent.split(/\s+/).length;
+    console.log(`\tCore Word Count: ${coreWordCount}`);
   }
   console.log(`...Done!\n---\n`);
 });
