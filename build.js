@@ -3,7 +3,7 @@ const config = require("./webpack.config");
 const { exec } = require("child_process");
 const path = require("path");
 
-const runBuild = (tweegoExecutable) => {
+const runBuild = (tweegoExecutable, postWebpack) => {
     webpack(config, (err, stats) => {
         if (err) {
             throw err;
@@ -13,11 +13,19 @@ const runBuild = (tweegoExecutable) => {
             return;
         }
 
-        const tweegoCommand = `${tweegoExecutable} -o ${__dirname}/build/index.html -m ${__dirname}/dist --log-stats ${__dirname}/story`
-        console.log(tweegoCommand)
+        if (postWebpack && typeof postWebpack === "function") {
+            postWebpack();
+            return;
+        }
+
+        const tweegoCommand = `${tweegoExecutable} -o ${__dirname}/build/index.html -m ${__dirname}/dist --log-stats ${__dirname}/story`;
+        console.log(tweegoCommand);
         exec(tweegoCommand, (error, stdout, stderr) => {
             if (error) {
-                console.error(`Error running \`tweego\`: ${error.message}`);
+                console.error(
+                    `Error running \`tweego\`: ${error.message}`,
+                    stderr
+                );
             } else if (stderr) {
                 console.error(`stderr (\`tweego\`): ${stderr}`);
             } else {
@@ -26,34 +34,60 @@ const runBuild = (tweegoExecutable) => {
             console.log("...done.");
         });
     });
-}
+};
 
 if (process.env.NETLIFY) {
-    exec(`${path.resolve(__dirname, "bin", "get-tweego")}`, (error, stdout, stderr) => {
-        if (error) {
-            console.error("Error getting tweego", error);
-            return;
+    exec(
+        `${path.resolve(__dirname, "bin", "get-tweego")}`,
+        (error, stdout, stderr) => {
+            if (error) {
+                console.error("Error getting tweego", error, stderr);
+                return;
+            }
+            if (stderr) {
+                console.log("stderr getting tweego", stderr);
+            }
+            if (stdout) {
+                console.log("stdout getting tweego", stdout);
+            }
+
+            runBuild("", { cwd: path.resolve(__dirname) }, () => {
+                exec(
+                    `./tweego/tweego -o ./build/index.html -m ./dist --log-stats --log-files ./story`,
+                    (error, stdout, stderr) => {
+                        if (error) {
+                            console.error(
+                                "Error running tweego",
+                                error,
+                                stderr
+                            );
+                            return;
+                        }
+                        if (stderr) {
+                            console.log("stderr running tweego", stderr);
+                        }
+                        if (stdout) {
+                            console.log("stdout running tweego", stdout);
+                        }
+                    }
+                );
+            });
         }
-        if (stderr) {
-            console.log("stderr", stderr);
-        }
-        if (stdout) {
-            console.log("stdout", stdout);
-        }
-        runBuild(path.resolve(__dirname, "tweego", "tweego"));
-    })
+    );
 } else {
     exec("which tweego", (error, stdout, stderr) => {
         if (error) {
             console.error(`Error running \`which tweego\`: ${error.message}`);
-            console.error("Did you remember to install Tweego? (https://www.motoslave.net/tweego/)");
+            console.error(
+                "Did you remember to install Tweego? (https://www.motoslave.net/tweego/)"
+            );
             return;
         }
         if (stderr) {
             console.error(`stderr (\`which tweego\`): ${stderr}`);
             return;
         }
-    
+
         runBuild("tweego");
     });
 }
