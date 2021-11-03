@@ -1,0 +1,87 @@
+.npc {
+    color: paleturquoise;
+}
+
+.pc {
+    color: plum;
+    a > &, .macro-linkappend > & {
+        font-weight: bold;
+    }
+}
+
+.aug {
+    color: goldenrod;
+    font-family: monospace;
+}
+
+#action-bar {
+    visibility: visible;
+    opacity: 1;
+
+    &[data-hide="true"] {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &[data-hide="false"] {
+        transition: opacity 1s;
+    }
+}
+
+.tooltip-trigger {
+    color: #bbb;
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted #ddd;
+    padding-bottom: 0;
+    cursor: pointer;
+    height: 1.5rem;
+}
+
+.tooltip-text {
+    background: #ddd;
+    color: #222;
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    border-radius: 0.25rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+    max-width: 45vw;
+
+    &[data-show="true"] {
+        opacity: 1;
+    }
+
+    & > .arrow {
+        visibility: hidden;
+
+        &,
+        &::before {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: inherit;
+            visibility: visible;
+            content: "";
+            transform: rotate(45deg);
+        }
+    }
+
+    &[data-popper-placement^="top"] > .arrow {
+        bottom: -4px;
+    }
+
+    &[data-popper-placement^="bottom"] > .arrow {
+        top: -4px;
+    }
+
+    &[data-popper-placement^="left"] > .arrow {
+        right: -4px;
+    }
+
+    &[data-popper-placement^="right"] > .arrow {
+        left: -4px;
+    }
+}

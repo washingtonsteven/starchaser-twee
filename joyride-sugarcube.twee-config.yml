@@ -1,8 +1,13 @@
 sugarcube-2:
   macros:
+    acts:
+      name: acts
+      description: "Adds action buttons to the page"
+      parameters:
+        - "text ...text"
     tooltip:
       name: tooltip
       description: "Show a tooltip when hovering over text\n\nUsage:\n\n```\n<<tooltip \"tooltipText\" [direction]>>triggerText<</tooltip>>\n```\n\nCustom Macro."
       container: true
       parameters:
-          - "text |+ (top | bottom | left | right | auto)"
+        - "text |+ ('top'|'bottom'|'left'|'right'|'auto')"

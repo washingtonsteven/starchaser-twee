@@ -1,8 +1,6 @@
 :: js [script]
-
 // Config.debug = true;
 
-window.setup = {};
 window.setup.$tooltips = [];
 window.setup.poppers = [];
 
@@ -48,7 +46,7 @@ const addMacros = function() {
     Macro.add("tooltip", {
         tags: null,
         handler: function() {
-            if (!window.Popper) {
+            if (!window.setup.createPopper) {
                 // Popper is not initialized, don't do anything.
                 // The passage will be re-rendered once it's here.
                 return;
@@ -81,7 +79,7 @@ const addMacros = function() {
             $(document.body).append(tooltipContent);
             window.setup.$tooltips.push(tooltipContent);
             
-            const popperInstance = Popper.createPopper(tooltipTrigger.get(0), tooltipContent.get(0), {
+            const popperInstance = window.setup.createPopper(tooltipTrigger.get(0), tooltipContent.get(0), {
                 placement: direction || 'auto',
                 modifiers: [
                     {
@@ -139,15 +137,6 @@ window.setup.init = function() {
 
     addMacros();
     setupUIBarObserver();
-
-    const lock = LoadScreen.lock();
-    return importScripts("https://unpkg.com/@popperjs/core@2")
-        .then(function () {
-            window.setup.JSLoaded = true;
-            Engine.play(passage(), true);
-            LoadScreen.unlock(lock);
-        })
-        .catch(function(e){ console.error(e); })
 };
 
 window.setup.init();

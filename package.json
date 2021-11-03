@@ -2,19 +2,34 @@
   "name": "joyride-twee",
   "version": "0.2.0",
   "description": "A [Twee3]() story about exploring a future galaxy.",
-  "main": "index.js",
+  "private": true,
   "dependencies": {},
   "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@popperjs/core": "^2.10.2",
+    "babel-loader": "^8.2.3",
     "concurrently": "^6.3.0",
+    "css-loader": "^6.5.0",
     "extwee": "^1.6.2",
+    "mini-css-extract-plugin": "^2.4.3",
     "nodemon": "^2.0.13",
-    "serve": "^12.0.1"
+    "rimraf": "^3.0.2",
+    "sass": "^1.43.4",
+    "sass-loader": "^12.3.0",
+    "serve": "^12.0.1",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.61.0",
+    "webpack-cli": "^4.9.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node build.js",
     "serve": "serve build",
-    "watch": "concurrently -n build,server \"nodemon -e twee build.js\" \"serve -l 1234 build\""
+    "watch": "concurrently -n build,server \"nodemon -e twee,js,scss build.js\" \"serve -l 1234 build\"",
+    "clean": "rimraf ./dist/* ./build/*",
+    "prebuild": "yarn run clean",
+    "prewatch": "yarn run clean"
   },
   "repository": {
     "type": "git",

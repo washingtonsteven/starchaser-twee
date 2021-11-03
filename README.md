@@ -1,4 +1,4 @@
-# joyride-twee
+# Ascendancy: Starchaser
 
 A [Twee3](https://github.com/iftechfoundation/twine-specs/blob/master/twee-3-specification.md) story about exploring a future galaxy.
 
