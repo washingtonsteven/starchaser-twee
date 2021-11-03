@@ -8,4 +8,5 @@ go install
 go build
 ls -la
 pwd
+./tweego --help
 echo "== /building tweego =="
