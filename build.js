@@ -53,7 +53,7 @@ if (process.env.NETLIFY) {
 
             runBuild("", () => {
                 exec(
-                    `mkdir build && tweego -o ./build/index.html -m ./dist --log-stats --log-files ./story`,
+                    `mkdir build && $(go env GOPATH)/bin/tweego -o ./build/index.html -m ./dist --log-stats --log-files ./story`,
                     { cwd: path.resolve(__dirname) },
                     (error, stdout, stderr) => {
                         if (error) {
