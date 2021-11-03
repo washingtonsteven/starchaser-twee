@@ -3,7 +3,7 @@ const config = require("./webpack.config");
 const { exec } = require("child_process");
 const path = require("path");
 
-const runBuild = (tweegoExecutable, postWebpack) => {
+const runBuild = (executableOrPostFunction) => {
     webpack(config, (err, stats) => {
         if (err) {
             throw err;
@@ -13,26 +13,37 @@ const runBuild = (tweegoExecutable, postWebpack) => {
             return;
         }
 
-        if (postWebpack && typeof postWebpack === "function") {
-            postWebpack();
+        if (
+            executableOrPostFunction &&
+            typeof executableOrPostFunction === "function"
+        ) {
+            executableOrPostFunction();
             return;
+        } else if (
+            executableOrPostFunction &&
+            typeof executableOrPostFunction === "string"
+        ) {
+            const tweegoCommand = `${executableOrPostFunction} -o ${__dirname}/build/index.html -m ${__dirname}/dist --log-stats ${__dirname}/story`;
+            console.log(tweegoCommand);
+            exec(tweegoCommand, (error, stdout, stderr) => {
+                if (error) {
+                    console.error(
+                        `Error running \`tweego\`: ${error.message}`,
+                        stderr
+                    );
+                } else if (stderr) {
+                    console.error(`stderr (\`tweego\`): ${stderr}`);
+                } else {
+                    console.log(`stdout (\`tweego\`): ${stdout}`);
+                }
+                console.log("...done.");
+            });
+        } else {
+            console.error(
+                "executableOrPostFunction is not function or string: ",
+                typeof executableOrPostFunction
+            );
         }
-
-        const tweegoCommand = `${tweegoExecutable} -o ${__dirname}/build/index.html -m ${__dirname}/dist --log-stats ${__dirname}/story`;
-        console.log(tweegoCommand);
-        exec(tweegoCommand, (error, stdout, stderr) => {
-            if (error) {
-                console.error(
-                    `Error running \`tweego\`: ${error.message}`,
-                    stderr
-                );
-            } else if (stderr) {
-                console.error(`stderr (\`tweego\`): ${stderr}`);
-            } else {
-                console.log(`stdout (\`tweego\`): ${stdout}`);
-            }
-            console.log("...done.");
-        });
     });
 };
 
@@ -51,7 +62,7 @@ if (process.env.NETLIFY) {
                 console.log("stdout getting tweego", stdout);
             }
 
-            runBuild("", () => {
+            runBuild(() => {
                 exec(
                     `mkdir build && $(go env GOPATH)/bin/tweego -o ./build/index.html -m ./dist --log-stats --log-files ./story`,
                     { cwd: path.resolve(__dirname) },

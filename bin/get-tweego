@@ -1,8 +1,6 @@
 #!/bin/bash
 
-echo "== building tweego =="
 git clone https://github.com/tmedwards/tweego.git
 cd tweego
 go get
 go install
-echo "== /building tweego =="
