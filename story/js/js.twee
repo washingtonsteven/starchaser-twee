@@ -1,22 +1,6 @@
 :: js [script]
 // Config.debug = true;
 
-window.setup.$tooltips = [];
-window.setup.poppers = [];
-
-// Ex. When the UI Bar changes from stowed
-window.setup.updatePoppers = function() {
-    window.setup.poppers.forEach(function(p) { p.update(); });
-}
-
-window.setup.hideActions = function() {
-    $("#action-bar").attr("data-hide", "true");
-}
-
-window.setup.showActions = function() {
-    $("#action-bar").attr("data-hide", "false");
-}
-
 window.setup.unreadMessagesCount = function() {
     if (Array.isArray(State.variables.messages)) {
         const found = State.variables.messages.filter(function(message) { return !message.read; });
@@ -41,102 +25,16 @@ window.setup.addMessage = function(newMessage) {
     }
 }
 
-const addMacros = function() {
-    // Tooltip Macro
-    Macro.add("tooltip", {
-        tags: null,
-        handler: function() {
-            if (!window.setup.createPopper) {
-                // Popper is not initialized, don't do anything.
-                // The passage will be re-rendered once it's here.
-                return;
-            }
-            const tooltipText = this.args[0]
-            const direction = this.args[1] ||  "auto";
-            const payload = (this.payload || []).find(p => p.name === "tooltip");
-            const text = (payload || {}).contents || "trigger";
-            
-            const tooltipContent = $("<div>")
-                .addClass("tooltip-text")
-                .data("show", "false")
-                .append(
-                    tooltipText,
-                    $("<div>").addClass("arrow").attr("data-popper-arrow", "")
-                )
-            
-            const tooltipTrigger = $("<span>")
-                .addClass(`tooltip-trigger`)
-                .attr("aria-describedby", "tooltip")
-                .html(text)
-                .on("mouseenter", function() {
-                    tooltipContent.attr("data-show", "true");
-                })
-                .on("mouseleave", function() {
-                    tooltipContent.attr("data-show", "false");
-                });
-            
-            $(this.output).append(tooltipTrigger);
-            $(document.body).append(tooltipContent);
-            window.setup.$tooltips.push(tooltipContent);
-            
-            const popperInstance = window.setup.createPopper(tooltipTrigger.get(0), tooltipContent.get(0), {
-                placement: direction || 'auto',
-                modifiers: [
-                    {
-                        name: 'offset',
-                        options: {
-                            offset: function({placement, reference, popper}) {
-                                // Top and Bottom don't need adjustment, but left and right do.
-                                if (placement.indexOf("top") === 0 || placement.indexOf("bottom") === 0) {
-                                    return [];
-                                } else {
-                                    return [0, 8];
-                                }
-                            },
-                        }
-                    }
-                ]
-            });
-            window.setup.poppers.push(popperInstance);
-        }
-    });
-}
 
-function setupUIBarObserver() {
-    if (!window.MutationObserver) {
-        return;
+// Tooltip Macro
+Macro.add("tooltip", {
+    tags: null,
+    handler: function() {
+        const tooltipText = this.args[0]
+        const direction = this.args[1] ||  "auto";
+        const payload = (this.payload || []).find(p => p.name === "tooltip");
+        const text = (payload || {}).contents || "trigger";
+
+        window.setup.createPopper(tooltipText, direction, text, this.output);
     }
-
-    const observer = new MutationObserver(function(mutationsList) {
-        mutationsList.forEach(function(mutation) {
-            if (mutation.type === "attributes" && mutation.attributeName === "class") {
-                // class changed, we aren't worried about what happened
-                // Wait for the animation to finish though.
-                setTimeout(function() {
-                    window.setup.updatePoppers && window.setup.updatePoppers();
-                }, 250);
-            }
-        })
-    });
-
-    observer.observe(document.querySelector("#ui-bar"), { attributes: true });
-}
-
-window.setup.init = function() {
-    $(document).on(":passageinit", function() {
-        // Clear old popups
-        window.setup.$tooltips.forEach(function($tooltip) {
-            $tooltip.remove();
-        });
-        window.setup.$tooltips = [];
-    });
-
-    $(document).on(":passagerender", function(e) {
-        $(e.content).find("button.link-broken").prop("disabled", true);
-    });
-
-    addMacros();
-    setupUIBarObserver();
-};
-
-window.setup.init();
+});
