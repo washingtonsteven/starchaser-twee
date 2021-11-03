@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const config = require("./webpack.config");
 const { exec } = require("child_process");
+const path = require("path");
 
 const runBuild = (tweegoExecutable) => {
     webpack(config, (err, stats) => {
