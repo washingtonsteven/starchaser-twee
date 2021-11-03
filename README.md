@@ -15,6 +15,10 @@ A [Twee3](https://github.com/iftechfoundation/twine-specs/blob/master/twee-3-spe
 2. `yarn serve` to play locally
 3. Host `build/index.html` to play online
 
+### Hosted Version
+
+The latest version of the story _should_ be available on [Netlify](https://condescending-montalcini-218035.netlify.app/)
+
 ## Dev
 
 1. Ensure [Tweego](https://www.motoslave.net/tweego/) is installed and on the `PATH`
@@ -26,6 +30,7 @@ A [Twee3](https://github.com/iftechfoundation/twine-specs/blob/master/twee-3-spe
 ## Info
 
 - Check out the [build script](build.js) to see the process that builds your story.
+  - When this is built on Netlify, the build script fetches and builds Tweego from source, which feels a bit janky but it works at least.
 - This story is built using [Tweego](https://www.motoslave.net/tweego/). In order to build you must install this separately.
 - JS and CSS (Sass) are built with [webpack](https://webpack.js.org/)
   - `js/main.js` is for Javascript that is run globally, and not dependent on story state.

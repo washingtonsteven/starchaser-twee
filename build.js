@@ -47,6 +47,7 @@ const runBuild = (executableOrPostFunction) => {
     });
 };
 
+// If we are building on Netlify, we need to fetch/build the tweego executable
 if (process.env.NETLIFY) {
     exec(
         `${path.resolve(__dirname, "bin", "get-tweego")}`,
@@ -86,6 +87,7 @@ if (process.env.NETLIFY) {
             });
         }
     );
+// local build, need to have installed tweego separately
 } else {
     exec("which tweego", (error, stdout, stderr) => {
         if (error) {
