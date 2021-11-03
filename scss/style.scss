@@ -1,18 +1,57 @@
 .npc {
-    color: paleturquoise;
+    color: rgb(98, 199, 199);
+}
+
+.npc1 {
+    color:rgb(54, 192, 49);
 }
 
 .pc {
-    color: plum;
-    a > &,
-    .macro-linkappend > & {
+    & , & > a {
         font-weight: bold;
+        color: rgb(172, 99, 240);
+    }
+
+    & > a {
+        font-weight: bold;
+        text-decoration-color: currentColor;
     }
 }
 
+.mora {
+    color: rgb(49, 192, 178);
+}
+
 .aug {
-    color: goldenrod;
+    color: rgb(218, 144, 32);
     font-family: monospace;
+}
+
+.ad {
+    border-radius: 5px;
+    background-color:rgb(58, 105, 233);
+    color: rgb(255,255,255);
+    border: solid 2px currentColor;
+    margin: 2rem 4rem;
+    padding: 0.5rem 1rem;
+}
+
+.food {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    color: rgb(231, 89, 33);
+    font-weight: bold;
+}
+
+.repair {
+    color: rgb(194, 119, 119);
+    font-weight: bold;
+}
+
+.club {
+    color:rgb(235, 134, 248);
+    font-weight: bold;
+    font-family: script, serif;
 }
 
 #action-bar {

@@ -1,29 +1,29 @@
 :: Juno Station, Deck 5, Retail - Conversation
 
-You step closer, getting a strong whiff of booze as they belch. They relax into the bench a bit, their brow still furrowed in frustration.
+$playerFirstName steps closer, getting a strong whiff of booze as she belches. She relaxes into the bench a bit, her brow still furrowed in frustration.
 
-<<link "@@.pc;\"You okay?\"@@" "Juno Station, Deck 5, Retail - Conversation(Check In)">><</link>>
+@@.pc;[["You okay?"|Juno Station, Deck 5, Retail - Conversation(Check In)]]@@
 \<<acts "Leave|Juno Station, Deck 5, Retail">>
 
 :: Juno Station, Deck 5, Retail - Conversation(Check In)
-You take another step closer, but they put up a paw, stopping you in your tracks.
+$playerFirstName takes another step closer, but she puts up a paw, stopping them in their tracks.
 
-@@.npc;"I'm //fine//."@@ they practically snarl. @@.npc;"Ugh, this…is not how I expected tonight to play out."@@
+@@.mora;"I'm //fine//."@@ she practically snarls. @@.mora;"Ugh, this…is not how I expected tonight to play out."@@
 
-Rolling off the bench, they land on the ground on all fours. They are wearing a black flight jacket covered in various patches and pins. 
+Rolling off the bench, she lands on the ground on all fours. She is wearing a black flight jacket covered in various patches and pins. 
 
-@@.npc;"And what are you doing here?"@@ They look up at you with a stone-faced look, which is immediately interrupted by a violent hiccup. They bring a paw to their mouth, waiting for a followup event that never came.
+@@.mora;"And what are you doing here?"@@ They look up at $playerFirstName with a stone-faced look, which is immediately interrupted by a violent hiccup. She brings a paw to her mouth, waiting for a followup event that never came.
 
-<<link "@@.pc;\"Nothing, just looking around.\"@@" "Juno Station, Deck 5, Retail - Conversation(Idle Chatter)">><</link>>
-<<link "@@.pc;\"I'm looking for the PB3 office\"@@" "Juno Station, Deck 5, Retail - Conversation(Get PB3 Directions)">><</link>>
+@@.pc;<<link "\"Nothing, just looking around.\"" "Juno Station, Deck 5, Retail - Conversation(Idle Chatter)">><</link>>@@
+@@.pc;<<link "\"I'm looking for the PB3 office\"" "Juno Station, Deck 5, Retail - Conversation(Get PB3 Directions)">><</link>>@@
 
 :: Juno Station, Deck 5, Retail - Conversation(Idle Chatter)
-They nod at you, and start to trot past. @@.npc;"Sure you were."@@ they chuckle.  @@.npc;"There ain't nothing worth stealing around here. Your best bet is jacking a ship directly from one of the hangars."@@
+She nods at $playerFirstName, and starts to trot past. @@.mora;"Sure you were."@@ they chuckle.  @@.mora;"There ain't nothing worth stealing around here. Your best bet is jacking a ship directly from one of the hangars."@@
 
-<<link "@@.pc;\"But I wasn't gonna steal--\"@@" "Juno Station, Deck 5, Retail - Conversation(Idle Chatter 2)">><</link>>
+@@.pc;[[But I wasn't gonna steal--|Juno Station, Deck 5, Retail - Conversation(Idle Chatter 2)]]@@
 
 :: Juno Station, Deck 5, Retail - Conversation(Idle Chatter 2)
-Their gait is wobbly, and they end up bumping against an automated display. @@.npc;"Ugh. Whatever. Look, you mind helping out an old lady find her way back to her ship? I've been having quite a night."@@
+Her gait is wobbly, and she ends up bumping against an automated display. @@.mora;"Ugh. Whatever. Look, you mind helping out an old lady find her way back to her ship? I've been having quite a night."@@
 \
 <<acts "Follow Her|Juno Station, Deck 5, Retail - Conversation(Escort 1)">>
 
@@ -31,4 +31,11 @@ Their gait is wobbly, and they end up bumping against an automated display. @@.n
 TBD
 
 :: Juno Station, Deck 5, Retail - Conversation(Get PB3 Directions)
-TBD
+@@.mora;"Well, it ain't here, I'll tell you that much."@@
+
+$playerFirstName shifts back onto their heels a bit, tapping their toe. @@.pc;"Well, I figured I'd see what's going on, the answer seems to be 'not much,' however."@@
+
+She shifts off of the bench, her legs wobbling slightly as she motions $playerFirstName forward. @@.mora;"Come on, then. Your punishmentt for waking me up is helping an old lady back to her ship."
+\
+<<acts "Follow her|Juno Station, Deck 5, Retail - Conversation(Escort 1)">>
+

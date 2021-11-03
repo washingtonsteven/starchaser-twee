@@ -15,11 +15,14 @@ Ascendancy: Starchaser
 <</silently>>\
 
 :: Registration
-Please enter your name: 
+Please name the Starchaser: 
 First: <<textbox "$playerFirstName" "Caleb">> 
 Last: <<textbox "$playerLastName" "Hertz">>
 
-What is your Ship’s name: <<textbox "$shipName" "The Opal Star">>
+What species are they?
+<label><<radiobutton "$species" "Mirleon" checked>> <<tooltip $glossary.Mirleon>>Mirleon<</tooltip>></label>
+
+What is their Ship’s name: <<textbox "$shipName" "The Opal Star">>
 \<<silently>>
 <<acts "Continue|Introduction">>
 <</silently>>\
@@ -29,9 +32,9 @@ The Dreyyar region covers one of the massive, spiraling arms of the galaxy, the 
 
 Sponsored by various Scientific Guilds, Starchasers are contractors, hired to extend the reach of planetary discovery of the Union.
 
-You have left your home moon of <<tooltip "The largest moon of the factory planet Ruzade">>Nides<</tooltip>>, eager to  find and start your first assignment from the <<tooltip "PB3">>Planetary Beacon Bounty Board<</tooltip>>. The nearest PB3 output is at the nearby Juno Station.
+$playerFirstName left their home moon of <<tooltip "The largest moon of the factory planet Ruzade">>Nides<</tooltip>>, eager to find and start their first assignment from the <<tooltip "PB3">>Planetary Beacon Bounty Board<</tooltip>>. The nearest PB3 outpost is at the nearby Juno Station.
 
-The ride is slightly bumpy, but you arrive at the cylindrical station without much hassle.
+The ride is slightly bumpy, but they arrive at the cylindrical station without much hassle.
 \<<silently>>
 <<acts "Dock|Juno Station, Deck 5, Hangar">>
 <</silently>>\

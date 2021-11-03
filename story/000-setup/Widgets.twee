@@ -6,3 +6,7 @@
     <</for>>
     <</silently>>\
 <</widget>>
+
+<<widget glossary>>
+\<<tooltip $glossary[$args[0]]>>$args[0]<</tooltip>>\
+<</widget>>

@@ -1,72 +1,63 @@
 :: Juno Station, Deck 5, Hangar
-You make a shaky landing at Juno Station. Your ship, //$shipName//, apparently received worse injuries from the previous owner, but the sound of metal scraping on metal is never a pleasant one.
+$playerFirstName makes a shaky landing at Juno Station. Their ship, //$shipName//, apparently received worse injuries from the previous owner, but the sound of metal scraping on metal is never a pleasant one.
 
-You disembark your <<tooltip "A model of ship made by the Tassa Company. Known for their reliability and function-over-form">>Gridskipper<</tooltip>> your stomach doing a partial flip in the reduced gravity of the hangar. With a thought, a digital readout appears over your vision:
+They disembark their <<tooltip "A model of ship made by the Tassa Company. Known for their reliability and function-over-form">>Gridskipper<</tooltip>> their stomach doing a partial flip in the reduced gravity of the hangar. With a thought, a digital readout appears over their vision:
 
 @@.aug;Planetary Beacon Bounty Board (PB3) Office is on deck 3: Administration.@@
 
-In addition, a yellow path is drawn on the ground in front of you, through the airlock and into the station. Just a moment later, the path flickers blue, before disappearing altogether.
+In addition, a yellow path is drawn on the ground in front of them, through the airlock and into the station. Just a moment later, the path flickers blue, before disappearing altogether.
 
 @@.aug;"Signal lost."@@
 
-Your <<tooltip "Augmented Communicator, a neural implant communications device">>AugComm<</tooltip>> is on the fritz again. Maybe someone here can help you out with that.
+They sigh, tapping the side of their head in a vain attempt to get their <<tooltip $glossary.AugComm>>AugComm<</tooltip>> working again. @@.pc;"Maybe there's a repair shop around here,"@@ they mutter to themselves, turning toward the door. 
 \
 \<<acts "Head In|Juno Station, Deck 5, Hangar Entrance">>
 
 :: Juno Station, Deck 5, Hangar Entrance
-You enter the station proper, and gravity is back to normal. The hallway is fairly quiet as it curves away from you.
+$playerFirstName enters the station proper, and gravity is back to normal. The hallway is fairly quiet as it curves away from them.
 
-The sign in front of you points in three directions:
+The sign directly ahead points in three directions:
 \
 \<<acts "Left - Mess Hall|Juno Station, Deck 5, Mess Hall">>
 \<<acts "Straight - Information, Elevators|Juno Station, Deck 5, Information">>
 \<<acts "Right - Retail|Juno Station, Deck 5, Retail">>
 
-:: Juno Station, Deck 5, Mess Hall
-Your footsteps echo in the hallway as you head toward the food court. Motion-sensing lights along the wall click on as you approach.
-
-You arrive, and see a large expanse of tables and chairs, mostly empty. There are a few small groups of people chattering, and all but one of the restaurants are closed. 
-
-A deep belly laugh erupts from a table to your left, where a large, furred creature smacks their rotund belly with two arms, their other two fists pounding on the table.
-\
-\<<acts "Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance">>
-
 :: Juno Station, Deck 5, Information
-You approach the center of the Deck, and are met with a bored, young <<tooltip "a reptilian species, sporting rough, milky white scales that can blush through several colors of the rainbow">>Mirleon<</tooltip>> who is tapping through their Slate, head in hand, their ears plugged up with headphones.
+$playerFirstName approaches the center of the Deck, and are met with a bored, young <<tooltip $glossary.Mirleon>>Mirleon<</tooltip>> who is tapping through their Slate, head in hand, their ears plugged up with headphones.
 \<<acts "Approach|Juno Station, Deck 5, Information - Conversation">>
 \<<acts "Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance">>
 \<<acts "Forward - Elevators|Juno Station, Deck 5, Elevators">>
 
 :: Juno Station, Deck 5, Retail
-You wander over to the retail section. The hallways are dark here, and light up as you pass their sensors. 
+$playerFirstName wanders over to the retail section. The hallways are dark here, and light up as they pass their sensors. 
 
-A row of storefronts meets you after a short trek. Every one of them is dark, and stays that way. A few have automated storefronts for vending small items, or storing orders for later pickup.
+A row of storefronts meets them after a short trek. Every one of windows is dark, and stays that way. A few have automated storefronts for vending small items, or storing orders for later pickup.
 
-In the center is a bench, where a <<tooltip "A furred, four-legged species, known for their brutality, though this has calmed some since joining the Dreyyar Union">>Lemnae<</tooltip>> is sprawled out. They are moaning to themselves, clutching their stomach.
+In the center is a bench, where a <<tooltip $glossary.Lemnae>>Lemnae<</tooltip>> is sprawled out. They are moaning to themselves, clutching their stomach.
 \
 \<<acts "Check on them|Juno Station, Deck 5, Retail - Conversation">>
 \<<acts "Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance">>
 
 :: Juno Station, Deck 5, Elevators
 
-You arrive at the Elevator bank for Deck 5. There are several doors that encircle you, occasionally sounding off calming chimes as they arrive at other levels of the station.
+They arrive at the Elevator bank for Deck 5. There are several doors that encircle them, occasionally sounding off calming chimes as they arrive at other levels of the station.
 \
 \<<acts "Summon an elevator|Juno Station, Deck 5, Inside Elevator">>
 \<<acts "Back - Information|Juno Station, Deck 5, Information">>
 
 :: Juno Station, Deck 5, Inside Elevator
 
-The elevator arrives, and you step in. There is a shiny panel to your left with a button for each deck of the station. On the right is a screen playing an advertisement.
+The elevator arrives, and $playerFirstName steps in. There is a shiny panel to their left with a button for each deck of the station. On the right is a screen playing an advertisement.
 
 \@@.ad;
 \<<set _adIndex = random(1,3)>>
 \<<switch _adIndex>>
     \<<case 1>>
-    A tinny fanfare plays, and a gruff beast shows up on screen, his raspy voice practically yelling at you: @@.repair;"We've gotcha covered! From scrapes and dings, to FTL repairs. The best dat Juno Station has to offer! Dial up Orion's Ship Repair directly from yer Hangar and we'll have ya shipshape by lunch! Tell 'em that Tandy sent ya and get 10% off! Orion's Ship Repair: We'll getcha moving again!"@@
+    \A tinny fanfare plays, and a gruff beast shows up on screen, his raspy voice practically yelling at the viewer: @@.repair;"We've gotcha covered! From scrapes and dings, to FTL repairs. The best dat Juno Station has to offer! Dial up ''//Orion's Ship Repair//'' directly from yer Hangar and we'll have ya shipshape by lunch! Tell 'em that Tandy sent ya and get 10% off! ''//Orion's Ship Repair//'': We'll getcha moving again!"@@
     \<<case 2>>
-    Sultry music plays as a breathy female voice echoes over the ad's speakers. Images of a slender silhouette dancing in front of a fire flicker across the screen. @@.club;"The most //personal// experiences. Enjoy yourself."@@ The background saxophone blares. @@.club;"Come have a satisfying evening. //The Lily Petal Spa//. Deck 6."@@
+    \Sultry music plays as a breathy female voice echoes over the ad's speakers. Images of a slender silhouette dancing in front of a fire flicker across the screen. @@.club;"The most //personal// experiences. Enjoy yourself."@@ The background saxophone blares. @@.club;"Come have a satisfying evening. ''//The Lily Petal Spa//''. Deck 6."@@
     \<<case 3>>
-    Some nondescript music plays over the speaker, while images of various fried foods appear on the screen. There is no voiceover, but the screen displays stylized text: @@.food;"The Total Package."@@ A hamburger spins into frame, joined by some friends and a cup of unknown, green liquid. @@.food;"only 699 Sols!"@@ The animation plays repeatedly on a loop.
+    \Some nondescript music plays over the speaker, while images of various fried foods appear on the screen. There is no voiceover, but the screen displays stylized text: @@.food;"The Total Package."@@ A hamburger spins into frame, joined by some fries and a cup of some sort of green liquid. @@.food;"only 699 Sols!"@@ The animation plays repeatedly on a loop.
 \<</switch>>
 @@
 \
