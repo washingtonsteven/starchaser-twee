@@ -14,7 +14,6 @@ const runBuild = (tweegoExecutable, postWebpack) => {
         }
 
         if (postWebpack && typeof postWebpack === "function") {
-            console.log("running post webpack");
             postWebpack();
             return;
         }
@@ -54,7 +53,7 @@ if (process.env.NETLIFY) {
 
             runBuild("", () => {
                 exec(
-                    `mkdir build && ./tweego/tweego -o ./build/index.html -m ./dist --log-stats --log-files ./story`,
+                    `mkdir build && tweego -o ./build/index.html -m ./dist --log-stats --log-files ./story`,
                     { cwd: path.resolve(__dirname) },
                     (error, stdout, stderr) => {
                         if (error) {
