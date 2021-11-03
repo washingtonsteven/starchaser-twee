@@ -31,11 +31,11 @@ $playerFirstName attempts to bring up their <<tooltip $glossary.AugComm>>AugComm
 
 It didn't really matter anyway, they were more interested in what was happening a few tables over.
 
-@@.npc;"Oh, come on!"@@ The largest of the group says, throwing up their four arms in frustration while stifling a hearty laugh. @@.npc;"You all get it, right? Callie? 'No //atmosphere//'?" he emphasized, voice booming across the empty room. $playerFirstName didn't really need to sit too close to overhear him.
+@@.npc;"Oh, come on!"@@ The largest of the group says, throwing up their four arms in frustration while stifling a hearty laugh. @@.npc;"You all get it, right? Callie? 'No //atmosphere//'?"@@ he emphasized, voice booming across the empty room. $playerFirstName didn't really need to sit too close to overhear him.
 
-@@.npc1;"Yeah, yeah." Another <<tooltip $glossary.Mirleon>>Mirleon<</tooltip>> spoke up. @@.npc1;"I get it. It's just the fifth time you've told that joke in the last hour."@@ She rested her cheek on her hand. @@.npc1;"You always get like this when you've had a few."@@
+@@.npc1;"Yeah, yeah."@@ Another <<tooltip $glossary.Mirleon>>Mirleon<</tooltip>> spoke up. @@.npc1;"I get it. It's just the fifth time you've told that joke in the last hour."@@ She rested her cheek on her hand. @@.npc1;"You always get like this when you've had a few."@@
 
-@@.npc;"A few?"@@ He continued to yell, causing her to wince. @@.npc;"Shows what you know! I'll have ten more!" He beat his chest. @@.npc;"Kolva blood!"@@
+@@.npc;"A few?"@@ He continued to yell, causing her to wince. @@.npc;"Shows what you know! I'll have ten more!"@@ He beat his chest. @@.npc;"Kolva blood!"@@
 
 @@.npc2;"Chill, Wrench!"@@ the other player shout-whispered. @@.npc2;"We're right here."@@
 
@@ -48,18 +48,21 @@ The large one, apparently named "Wrench," sat back in his chair, pouting as he s
 :: Juno Station, Deck 5, Mess Hall - Leaving Eavesdropping
 $playerFirstName tries to shift to get away, but the scraping of the chair on the ground gets the attention of the group.
 
-@@.npc1;"Hey!"@@ the other Mirleon called out. @@.npc1;"Hope this knucklehead didn't bother ya!"
+@@.npc1;"Hey!"@@ the other Mirleon called out. @@.npc1;"Hope this knucklehead didn't bother ya!"@@
 
-@@.pc;[["Oh, no big deal"|Juno Station, Deck 5, Leaving Eavesdropping 2]]@@
-@@.pc;[["Sounds like he's having fun"|Juno Station, Deck 5, Leaving Eavesdropping 3]]@@
+@@.pc;<<link "\"Oh, no big deal\"" "Juno Station, Deck 5, Leaving Eavesdropping 2">><</link>>@@
+@@.pc;<<link "\"Sounds like he's having fun\"" "Juno Station, Deck 5, Leaving Eavesdropping 3">><</link>>@@
+
+:: Juno Station, Deck 5, Leaving Eavesdropping 2
+TBD <!-- NBD, disengage? -->
 
 :: Juno Station, Deck 5, Leaving Eavesdropping 3
-@.npc1;"Maybe a bit too much."@@ she responds, reaching for her own drink.
+@@.npc1;"Maybe a bit too much."@@ she responds, reaching for her own drink.
 
-@.npc2;"You drinking anything? It's the least we could do for the disturbance"@@
+@@.npc2;"You having anything? It's the least we could do for the disturbance"@@
 
-Before you could respond, the shorter player already shot off an order for another glass of what they were drinking. The glass was filled, and slide over to the table on a conveyor system before $playerFirstName could accept the offer. 
+Before you could respond, the shorter player already shot off an order for another glass of what they were drinking. The glass was filled, and slid over to the table on a conveyor system before $playerFirstName could accept the offer. 
 
-@@.npc2;"Just a simple River Bomb."@@ he explained. @@.npc2;"Figured you didn't want to get absolutely plastered on the Kolvan Bourbon."
+@@.npc2;"Just a simple River Bomb."@@ he explained. @@.npc2;"Figured you didn't want to get absolutely plastered on the Kolvan Bourbon."@@
 
 $playerFirstName had heard stories of Kolvans, and even seen them on the feeds. They knew they were big, but seeing one in person...$playerFirstName was awestruck. Certainly any liquor able to topple a giant would completely destroy the relatively tiny reptile.

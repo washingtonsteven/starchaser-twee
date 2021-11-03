@@ -6,8 +6,9 @@ A [Twee3](https://github.com/iftechfoundation/twine-specs/blob/master/twee-3-spe
 
 1. Install [Tweego](https://www.motoslave.net/tweego/)
    1. Ensure `tweego` is available on your `PATH` (i.e. `which tweego` works)
-2. `yarn install` 
-3. `yarn build`
+2. `mkdir build` (TODO: Just have this folder here)
+3. `yarn install` 
+4. `yarn build`
 
 ## Play
 
