@@ -29,8 +29,10 @@ A [Twee3](https://github.com/iftechfoundation/twine-specs/blob/master/twee-3-spe
 - This story is built using [Tweego](https://www.motoslave.net/tweego/). In order to build you must install this separately.
 - JS and CSS (Sass) are built with [webpack](https://webpack.js.org/)
   - `js/main.js` is for Javascript that is run globally, and not dependent on story state.
+    - This is the place to load 3rd party libraries, etc.
   - In order to access SugarCube's APIs, that JS must be in a `[script]` tagged passage.
     - These passages are in `story/js`
   - `scss/style.scss` is the main Sass file
     - Since CSS isn't dependent on anything in SugarCube's scope, `[stylesheet]` passages _shouldn't_ be necessary.
+  - Built JS/CSS is placed in `./dist`, separate from `./build` since `tweego`'s `-m` option doesn't like being the same folder as the output folder.
 - The story uses the included SugarCube 2.35.0 format in `.storyformats/sugarcube-2.35.0`
