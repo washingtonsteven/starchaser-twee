@@ -6,8 +6,4 @@ cd tweego
 go get
 go install
 go build
-ls -la
-pwd
-cd ..
-./tweego/tweego --help
 echo "== /building tweego =="
