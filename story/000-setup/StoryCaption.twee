@@ -1,6 +1,6 @@
 :: StoryCaption
-Name: <<print $playerName || "N/A">> <<print $navigatorNumber ? "($navigatorNumber)" : "">>
-Ship: <<print $shipName ? "$shipName ($shipType)" : "None">>
+Name: <<print $playerFirstName || "N/A">> <<print $navigatorNumber ? "($navigatorNumber)" : "">>
+Ship: <<print $shipName ? "$shipName" : "None">>
 Current Location: <<print _currentLocation || "Unknown">>
 
 <<silently>>
