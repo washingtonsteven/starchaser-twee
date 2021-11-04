@@ -27,9 +27,6 @@ Her gait is wobbly, and she ends up bumping against an automated display. @@.mor
 \
 <<acts "Follow Her|Juno Station, Deck 5, Retail - Conversation(Escort 1)">>
 
-:: Juno Station, Deck 5, Retail - Conversation(Escort 1)
-TBD
-
 :: Juno Station, Deck 5, Retail - Conversation(Get PB3 Directions)
 @@.mora;"Well, it ain't here, I'll tell you that much."@@
 
@@ -39,3 +36,31 @@ She shifts off of the bench, her legs wobbling slightly as she motions $playerFi
 \
 <<acts "Follow her|Juno Station, Deck 5, Retail - Conversation(Escort 1)">>
 
+:: Juno Station, Deck 5, Retail - Conversation(Escort 1)
+As the pair walk to the far end of the station, the lights in the repetetive halls shutter on and off, a rhythm of soft clicks accompanying the echo of footfalls. They exchange names, and she introduces herself as @@.name;Mora Evelu@@, Captain of the //Thylacine Harpy// Caravan.
+
+@@.pc;"I've heard of caravans."@@ $playerFirstName piped up. @@.pc;"They cover them in the training manuals, but not in very much detail."@@
+
+@@.mora;"Well, they wouldn't. Purely unofficial business."@@ She looks around, as if someone would have been watching them. @@.mora;"But the Board doesn't look where they don't have to, if you catch my meaning."@@
+
+$playerFirstName nods. @@.name;Mora@@ continues.
+
+@@.mora;"If you're new, I highly suggest getting in good with one. Unless you //want// to take a string to trashbos 
+"@@ She picks up on their confusion. @@.mora;"Trash Bounties. The ones that don't pay much cause they're 'easier.' They show up in your history and most Captains don't look kindly on the ones that are willing to take them. If you get a Big Boy Bounty under your belt--"@@ she whistles. @@.mora;"--You'll have your pick of the litter."@@
+
+@@.pc;"My pick of the what?"@@
+
+@@.mora;"Nothing."@@ she shrugs. @@.mora;"Check up on Deck 6 in the morning and there will be a fresh crop of caravans with a spot or two."
+\
+<<acts "Hangar #575|Juno Station, Deck 5, Hangar 575">>
+
+:: Juno Station, Deck 5, Hangar 575
+The two approach the door to Hangar #575, the digital nameplate reading out @@.aug;//Thylacine Harpy//@@ She turns to $playerFirstName as she autheticates entry into the airlock. @@.mora;"I'd offer you a spot in mine, but we're full up."@@
+
+$playerFirstName cocks their head. @@.pc;"Wait, 'full'?"@@
+
+She nods. @@.mora;"It's a business out there, kid. The pot can only get split so many ways."@@ she backs up into the airlock, shrugging her shoulder to press a button on her collar. In a flash, an exosuit forms around her, an opaque, spherical helmet enclosing over her head. Her voice rings out through a tinny onboard speaker. @@.mora;"No hard feelings, kid. Just remember, Deck 6."@@
+
+$playerFirstName tries to wave goodbye, but the airlock doors shut too quickly. With a shrug, they turn down a hall toward the center of the station.
+\
+<<acts "Elevators|Juno Station, Deck 5, Elevators">>
