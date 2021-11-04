@@ -1,0 +1,12 @@
+:: Juno Station, Deck 7, Elevators
+$playerFirstName arrives at the bank of Elevators for Deck 7. 
+
+While the other decks were laid out as a series of maze-like hallways, the entirety of Deck 7 was like an open field, complete with faux-turf and imported plant life, decorating the area. It was difficult to not immediately look up, gazing through the transparent dome that capped the station into the starfield surrounding it.
+
+\<<if $state_001.quiet_hours>>
+The artificial lighting was dimmed, to allow for easier stargazing durign quiet hours. A few groups of people were milling about, holding quiet conversations with each other or into their AugComms. 
+\<</if>>
+
+\<<include "Juno Station, Elevator notice">>
+\<<acts "Summon an elevator|Juno Station, Inside Elevator">>
+\<<if $state_001.quiet_hours>><<acts "Go Stargazing|Juno Station, Deck 7, Information">><</if>>

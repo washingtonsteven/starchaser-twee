@@ -36,13 +36,23 @@
     font-family: monospace;
 }
 
-.ad {
+.ad, .notice {
     border-radius: 5px;
     background-color:rgb(58, 105, 233);
     color: rgb(255,255,255);
     border: solid 2px currentColor;
     margin: 2rem 4rem;
     padding: 0.5rem 1rem;
+}
+
+.notice {
+    text-align: center;
+    font-family: monospace;
+
+    .notice-highlight {
+        font-weight: bold;
+        color: rgb(253, 215, 109);
+    }
 }
 
 .food {

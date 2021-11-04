@@ -50,11 +50,7 @@ $playerFirstName tries to shift to get away, but the scraping of the chair on th
 
 @@.npc1;"Hey!"@@ the other Mirleon called out. @@.npc1;"Hope this knucklehead didn't bother ya!"@@
 
-@@.pc;<<link "\"Oh, no big deal\"" "Juno Station, Deck 5, Leaving Eavesdropping 2">><</link>>@@
 @@.pc;<<link "\"Sounds like he's having fun\"" "Juno Station, Deck 5, Leaving Eavesdropping 3">><</link>>@@
-
-:: Juno Station, Deck 5, Leaving Eavesdropping 2
-TBD <!-- NBD, disengage? -->
 
 :: Juno Station, Deck 5, Leaving Eavesdropping 3
 @@.npc1;"Maybe a bit too much."@@ she responds, reaching for her own drink.

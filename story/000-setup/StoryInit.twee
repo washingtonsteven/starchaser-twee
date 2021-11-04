@@ -6,3 +6,8 @@
     Lemnae: "A furred, four-legged species, known for their brutality, though this has calmed some since joining the Dreyyar Union",
     Milgred: "A beast-like, bipedal species. They frequently tower over others, though by they time they reach old age, their constant hunching caused their backs to permanently arch."
 }>>
+<<set $state_001 = {
+    quiet_hours: true,
+    met_mora: false,
+    current_deck: 5,
+}>>
