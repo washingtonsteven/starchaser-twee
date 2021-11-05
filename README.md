@@ -2,6 +2,8 @@
 
 A [Twee3](https://github.com/iftechfoundation/twine-specs/blob/master/twee-3-specification.md) story about exploring a future galaxy.
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/81c2b911-9857-44fa-b0e0-6eb0caa640a2/deploy-status)](https://app.netlify.com/sites/condescending-montalcini-218035/deploys)
+
 ## Build
 
 1. Install [Tweego](https://www.motoslave.net/tweego/)
