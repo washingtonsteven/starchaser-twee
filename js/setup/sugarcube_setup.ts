@@ -1,16 +1,4 @@
-import { SugarCubeStoryVariables } from "twine-sugarcube";
-
-export interface JoyrideMessage {
-    subject: string,
-    from: string,
-    body: string,
-    read?: boolean
-}
-
-interface JoyrideStoryVariables extends SugarCubeStoryVariables {
-    [x:string]: any,
-    messages?: [JoyrideMessage]
-}
+import { JoyrideMessage, JoyrideStoryVariables } from "../types/storyVariables";
 
 const getStoryVariables = () => {
     return (State.variables as JoyrideStoryVariables);

@@ -1,7 +1,8 @@
 import { createPopper, updatePoppers } from "./setup/popper_setup";
 import { addMacros } from "./setup/sugarcube_macros";
-import { addMessage, JoyrideMessage, unreadMessagesCount } from "./setup/sugarcube_setup";
+import { addMessage, unreadMessagesCount } from "./setup/sugarcube_setup";
 import { Instance as PopperInstance, Placement } from "@popperjs/core";
+import { JoyrideMessage } from "./types/storyVariables";
 
 class Setup {
     $tooltips: Array<JQuery> = [];

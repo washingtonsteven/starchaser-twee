@@ -31,7 +31,7 @@
     "build": "node build.js",
     "serve": "serve build",
     "watch": "concurrently -n build,server \"nodemon -e twee,js,scss build.js\" \"serve -l 1234 build\"",
-    "clean": "rimraf ./dist/* ./build/*",
+    "clean": "rimraf ./src/dist/* ./build/*",
     "prebuild": "yarn run clean",
     "prewatch": "yarn run clean"
   },
