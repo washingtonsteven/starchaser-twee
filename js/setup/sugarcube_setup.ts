@@ -8,7 +8,7 @@ export const unreadMessagesCount = () => {
     const messages = getStoryVariables().messages;
 
     if (Array.isArray(messages)) {
-        const found = messages.filter(function (message) {
+        const found = messages.filter((message) => {
             return !message.read;
         });
         return found.length;
@@ -20,7 +20,7 @@ export const unreadMessagesCount = () => {
 export const addMessage = (newMessage: JoyrideMessage) => {
     const messages = getStoryVariables().messages;
     if (Array.isArray(messages)) {
-        const existing = messages.find(function (message) {
+        const existing = messages.find((message) => {
             return (
                 newMessage.subject === message.subject &&
                 newMessage.from === message.from &&

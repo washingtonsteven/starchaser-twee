@@ -11,3 +11,6 @@
     met_mora: false,
     current_deck: 5,
 }>>
+
+<<character "mora" "https://via.placeholder.com/150?text=Mora">>
+<<character "pc" $playerFirstName "https://via.placeholder.com/150?text=Player">>

@@ -9,4 +9,5 @@ type WindowWithSetup = typeof window & {
     const win = (window as WindowWithSetup);
 
     win.setup = new Setup();
+    require("../lib/custom-macros-for-sugarcube-2/speech")(win.setup);
 })();

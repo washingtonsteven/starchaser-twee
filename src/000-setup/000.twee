@@ -9,7 +9,9 @@ Ascendancy: Starchaser
 }
 
 :: Start
-! <<print Story.title>>
+! <<print Story.title>><!--
+<<mora>>This is mora speaking!<</mora>>
+<<pc>>And this is the player<</pc>>-->
 \<<silently>>
 <<acts "Begin|Registration">>
 <</silently>>\

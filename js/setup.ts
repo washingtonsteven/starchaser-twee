@@ -14,7 +14,7 @@ class Setup {
         });
         $(document).on(":passageinit", () => {
             // Clear old popups
-            this.$tooltips.forEach(function ($tooltip) {
+            this.$tooltips.forEach(($tooltip) => {
                 $tooltip.remove();
             });
             this.$tooltips = [];
@@ -53,15 +53,15 @@ class Setup {
             return;
         }
 
-        const observer = new MutationObserver(function (mutationsList) {
-            mutationsList.forEach(function (mutation) {
+        const observer = new MutationObserver((mutationsList) => {
+            mutationsList.forEach((mutation) => {
                 if (
                     mutation.type === "attributes" &&
                     mutation.attributeName === "class"
                 ) {
                     // class changed, we aren't worried about what happened
                     // Wait for the animation to finish though.
-                    setTimeout(function () {
+                    setTimeout(() => {
                         this.updatePoppers();
                     }, 250);
                 }

@@ -20,10 +20,10 @@ export const createPopper = (
         .addClass(`tooltip-trigger`)
         .attr("aria-describedby", "tooltip")
         .html(text)
-        .on("mouseenter", function () {
+        .on("mouseenter", () => {
             tooltipContent.attr("data-show", "true");
         })
-        .on("mouseleave", function () {
+        .on("mouseleave", () => {
             tooltipContent.attr("data-show", "false");
         });
 
