@@ -1,6 +1,0 @@
-#!/bin/bash
-
-git clone https://github.com/tmedwards/tweego.git
-cd tweego
-go get
-go install
