@@ -19,11 +19,19 @@ then
     go get
     go install
     cd -
+    if [ ! -d build ]
+    then
+        mkdir build
+    fi
     echo "running tweego: \"$(go env GOPATH)/bin/tweego $TWEEGO_ARGS\""
     $(go env GOPATH)/bin/tweego $TWEEGO_ARGS
 else
     echo "Local build, not fetching tweego"
     echo "running tweego \"tweego $TWEEGO_ARGS\""
+    if [ ! -d build ]
+    then
+        mkdir build
+    fi
     tweego $TWEEGO_ARGS
 fi
 
