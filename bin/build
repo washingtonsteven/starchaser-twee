@@ -11,7 +11,10 @@ echo "...Webpack done.\n"
 if [ $NETLIFY = "true" ] 
 then
     echo "Netlify build, fetching tweego"
-    git clone --depth 1 --branch $TWEEGO_TAG -c advice.detachedHead=false https://github.com/tmedwards/tweego.git
+    if [ ! -d tweego ]
+    then
+        git clone --depth 1 --branch $TWEEGO_TAG -c advice.detachedHead=false https://github.com/tmedwards/tweego.git
+    fi
     cd tweego
     go get
     go install
