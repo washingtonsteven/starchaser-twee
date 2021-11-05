@@ -23,7 +23,7 @@ const runBuild = (executableOrPostFunction) => {
             executableOrPostFunction &&
             typeof executableOrPostFunction === "string"
         ) {
-            const tweegoCommand = `${executableOrPostFunction} -o ${__dirname}/build/index.html -m ${__dirname}/dist --log-stats ${__dirname}/story`;
+            const tweegoCommand = `${executableOrPostFunction} -o ${__dirname}/build/index.html --log-stats ${__dirname}/src`;
             console.log(tweegoCommand);
             exec(tweegoCommand, (error, stdout, stderr) => {
                 if (error) {
@@ -65,7 +65,7 @@ if (process.env.NETLIFY) {
 
             runBuild(() => {
                 exec(
-                    `mkdir build && $(go env GOPATH)/bin/tweego -o ./build/index.html -m ./dist --log-stats --log-files ./story`,
+                    `mkdir build && $(go env GOPATH)/bin/tweego -o ./build/index.html --log-stats --log-files ./src`,
                     { cwd: path.resolve(__dirname) },
                     (error, stdout, stderr) => {
                         if (error) {
