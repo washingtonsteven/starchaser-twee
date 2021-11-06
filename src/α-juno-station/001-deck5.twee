@@ -1,0 +1,62 @@
+:: α Juno Station, Deck 5, Hangar
+$playerFirstName makes a shaky landing at Juno Station. Their ship, //$shipName//, apparently received worse injuries from the previous owner, but the sound of metal scraping on metal is never a pleasant one.
+
+They disembark their <<tooltip "A model of ship made by the Tassa Company. Known for their reliability and function-over-form">>Gridskipper<</tooltip>> their stomach doing a partial flip in the reduced gravity of the hangar. With a thought, a digital readout appears over their vision:
+
+@@.aug;Planetary Beacon Bounty Board (PB3) Office is on deck 3: Administration.@@
+
+In addition, a yellow path is drawn on the ground in front of them, through the airlock and into the station. Just a moment later, the path flickers blue, before disappearing altogether.
+
+@@.aug;"Signal lost."@@
+
+They sigh, tapping the side of their head in a vain attempt to get their <<tooltip $glossary.AugComm>>AugComm<</tooltip>> working again. @@.pc;"Maybe there's a repair shop around here,"@@ they mutter to themselves, turning toward the door. 
+\
+\<<acts "Head In|Juno Station, Deck 5, Hangar Entrance">>
+
+:: Juno Station, Deck 5, Hangar Entrance
+$playerFirstName enters the station proper, and gravity is back to normal. The hallway is fairly quiet as it curves away from them.
+
+The sign directly ahead points in three directions:
+\
+\<<acts "Left - Mess Hall|Juno Station, Deck 5, Mess Hall">>
+\<<acts "Straight - Information, Elevators|Juno Station, Deck 5, Information">>
+\<<acts "Right - Retail|Juno Station, Deck 5, Retail">>
+
+:: Juno Station, Deck 5, Information
+$playerFirstName approaches the center of the Deck, and are met with a bored, young <<tooltip $glossary.Mirleon>>Mirleon<</tooltip>> who is tapping through their Slate, head in hand, their ears plugged up with headphones.
+\<<acts "Approach|Juno Station, Deck 5, Information - Conversation">>
+\<<acts "Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance">>
+\<<acts "Forward - Elevators|Juno Station, Deck 5, Elevators">>
+
+:: Juno Station, Deck 5, Retail
+$playerFirstName wanders over to the retail section. The hallways are dark here, and light up as they pass their sensors. 
+
+A row of storefronts meets them after a short trek. Every one of windows is dark, and stays that way. A few have automated storefronts for vending small items, or storing orders for later pickup.
+
+In the center is a bench, where a <<tooltip $glossary.Lemnae>>Lemnae<</tooltip>> is sprawled out. They are moaning to themselves, clutching their stomach.
+\
+\<<acts "Check on them|Juno Station, Deck 5, Retail - Conversation">>
+\<<acts "Back - Hangar Entrance|Juno Station, Deck 5, Hangar Entrance">>
+
+:: Juno Station, Deck 5, Elevators
+$playerFirstName arrives at the Elevator bank for Deck 5. There are several doors that encircle them, occasionally sounding off calming chimes as they arrive at other levels of the station.
+<<include "Juno Station, Elevator notice">>
+\
+\<<acts "Summon an elevator|Juno Station, Inside Elevator">>
+\<<acts "Back - Information|Juno Station, Deck 5, Information">>
+
+:: Juno Station, Elevator notice
+<<if $state_001.quiet_hours>>
+\<<set _adIndex = 1>>
+At the far end of the bank of elevators is an electric sign, displaying two separate messages. On top is a rotating slideshow of ads for various stores and restaurants on this level. The bottom half of the sign reads:
+
+\@@.notice;
+\<<if true>> <!-- Making a macro block so style markup can be nested -->
+It is currently @@.notice-highlight;After Hours@@. 
+
+Administration, the Planetary Beacon Bounty Board, and most non-essential operations are closed for the evening. Please enjoy our entertainment suite on Decks 6 and 7.
+
+Operations will resume at 0600.
+@@
+\<</if>>
+<</if>>

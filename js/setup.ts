@@ -7,6 +7,9 @@ import { JoyrideMessage } from "./types/storyVariables";
 class Setup {
     $tooltips: Array<JQuery> = [];
     poppers: Array<PopperInstance> = [];
+    _isTyping = false;
+    lastTypingComplete = 0;
+    typingCompleteThreshold = 250;
 
     constructor() {
         $(document).on(":storyready", () => {
@@ -23,6 +26,15 @@ class Setup {
         $(document).on(":passagerender", (e) => {
             $(e.content).find("button.link-broken").prop("disabled", true);
         });
+
+        $(document).on(":typingstart", () => {
+            this._isTyping = true;
+        })
+
+        $(document).on(":typingcomplete", () => {
+            this._isTyping = false;
+            this.lastTypingComplete = (new Date()).getTime();
+        })
 
         addMacros(this);
     }
@@ -79,6 +91,20 @@ class Setup {
 
     addMessage(message: JoyrideMessage) {
         addMessage(message);
+    }
+
+    isTyping() {
+        if (this._isTyping) {
+            return true;
+        }
+        
+        // Also wait typingCompleteThreshold ms after typing complete to actually mark it complete
+        const now = (new Date()).getTime();
+        if (now - this.lastTypingComplete < this.typingCompleteThreshold) {
+            return true;
+        }
+
+        return false;
     }
 }
 

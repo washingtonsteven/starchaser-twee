@@ -8,7 +8,7 @@ echo "Running webpack..."
 yarn webpack
 echo "...Webpack done."
 
-if [ $NETLIFY = "true" ] # env variable. See: https://docs.netlify.com/configure-builds/environment-variables/
+if [ "$NETLIFY" = "true" ] # env variable. See: https://docs.netlify.com/configure-builds/environment-variables/
 then
     echo "Netlify build, fetching tweego"
     if [ ! -d tweego ]

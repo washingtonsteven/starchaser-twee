@@ -4,7 +4,8 @@
     AugComm: "Augmented Communicator, a neural implant communications device",
     Mirleon: "A reptilian species, sporting rough, milky white scales that can blush through several colors of the rainbow",
     Lemnae: "A furred, four-legged species, known for their brutality, though this has calmed some since joining the Dreyyar Union",
-    Milgred: "A beast-like, bipedal species. They frequently tower over others, though by they time they reach old age, their constant hunching caused their backs to permanently arch."
+    Milgred: "A beast-like, bipedal species. They frequently tower over others, though by they time they reach old age, their constant hunching caused their backs to permanently arch.",
+    Nides: "My home moon, orbiting a factory planet called Ruzade"
 }>>
 <<set $state_001 = {
     quiet_hours: true,
@@ -14,3 +15,4 @@
 
 <<character "mora" "https://via.placeholder.com/150?text=Mora">>
 <<character "pc" $playerFirstName "https://via.placeholder.com/150?text=Player">>
+<<character "augcomm" "AugComm" "https://via.placeholder.com/150?text=AugComm">>
