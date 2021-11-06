@@ -93,18 +93,18 @@ class Setup {
         addMessage(message);
     }
 
-    isTyping() {
+    shouldContinue() {
         if (this._isTyping) {
-            return true;
+            return false;
         }
         
         // Also wait typingCompleteThreshold ms after typing complete to actually mark it complete
         const now = (new Date()).getTime();
         if (now - this.lastTypingComplete < this.typingCompleteThreshold) {
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 }
 

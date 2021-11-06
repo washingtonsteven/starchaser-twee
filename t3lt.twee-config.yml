@@ -20,6 +20,28 @@ sugarcube-2:
       container: true
       parameters:
         - text |+ ('top'|'bottom'|'left'|'right'|'auto')
+    convo:
+      name: convo
+      description: |-
+        Use Chapel's speech macro to show a conversation box that can be cycled through
+
+        Content inside `<<convo>><</convo>>` will be executed silently when the last line of the conversation is displayed.
+        Requires Chapel's speech box and continue macros from: https://twinelab.net/custom-macros-for-sugarcube-2/
+
+        Usage:
+
+        ```
+        <<convo characterName convoLines [replace]>><</convo>> 
+        ```
+
+        Arguments:
+        
+        - characterName: `string` - matches with a character name string provided to <<character>>
+        - convoLines: `array<string>` - An array of string to show in the speech box. Doesn't support directly placing an array in this arg, save it in a temp var first. (i.e. `<<set _lines = []>> <<convo "characterName" _lines>><</convo>>` and not `<<convo "characterName" ["line 1", "line 2"]>><</convo>>`)
+        - replace: `boolean` - Whether to replace text in the box. If `false` this will instead append text. Default `true`
+      container: true
+      parameters: 
+        - text &+ string |+ bool
     # speech macro characters
     augcomm:
       name: augcomm

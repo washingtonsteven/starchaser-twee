@@ -1,41 +1,32 @@
 :: Juno Station, Deck 5, Hangar
 I arrived in my assigned Hangar at Juno Station. After taking a moment to calm my nerves after my first flight off <<tooltip $glossary.Nides>>Nides<</tooltip>>, I exited into the microgravity of the Hangar. After properly registrering //$shipName// and paying the nightly fare, I brought up my <<tooltip $glossary.AugComm>>AugComm<</tooltip>> with a thought. It's chipper voice piped up:
 
-<<nobr>>
-@@.convo;
+@@.convo-wrapper;
 @@
+
 @@.continue;
 @@
-    <<cont keypress>>
-    <<silently>>
-        <<replace ".convo">>
-            <<augcomm>><<type 40ms>>The Planetary Beacon Bounty Board Office is on Deck 3.<</type>><</augcomm>>
-            <<cont keypress>>
-                <<append ".convo .augcomm.say p:last-of-type">>
-                    <<type 40ms>>Hm, seems like it's closed at the moment.<</type>>
+<<silently>>
+<<set _lines = [
+    "The Planetary Beacon Bounty Board Office is on Deck 3.",
+    "Hm, seems like it's closed at the moment.",
+    "If you get to an Information Terminal I can get you the operating hours. I don't have network access to the station yet."
+]>>
+<<cont keypress>>
+    <<replace ".convo-wrapper" t8n>>
+        <<convo "augcomm" _lines>>
+            <<timed 2s>>
+                <<replace ".continue" t8n>>Press a button to continue<</replace>>
+                <<timed 1s>>
                     <<cont keypress>>
-                        <<append ".convo .augcomm.say p:last-of-type">>
-                            <<silently>><<script>>
-                            $(document).one(":typingcomplete", function() {
-                                $.wiki(`
-                                    <<timed 2s>>
-                                        <<replace ".continue" t8n>>Press [Space] to continue<</replace>>
-                                        <<cont keypress>>
-                                            <<goto "Juno Station, Deck 5, Hangar Airlock">>
-                                        <</cont>>
-                                    <</timed>>
-                                `);
-                            });
-                            <</script>><</silently>>
-                            <<type 40ms>>If you get to an Information Terminal I can get you the operating hours. I don't have network access to the station yet.<</type>>
-                        <</append>>
+                        <<goto "Juno Station, Deck 5, Hangar Airlock">>
                     <</cont>>
-                <</append>>
-            <</cont>>
-        <</replace>>
-    <</silently>>
-    <</cont>>
-<</nobr>>
+                <</timed>>
+            <</timed>>
+        <</convo>>
+    <</replace>>
+<</cont>>
+<</silently>>
 
 :: Juno Station, Deck 5, Hangar Airlock
 TBD
