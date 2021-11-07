@@ -75,6 +75,22 @@
     font-family: script, serif;
 }
 
+.convo {
+    &.convo-direction-right {
+        & > .say {
+            & > p {
+                padding-left: 1em;
+            }
+
+            & > img {
+                float: right;
+                margin-right: 0;
+                margin-left: 1em;
+            }
+        }
+    }
+}
+
 #action-bar {
     visibility: visible;
     opacity: 1;

@@ -1,32 +1,43 @@
-:: Juno Station, Deck 5, Hangar
-I arrived in my assigned Hangar at Juno Station. After taking a moment to calm my nerves after my first flight off <<tooltip $glossary.Nides>>Nides<</tooltip>>, I exited into the microgravity of the Hangar. After properly registrering //$shipName// and paying the nightly fare, I brought up my <<tooltip $glossary.AugComm>>AugComm<</tooltip>> with a thought. It's chipper voice piped up:
-
-@@.convo-wrapper;
-@@
-
-@@.continue;
-@@
+:: Juno Station, Deck 5, Hangar [nobr]
 <<silently>>
-<<set _lines = [
+<<set _pclines = [
+    "I arrived in my assigned Hangar at Juno Station.",
+    "It was my first flight off <<tooltip $glossary.Nides>>Nides<</tooltip>>, and I had to take a moment to calm my nerves.",
+    "I step out of the ship into the microgravity of the Hangar.",
+    "After properly registering //$shipName// with the dock, and paying the nightly fare,",
+    "I brought up my <<tooltip $glossary.AugComm>>AugComm<</tooltip>> with a thought",
+    "It's chipper voice piped up:"
+]>>
+<<set _auglines = [
     "The Planetary Beacon Bounty Board Office is on Deck 3.",
     "Hm, seems like it's closed at the moment.",
     "If you get to an Information Terminal I can get you the operating hours. I don't have network access to the station yet."
 ]>>
-<<cont keypress>>
-    <<replace ".convo-wrapper" t8n>>
-        <<convo "augcomm" _lines>>
-            <<timed 2s>>
-                <<replace ".continue" t8n>>Press a button to continue<</replace>>
-                <<timed 1s>>
-                    <<cont keypress>>
-                        <<goto "Juno Station, Deck 5, Hangar Airlock">>
-                    <</cont>>
-                <</timed>>
-            <</timed>>
-        <</convo>>
-    <</replace>>
-<</cont>>
 <</silently>>
+@@#convo-wrapper;
+<<convo "pc" _pclines "right">>
+    <<timed 750ms>>
+        <<cont keypress>>
+            <<replace "#convo-wrapper" t8n>>
+                <<convo "augcomm" _auglines>>
+                    <<timed 2s>>
+                        <<replace "#convo-continue" t8n>>Press a button to continue<</replace>>
+                        <<timed 1s>>
+                            <<cont keypress>>
+                                <<goto "Juno Station, Deck 5, Hangar Airlock">>
+                            <</cont>>
+                        <</timed>>
+                    <</timed>>
+                <</convo>> 
+            <</replace>>
+        <</cont>>
+    <</timed>>
+<</convo>>
+@@
+
+@@#convo-continue;
+@@
+
 
 :: Juno Station, Deck 5, Hangar Airlock
 TBD

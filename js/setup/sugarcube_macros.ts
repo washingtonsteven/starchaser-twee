@@ -31,20 +31,21 @@ export const addConvoMacro = (setup: SetupWithCont) => {
         handler: function () {
             const character = this.args[0];
             const lines = this.args[1];
-            const replaceLine = this.args[2] || true;
+            const direction = this.args[2] || "left"
+            const replaceLine = this.args[3] || true;
             let lineIndex = 0;
 
             const makeLine = (withCharacter = false) => {
                 const typeLine = `<<type 40ms>>${lines[lineIndex]}<</type>>`;
 
                 if (withCharacter) {
-                    return `<<${character}>>${typeLine}<</${character}>>`; // TODO: use <<say>> instead in case the character name isn't macro-safe
+                    return `<<say "${character}">>${typeLine}<</say>>`;
                 } else {
                     return typeLine;
                 }
             };
 
-            const $convo = $("<div>").addClass(".convo");
+            const $convo = $("<div>").addClass(`convo convo-direction-${direction}`);
             $convo.wiki(makeLine(true));
 
             const nextLink = () => {

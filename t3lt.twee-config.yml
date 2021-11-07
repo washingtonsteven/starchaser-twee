@@ -31,17 +31,18 @@ sugarcube-2:
         Usage:
 
         ```
-        <<convo characterName convoLines [replace]>><</convo>> 
+        <<convo characterName convoLines [(left|right)] [replace]>><</convo>> 
         ```
 
         Arguments:
         
         - characterName: `string` - matches with a character name string provided to <<character>>
         - convoLines: `array<string>` - An array of string to show in the speech box. Doesn't support directly placing an array in this arg, save it in a temp var first. (i.e. `<<set _lines = []>> <<convo "characterName" _lines>><</convo>>` and not `<<convo "characterName" ["line 1", "line 2"]>><</convo>>`)
+        - (left|right) - Which side to place the portrait on. Default left
         - replace: `boolean` - Whether to replace text in the box. If `false` this will instead append text. Default `true`
       container: true
       parameters: 
-        - text &+ string |+ bool
+        - text &+ string |+ ('left'|'right') |+ bool
     # speech macro characters
     augcomm:
       name: augcomm
