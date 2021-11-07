@@ -25,43 +25,50 @@ export const addTooltipMacro = (setup: Setup) => {
     });
 };
 
+type Line = {
+    character: string,
+    content: string,
+    direction: "left" | "right",
+}
+
 export const addConvoMacro = (setup: SetupWithCont) => {
     Macro.add("convo", {
         tags: ["line", "convocomplete"],
         handler: function () {
             const character = this.args[0];
             const direction = this.args[1] || "left";
-            const replaceLine = this.args[2] || true;
             let lineIndex = 0;
+            let currentCharacter = "";
 
             const linePayloads = this.payload.filter((p) => p.name === "line");
             if (!linePayloads) {
                 const errMsg =
-                    "<<convo>> macro must have a <<lines>> child macro";
+                    "<<convo>> macro must have at least one <<line>> child macro";
                 return this.error(errMsg);
             }
-            const lines = linePayloads
-                .map((payload) => payload.contents.trim())
-                .filter((line) => line);
+            const lines:Line[] = linePayloads
+                .map((payload) : Line => ({
+                    character: payload.args[0] || character,
+                    content: payload.contents.trim(),
+                    direction: payload.args[1] || direction,
+                }))
+                .filter((line) => line.content);
 
             const convocompletePayload = this.payload.find(
                 (p) => p.name === "convocomplete"
             );
 
-            const makeLine = (withCharacter = false) => {
-                const typeLine = `<<type 40ms>>${lines[lineIndex]}<</type>>`;
-
-                if (withCharacter) {
-                    return `<<say "${character}">>${typeLine}<</say>>`;
-                } else {
-                    return typeLine;
-                }
+            const makeLine = () => {
+                const line = lines[lineIndex];
+                currentCharacter = line.character;
+                const typeLine = `<<type 40ms>>${line.content}<</type>>`;
+                return `<<say "${currentCharacter}">>${typeLine}<</say>>`;
             };
 
             const $convo = $("<div>").addClass(
                 `convo convo-direction-${direction}`
             );
-            $convo.wiki(makeLine(true));
+            $convo.wiki(makeLine());
 
             const nextLine = () => {
                 lineIndex++;
@@ -75,11 +82,16 @@ export const addConvoMacro = (setup: SetupWithCont) => {
                 }
 
                 setup.cont(true, () => {
-                    const $convoArea = $convo.find(".say p:last-of-type");
-                    if (replaceLine) {
-                        $convoArea.empty();
-                    }
-                    $convoArea.wiki(makeLine());
+                    $convo.empty();
+                    $convo
+                        .removeClass([
+                            "convo-direction-left",
+                            "convo-direction-right",
+                        ])
+                        .addClass(
+                            `convo-direction-${lines[lineIndex].direction}`
+                        );
+                    $convo.wiki(makeLine());
                     nextLine();
                 });
             };

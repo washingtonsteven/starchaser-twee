@@ -31,8 +31,8 @@ sugarcube-2:
         Usage:
 
         ```
-        <<convo characterName [(left|right)] [replace]>>
-            <<line>>line 1
+        <<convo [characterName] [(left|right)]>>
+            <<line [characterName] [(left|right)]>>line 1
             <<line>>line 2
             <<line>>line 3
             <<convocomplete>>
@@ -44,7 +44,6 @@ sugarcube-2:
         
         - characterName: `string` - matches with a character name string provided to <<character>>
         - (left|right) - Which side to place the portrait on. Default left
-        - replace: `boolean` - Whether to replace text in the box. If `false` this will instead append text. Default `true`
 
         Children:
         - `<<line>>` - Required. Each of these will be a line that shows up in the box
@@ -52,14 +51,20 @@ sugarcube-2:
       container: true
       children: ['lines', 'convocomplete']
       parameters: 
-        - text |+ ('left'|'right') |+ bool
+        - text |+ ('left'|'right')
     line:
         name: line
         description: |-
             Line of text to put into a convo
             Each line should be separated by a newline.
 
+            Arguments:
+            - characterName: - `string` the character that is speaking. If not provided, will default to the characterName provided in `<<convo>>`
+            - (left|right) - Which side to place the portrait on. If not provided, will default to the direction provided in `<<convo>>` (which itself defaults to "left")
+
             See `<<convo>>` for usage
+        parameters:
+            - (|+ text |+ ('left'|'right'))
     convocomplete:
         name: convocomplete
         description: |-

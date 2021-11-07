@@ -6,33 +6,23 @@
     <<line>>I step out of the ship into the microgravity of the Hangar.
     <<line>>After properly registering //$shipName// with the dock, and paying the nightly fare,
     <<line>>I brought up my AugComm with a thought.
+    <<line "augcomm" "left">>The Planetary Beacon Bounty Board Office is on Deck 3.
+    <<line "augcomm" "left">>Hm, seems like it's closed at the moment.
+    <<line "augcomm" "left">>If you get to an Information Terminal I can get you the operating hours. I don't have network access to the station yet.
     <<convocomplete>>
-        <<timed 750ms>>
-            <<cont keypress>>
-                <<replace "#convo-wrapper" t8n>>
-                    <<convo "augcomm">>
-                        <<line>>The Planetary Beacon Bounty Board Office is on Deck 3.
-                        <<line>>Hm, seems like it's closed at the moment.
-                        <<line>>If you get to an Information Terminal I can get you the operating hours. I don't have network access to the station yet.
-                        <<convocomplete>>
-                            <<timed 2s>>
-                                <<replace "#convo-continue" t8n>>Press a button to continue<</replace>>
-                                <<timed 1s>>
-                                    <<cont keypress>>
-                                        <<goto "Juno Station, Deck 5, Hangar Airlock">>
-                                    <</cont>>
-                                <</timed>>
-                            <</timed>>
-                    <</convo>> 
-                <</replace>>
-            <</cont>>
+        <<timed 2s>>
+            <<replace "#convo-continue" t8n>>Press a button to continue<</replace>>
+            <<timed 1s>>
+                <<cont keypress>>
+                    <<goto "Juno Station, Deck 5, Hangar Airlock">>
+                <</cont>>
+            <</timed>>
         <</timed>>
 <</convo>>
 @@
 
 @@#convo-continue;
 @@
-
 
 :: Juno Station, Deck 5, Hangar Airlock
 TBD
