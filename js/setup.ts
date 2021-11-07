@@ -36,8 +36,8 @@ class Setup {
             this.lastTypingComplete = new Date().getTime();
         });
 
-        // click to end typing
         $(document).on("click", (e) => {
+            // click to end typing
             if (this.isTyping()) {
                 e.preventDefault();
                 $(document.body).trigger(

@@ -27,13 +27,26 @@ export const addTooltipMacro = (setup: Setup) => {
 
 export const addConvoMacro = (setup: SetupWithCont) => {
     Macro.add("convo", {
-        tags: null,
+        tags: ["line", "convocomplete"],
         handler: function () {
             const character = this.args[0];
-            const lines = this.args[1];
-            const direction = this.args[2] || "left"
-            const replaceLine = this.args[3] || true;
+            const direction = this.args[1] || "left";
+            const replaceLine = this.args[2] || true;
             let lineIndex = 0;
+
+            const linePayloads = this.payload.filter((p) => p.name === "line");
+            if (!linePayloads) {
+                const errMsg =
+                    "<<convo>> macro must have a <<lines>> child macro";
+                return this.error(errMsg);
+            }
+            const lines = linePayloads
+                .map((payload) => payload.contents.trim())
+                .filter((line) => line);
+
+            const convocompletePayload = this.payload.find(
+                (p) => p.name === "convocomplete"
+            );
 
             const makeLine = (withCharacter = false) => {
                 const typeLine = `<<type 40ms>>${lines[lineIndex]}<</type>>`;
@@ -45,15 +58,19 @@ export const addConvoMacro = (setup: SetupWithCont) => {
                 }
             };
 
-            const $convo = $("<div>").addClass(`convo convo-direction-${direction}`);
+            const $convo = $("<div>").addClass(
+                `convo convo-direction-${direction}`
+            );
             $convo.wiki(makeLine(true));
 
-            const nextLink = () => {
+            const nextLine = () => {
                 lineIndex++;
                 if (lineIndex >= lines.length) {
-                    $(document).one(":typingcomplete", () => {
-                        $.wiki(this.payload[0].contents);
-                    });
+                    if (convocompletePayload) {
+                        $(document).one(":typingcomplete", () => {
+                            $.wiki(convocompletePayload.contents);
+                        });
+                    }
                     return;
                 }
 
@@ -63,11 +80,11 @@ export const addConvoMacro = (setup: SetupWithCont) => {
                         $convoArea.empty();
                     }
                     $convoArea.wiki(makeLine());
-                    nextLink();
+                    nextLine();
                 });
             };
 
-            nextLink();
+            nextLine();
             $(this.output).append($convo);
         },
     });

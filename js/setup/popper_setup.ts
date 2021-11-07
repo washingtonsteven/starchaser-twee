@@ -10,7 +10,7 @@ export const createPopper = (
 ) => {
     const tooltipContent = $("<div>")
         .addClass("tooltip-text")
-        .data("show", "false")
+        .attr("data-show", "false")
         .append(
             tooltipText,
             $("<div>").addClass("arrow").attr("data-popper-arrow", "")

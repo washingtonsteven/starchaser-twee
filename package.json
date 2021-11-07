@@ -30,7 +30,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./bin/build.sh",
     "serve": "serve build",
-    "watch": "concurrently -n build,server \"nodemon --exec ./bin/build.sh -e twee,js,ts,scss\" \"serve -l 1234 build\"",
+    "watch": "concurrently -n build,server \"nodemon --exec ./bin/build.sh -e twee,js,ts,scss,css --ignore src/dist\" \"serve -l 1234 build\"",
     "clean": "rimraf ./src/dist/* ./build/*",
     "prebuild": "yarn run clean",
     "prewatch": "yarn run clean"

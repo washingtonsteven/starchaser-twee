@@ -31,18 +31,40 @@ sugarcube-2:
         Usage:
 
         ```
-        <<convo characterName convoLines [(left|right)] [replace]>><</convo>> 
+        <<convo characterName [(left|right)] [replace]>>
+            <<line>>line 1
+            <<line>>line 2
+            <<line>>line 3
+            <<convocomplete>>
+                <!-- stuff to do when the convo is done -->
+        <</convo>> 
         ```
 
         Arguments:
         
         - characterName: `string` - matches with a character name string provided to <<character>>
-        - convoLines: `array<string>` - An array of string to show in the speech box. Doesn't support directly placing an array in this arg, save it in a temp var first. (i.e. `<<set _lines = []>> <<convo "characterName" _lines>><</convo>>` and not `<<convo "characterName" ["line 1", "line 2"]>><</convo>>`)
         - (left|right) - Which side to place the portrait on. Default left
         - replace: `boolean` - Whether to replace text in the box. If `false` this will instead append text. Default `true`
+
+        Children:
+        - `<<line>>` - Required. Each of these will be a line that shows up in the box
+        - `<<convocomplete>>` - Optional. Content to run silently after the content is dune.
       container: true
+      children: ['lines', 'convocomplete']
       parameters: 
-        - text &+ string |+ ('left'|'right') |+ bool
+        - text |+ ('left'|'right') |+ bool
+    line:
+        name: line
+        description: |-
+            Line of text to put into a convo
+            Each line should be separated by a newline.
+
+            See `<<convo>>` for usage
+    convocomplete:
+        name: convocomplete
+        description: |-
+            The contents of `<<convocomplete>>` will be run after the convo is complete.
+            See `<<convo>>` for usage
     # speech macro characters
     augcomm:
       name: augcomm
