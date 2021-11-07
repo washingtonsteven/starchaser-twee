@@ -62,7 +62,8 @@ export const addConvoMacro = (setup: SetupWithCont) => {
                 const line = lines[lineIndex];
                 currentCharacter = line.character;
                 const typeLine = `<<type 40ms>>${line.content}<</type>>`;
-                return `<<say "${currentCharacter}">>${typeLine}<</say>>`;
+                const fullLine = `<<say "${currentCharacter}">>${typeLine}<</say>>`;
+                return fullLine;
             };
 
             const $convo = $("<div>").addClass(
@@ -91,6 +92,7 @@ export const addConvoMacro = (setup: SetupWithCont) => {
                         .addClass(
                             `convo-direction-${lines[lineIndex].direction}`
                         );
+                    setup._isTyping = true; // Force this so we can't accidentally continue too fast
                     $convo.wiki(makeLine());
                     nextLine();
                 });

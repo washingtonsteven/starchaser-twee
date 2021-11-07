@@ -13,7 +13,7 @@
                         if (!action.match(/\[\[.+\]\]/)) {
                             fullLink = `[[${action}]]`;
                         }
-                        $(output).wiki(`<<button ${fullLink}>><</button>>`);
+                        $(output).wiki(`<<link ${fullLink}>><</link>>`);
                     }
 
                     $(output).wiki(" ");
