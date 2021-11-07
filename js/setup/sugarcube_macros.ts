@@ -38,7 +38,7 @@ export const addConvoMacro = (setup: SetupWithCont) => {
                 const typeLine = `<<type 40ms>>${lines[lineIndex]}<</type>>`;
 
                 if (withCharacter) {
-                    return `<<${character}>>${typeLine}<</${character}>>`;
+                    return `<<${character}>>${typeLine}<</${character}>>`; // TODO: use <<say>> instead in case the character name isn't macro-safe
                 } else {
                     return typeLine;
                 }

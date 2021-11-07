@@ -29,12 +29,24 @@ class Setup {
 
         $(document).on(":typingstart", () => {
             this._isTyping = true;
-        })
+        });
 
         $(document).on(":typingcomplete", () => {
             this._isTyping = false;
-            this.lastTypingComplete = (new Date()).getTime();
-        })
+            this.lastTypingComplete = new Date().getTime();
+        });
+
+        // click to end typing
+        $(document).on("click", (e) => {
+            if (this.isTyping()) {
+                e.preventDefault();
+                $(document.body).trigger(
+                    $.Event("keydown.macro-type", {
+                        key: Config.macros.typeSkipKey,
+                    })
+                );
+            }
+        });
 
         addMacros(this);
     }
@@ -94,17 +106,22 @@ class Setup {
     }
 
     shouldContinue() {
+        if (this.isTyping()) return false;
+        return true;
+    }
+
+    isTyping() {
         if (this._isTyping) {
-            return false;
-        }
-        
-        // Also wait typingCompleteThreshold ms after typing complete to actually mark it complete
-        const now = (new Date()).getTime();
-        if (now - this.lastTypingComplete < this.typingCompleteThreshold) {
-            return false;
+            return true;
         }
 
-        return true;
+        // Also wait typingCompleteThreshold ms after typing complete to actually mark it complete
+        const now = new Date().getTime();
+        if (now - this.lastTypingComplete < this.typingCompleteThreshold) {
+            return true;
+        }
+
+        return false;
     }
 }
 
