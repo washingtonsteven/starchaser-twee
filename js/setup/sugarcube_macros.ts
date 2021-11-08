@@ -7,7 +7,18 @@ type SetupWithCont = Setup & {
 export const addMacros = (setup: Setup) => {
     addTooltipMacro(setup);
     addConvoMacro(setup as SetupWithCont);
+    addWrapperMacro();
 };
+
+export const addWrapperMacro = () => {
+    Macro.add("wrapper", {
+        tags: null,
+        handler: function() {
+            const className = this.args[0] || "passage-section";
+            $(this.output).append($("<div>").addClass(className).wiki(this.payload[0].contents));
+        }
+    });
+}
 
 export const addTooltipMacro = (setup: Setup) => {
     Macro.add("tooltip", {

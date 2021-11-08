@@ -10,3 +10,9 @@
 <<widget glossary>>
 \<<tooltip $glossary[$args[0]]>>$args[0]<</tooltip>>\
 <</widget>>
+
+<<widget typepara>>
+    \<<one ":typingcomplete">>\
+    <<timed $typeParaWait>><<type $typeSpeed>>$args[0]<</type>><</timed>>
+    \<</one>>
+<</widget>>

@@ -1,2 +1,2 @@
-:: PassageHeader
+:: PassageHeader [nobr]
 <<set _actions = []>>

@@ -3,6 +3,7 @@ import { addMacros } from "./setup/sugarcube_macros";
 import { addMessage, unreadMessagesCount } from "./setup/sugarcube_setup";
 import { Instance as PopperInstance, Placement } from "@popperjs/core";
 import { JoyrideMessage } from "./types/storyVariables";
+import { Passage } from "twine-sugarcube";
 
 class Setup {
     $tooltips: Array<JQuery> = [];
@@ -15,13 +16,16 @@ class Setup {
         $(document).on(":storyready", () => {
             this.setup_UIBar_observer();
         });
-        $(document).on(":passageinit", () => {
+
+        $(document).on(":passageinit", (e) => {
             // Clear old popups
             this.$tooltips.forEach(($tooltip) => {
                 $tooltip.remove();
             });
             this.$tooltips = [];
         });
+
+        Config.passages.onProcess = this.onPassageProcess;
 
         $(document).on(":passagerender", (e) => {
             $(e.content).find("button.link-broken").prop("disabled", true);
@@ -49,6 +53,18 @@ class Setup {
         });
 
         addMacros(this);
+
+        this.onFrameUpdate = this.onFrameUpdate.bind(this);
+        this.onFrameUpdate();
+    }
+
+    onFrameUpdate() {
+        if (this.isTyping()) {
+            $(".passage-section-main").scrollTop(
+                $(".passage-section-main").height()
+            );
+        }
+        window.requestAnimationFrame(this.onFrameUpdate);
     }
 
     hideActions() {
@@ -57,6 +73,19 @@ class Setup {
 
     showActions() {
         $("#action-bar").attr("data-hide", "false");
+    }
+
+    onPassageProcess(passage: Passage) {
+        if (["Widgets", "StoryCaption"].includes(passage.title)) {
+            return passage.text;
+        }
+        const section =
+            passage.title === "PassageHeader"
+                ? "header"
+                : passage.title === "PassageFooter"
+                ? "footer"
+                : "main";
+        return `<<wrapper "passage-section-${section}">>${passage.text}<</wrapper>>`;
     }
 
     createPopper(

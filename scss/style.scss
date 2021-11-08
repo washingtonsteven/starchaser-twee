@@ -1,5 +1,16 @@
 @import "../lib/custom-macros-for-sugarcube-2/speech.css";
 
+.passage-section-main {
+    height: 35vh;
+    overflow: scroll;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        width: 0;
+        background: transparent;
+    }
+}
+
 .npc {
     color: rgb(98, 199, 199);
 }
@@ -45,6 +56,14 @@
     border: solid 2px currentColor;
     margin: 2rem 4rem;
     padding: 0.5rem 1rem;
+}
+
+.sc { /* Starchasers */
+    color: rgb(99, 176, 240);
+}
+
+.du { /* Dreyyar Union */
+    color:rgb(143, 43, 236)
 }
 
 .notice {

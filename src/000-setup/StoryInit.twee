@@ -13,6 +13,14 @@
     current_deck: 5,
 }>>
 
+<<set $typeSpeed = "20ms">>
+<<set $typeParaWait = "1s">>
+
+<<set $playerFirstName = "Caleb">>
+<<set $playerListName = "Hertz">>
+<<set $shipType = "Gridskipper">>
+<<set $shipName = "The Opal Star">>
+
 <<preload "https://via.placeholder.com/150">>
 <<character "mora" "https://via.placeholder.com/150?text=Mora">>
 <<character "pc" $playerFirstName "https://via.placeholder.com/150?text=Player">>
