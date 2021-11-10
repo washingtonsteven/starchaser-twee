@@ -42,7 +42,7 @@ What is their Ship’s name: <<textbox "$shipName" "The Opal Star">>
     <</append>>
         <<one ":typingcomplete">>
         <<append "#intropara">>
-        <<timed $typeParaWait>><p><<type $typeSpeed>>$playerFirstName now heads for the nearst PB3 outpost, Juno Station. Equipped with a few essentials, their personal Augmented Communicator (AugComm), and flying in their $shipType, //$shipName//, $playerFirstName begins his ''@@.sc;Starchaser@@'' career.<</type>></p><</timed>>
+        <<timed $typeParaWait>><p><<type $typeSpeed>>$playerFirstName now heads for the nearest PB3 outpost, Juno Station. Equipped with a few essentials, their personal Augmented Communicator (AugComm), and flying in their $shipType, //$shipName//, $playerFirstName begins his ''@@.sc;Starchaser@@'' career.<</type>></p><</timed>>
         <</append>>
         <</one>>
     <</one>>
